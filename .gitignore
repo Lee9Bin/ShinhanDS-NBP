@@ -38,3 +38,6 @@ out/
 
 ### CMake
 cmake-build-*/
+
+### yml
+src/main/resources/application.yml
