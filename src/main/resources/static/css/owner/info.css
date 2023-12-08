@@ -1,0 +1,82 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+}
+body {
+    min-height: 100vh;
+}
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    flex-basis: 20%;
+    color: #fff;
+    padding-top: 20px;
+    padding: 1rem;
+    background-color: #333;
+}
+.mainpage {
+    flex-basis: 80%;
+    border: 1px solid darkgreen;
+    padding: 1rem;
+}
+
+h5 {
+    font-weight: 700;
+    color: #fff;
+    margin: 20px 0;
+}
+
+ul li {
+    margin-bottom: 10px;
+    list-style: none;
+}
+
+ul li a {
+    color: rgba(255, 255, 255, 0.4);
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+ul li a:hover {
+    color: white;
+}
+
+
+/* 정보 입력 css */
+form {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    background-color: #f4f4f4;
+}
+
+input[type='submit'] {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
