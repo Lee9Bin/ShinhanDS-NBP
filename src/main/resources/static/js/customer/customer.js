@@ -1,3 +1,11 @@
+// JavaScript 수정
+document.querySelectorAll('.fa-regular.fa-bookmark').forEach(function(item) {
+    item.addEventListener('click', function() {
+        this.classList.toggle('fa-regular')
+        this.classList.toggle('fa-solid');
+    });
+});
+
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 mapOption = { 
@@ -18,3 +26,6 @@ var marker = new kakao.maps.Marker({
 // 마커가 지도 위에 표시되도록 설정합니다
 marker.setMap(map);
 // 지도 js --------------------------------------------------
+
+
+
