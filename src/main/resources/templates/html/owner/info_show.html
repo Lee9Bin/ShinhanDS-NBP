@@ -1,39 +1,28 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header" />
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>가게 정보 수정</title>
+    <link rel="stylesheet" th:href="@{/css/owner/info.css}">
+</head>
 <body>
+<h2>가게 정보 수정</h2>
 
-<div class="container">
-    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+<form th:action="@{/owner/api/restaurants/new}" method="post" th:object="${restaurant}">
+    <label for="storeName">가게 이름:</label>
+    <input type="text" id="storeName" name="storeName" th:field="${restaurant.name}">
 
-    <div>
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>가게 이름</th>
-                <th>가게 주소</th>
-                <th>오픈 시간</th>
-                <th>마감 시간</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody th:object="${restaurant}>
-                <td th:text="${name}"></td>
-                <td th:text="${item.name}"></td>
-                <td th:text="${item.price}"></td>
-                <td th:text="${item.stockQuantity}"></td>
-<!--                <td>-->
-<!--                    <a href="#" th:href="@{/items/{id}/edit (id=${item.id})}" class="btn btn-primary" role="button">수정</a>-->
-<!--                </td>-->
-            </tr>
-            </tbody>
-        </table>
-    </div>
+    <label for="storeAddress">가게 주소:</label>
+    <input type="text" id="storeAddress" name="storeAddress" th:field="${restaurant.address}">
 
-    <div th:replace="fragments/footer :: footer"/>
+    <label for="openingTime">오픈 시간:</label>
+    <input type="text" id="openingTime" name="openingTime" th:field="${restaurant.openTime}">
 
-</div> <!-- /container -->
+    <label for="closingTime">마감 시간:</label>
+    <input type="text" id="closingTime" name="closingTime" th:field="${restaurant.closeTime}">
 
+    <input type="submit" value="수정하기">
+</form>
 </body>
 </html>
