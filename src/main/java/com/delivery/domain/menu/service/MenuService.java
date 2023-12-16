@@ -1,5 +1,8 @@
-package com.delivery.domain.restaurant.service;
+package com.delivery.domain.menu.service;
 
+
+import com.delivery.domain.menu.entity.Menu;
+import com.delivery.domain.menu.repository.MenuRepository;
 import com.delivery.domain.restaurant.entity.Restaurant;
 import com.delivery.domain.restaurant.repository.RestaurantRepository;
 import lombok.RequiredArgsConstructor;
@@ -9,17 +12,15 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class RestaurantService {
-
-    private final RestaurantRepository restaurantRepository;
+public class MenuService {
+    private final MenuRepository menuRepository;
 
     @Transactional
-    public Long join(Restaurant restaurant){
-        restaurantRepository.save(restaurant);
-        return restaurant.getId();
+    public Long join(Menu menu) {
+        menuRepository.save(menu);
+        return menu.getId();
     }
 
-    public Restaurant findOne(Long itemId){
-        return restaurantRepository.findOne(itemId);
-    }
+
+
 }

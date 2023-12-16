@@ -30,12 +30,17 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 //	// https://mvnrepository.com/artifact/mysql/mysql-connector-java
-	implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.35'
+	//implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.35'
+	implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.29'
 //	testImplementation 'org.springframework.security:spring-security-test'
 	// build.gradle
 	// https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-mustache 테스트 템플릿
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mustache', version: '3.1.2'
 }
 
 tasks.named('bootBuildImage') {
