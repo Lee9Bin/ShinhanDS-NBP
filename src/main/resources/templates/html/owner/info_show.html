@@ -8,9 +8,8 @@
 </head>
 <body>
 <h2>가게 정보 수정</h2>
-
 <form th:action="@{/owner/api/restaurants/{restaurantId}(restaurantId=${restaurant.id})}" method="post" th:object="${restaurant}">
-    <input type="hidden" id="storeID" name="storeID" th:field="${restaurant.id}">
+    <input type="hidden" id="storeID" name="storeID" th:field="*{id}">
 
     <label for="storeName">가게 이름:</label>
     <input type="text" id="storeName" name="storeName" th:field="${restaurant.name}">

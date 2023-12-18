@@ -8,7 +8,7 @@ import lombok.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class RestaurantCreateDto {
+public class RestaurantDto {
     private Long id;
     private String name;
     private String phone;
@@ -22,8 +22,8 @@ public class RestaurantCreateDto {
     private String storeRegister;
 
 
-    public static RestaurantCreateDto toDto(Restaurant restaurant){
-        return new RestaurantCreateDto(restaurant.getId(),
+    public static RestaurantDto toDto(Restaurant restaurant){
+        return new RestaurantDto(restaurant.getId(),
                 restaurant.getName(),
                 restaurant.getPhone(),
                 restaurant.getAddress(),

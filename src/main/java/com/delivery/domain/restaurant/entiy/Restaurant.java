@@ -1,6 +1,6 @@
 package com.delivery.domain.restaurant.entiy;
 
-import com.delivery.domain.restaurant.dto.RestaurantCreateDto;
+import com.delivery.domain.restaurant.dto.RestaurantDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,7 +33,7 @@ public class Restaurant {
     private String storeRegister;
 
 
-    public static Restaurant toEntity(RestaurantCreateDto RestaurantCreateDto){
+    public static Restaurant toEntity(RestaurantDto RestaurantCreateDto){
         return new Restaurant(RestaurantCreateDto.getId(),
                 RestaurantCreateDto.getName(),
                 RestaurantCreateDto.getPhone(),
