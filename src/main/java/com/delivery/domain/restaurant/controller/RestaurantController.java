@@ -1,17 +1,14 @@
 package com.delivery.domain.restaurant.controller;
 
-import com.delivery.domain.restaurant.entiy.Restaurant;
+import com.delivery.domain.restaurant.entity.Restaurant;
 import com.delivery.domain.restaurant.service.RestaurantService;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.Banner.Mode;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor

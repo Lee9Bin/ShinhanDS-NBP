@@ -1,4 +1,4 @@
-package com.delivery.domain.restaurant.entiy;
+package com.delivery.domain.restaurant.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

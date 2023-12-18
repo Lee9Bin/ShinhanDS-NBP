@@ -18,4 +18,12 @@ public class HomeController {
         log.info("ownerHome");
         return "html/owner/owner";
     }
-}
+
+    @GetMapping("/test")
+    public String testLayout(){
+        return "html/customer/customer1";
+    }
+
+
+
+    }

@@ -1,6 +1,6 @@
-package com.delivery.domain.restaurant.repositry;
+package com.delivery.domain.restaurant.repository;
 
-import com.delivery.domain.restaurant.entiy.Restaurant;
+import com.delivery.domain.restaurant.entity.Restaurant;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
