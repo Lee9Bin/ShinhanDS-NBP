@@ -3,19 +3,20 @@ package com.delivery.domain.article.controller;
 import com.delivery.domain.article.dto.ArticleDto;
 import com.delivery.domain.article.entity.ArticleEntity;
 import com.delivery.domain.article.repository.ArticleRepository;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Optional;
 
-@Controller
+
+@Tag(name = "게시판", description = "게시판 관련 api 입니다.")
+@Controller // view 템플릿을 반환
 @RequestMapping("/articles")
 @Slf4j
 public class ArticleController {
@@ -56,11 +57,12 @@ public class ArticleController {
 
         // 1. id로 데이터를 가져옴, id값이 ArticleEntity 타입이 아니여서 Optional로 넣기
         Optional<ArticleEntity> articleEntity = articleRepository.findById(id);
-        // Optional대신 뒤에 .orElse(null) 붙이면 밑에 articleEntity만 사용해도 가능
 
         // 2. 가져온 데이터를 모델에 등록
-        // optional이 값을 포함하고 있으면 그 값을, 아니면 null을 사용
-        model.addAttribute("article", articleEntity.orElse(null));
+//        model.addAttribute("article", articleEntity.orElse(null));
+        if (articleEntity.isPresent()) {
+            model.addAttribute("article", articleEntity.get());
+        }
 
         // 3. 보여줄 페이지 설정
         return "html/articles/show";
@@ -86,9 +88,12 @@ public class ArticleController {
     public String edit(@PathVariable Long id, Model model){
 
         Optional<ArticleEntity> articleEntity = articleRepository.findById(id);
-        //ArticleEntity articleEntity = articleRepository.findById(id).orElse(null);
         // 모델에 데이터 등록
-        model.addAttribute("article", articleEntity.orElse(null));
+        //model.addAttribute("article", articleEntity.orElse(null));
+        if (articleEntity.isPresent()) {
+            model.addAttribute("article", articleEntity.get());
+        }
+
         return "/html/articles/edit";
     }
 
@@ -103,12 +108,31 @@ public class ArticleController {
         // 2-1 : db에서 기존 데이터를 가져오기
          Optional<ArticleEntity> target = articleRepository.findById(article.getId());
         // 2-2
-        if (target != null) {
+        if (target.isPresent()) {
             articleRepository.save(article); // 엔티티가 db 갱신
         }
         // 수정결과를 뷰로 리다이렉트
         return "redirect:/articles/" + article.getId();
     }
+
+    // 데이터 삭제하기
+    @GetMapping("/{id}/delete")
+    public String delete(@PathVariable Long id, RedirectAttributes rttr){
+        log.info("삭제 요청이 들어옴!");
+
+        // 1: 삭제할 대상 가져오기
+        Optional<ArticleEntity> target = articleRepository.findById(id);
+        log.info(target.toString());
+        // 2: 대상 삭제하기
+        //  2-1 : 삭제 완료 메세지 -> RedirectAttributes 객체 사용
+        //  삭제가 된 경우 addFlashAttribute("이름", "메세지") 일회성(휘발성) 메서드 사용가능
+        if (target.isPresent()) {
+            articleRepository.delete(target.get());
+            rttr.addFlashAttribute("msg", "게시물이 삭제되었습니다.");
+        }
+        return "redirect:/articles";
+    }
+
 
 
 }

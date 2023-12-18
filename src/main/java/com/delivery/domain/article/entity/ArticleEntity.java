@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity // DB가 해당 객체 인식 가능!
-@Table(name = "article_entity")
+@Table(name = "article")
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
@@ -23,6 +23,14 @@ public class ArticleEntity {
     @Column
     private String content;
 
-
+    // 수정을 할 때 전부 안하고 1개만 해도 가능하게 해줌
+    public void patch(ArticleEntity articleEntity){
+        if (articleEntity.title != null) {
+            this.title = articleEntity.title;
+        }
+        if (articleEntity.content != null) {
+            this.content = articleEntity.content;
+        }
+    }
 
 }
