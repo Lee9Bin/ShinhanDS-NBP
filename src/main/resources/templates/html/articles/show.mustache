@@ -33,17 +33,17 @@
     </thead>
     <tbody>
     {{#article}}
-    <tr>
-        <th>{{id}}</th>
-        <td>{{title}}</td>
-        <td>{{content}}</td>
-    </tr>
+        <tr>
+            <th>{{id}}</th>
+            <td>{{title}}</td>
+            <td>{{content}}</td>
+        </tr>
     {{/article}}
     </tbody>
 </table>
 <a href="/articles/{{id}}/edit" class="btn btn-primary">수정하기</a>
 <a href="/articles/{{id}}/delete" class="btn btn-danger">삭제하기</a>
-<a href="/articles" class="btn btn-primary">목록가기</a>
+<a href="/articles/" class="btn btn-primary">목록가기</a>
 {{>layouts/footer}}
 </body>
 </html>
