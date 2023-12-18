@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -19,7 +21,13 @@ public class RestaurantService {
         return restaurant.getId();
     }
 
-    public Restaurant findOne(Long itemId){
-        return restaurantRepository.findOne(itemId);
+    public Restaurant findById(Long id){
+        Optional<Restaurant> findRestaurant = restaurantRepository.findById(id);
+        if (findRestaurant.isPresent()){
+            return findRestaurant.get();
+        }
+        else{
+            return null;
+        }
     }
 }
