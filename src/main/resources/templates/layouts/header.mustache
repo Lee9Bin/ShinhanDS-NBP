@@ -1,0 +1,42 @@
+<header>
+    <div></div>
+    <div>
+        <img id="logo" src="../../img/logo.png" alt="로고"/>
+    </div>
+    <div class="profile-section">
+        <img width="36px" src="../../img/basket.png" alt=""/>
+        <img width="42px" src="../../img/user-circle.png" alt=""/>
+        <div class="profile-dropdown">
+
+            <div class="nav-bar-profile">
+                <div>사진 <span> <p th:text="${session.loginName} " style="display: inline;"></p></span></div>
+
+                <div>
+                    <a href="/member/login">로그인</a>
+                </div>
+            </div>
+            <!-- 드롭다운 내용 추가 -->
+            <div class="nav-bar-couponAndPoint">
+                <div class="coupon">쿠폰 <span>1장</span></div>
+                <div class="point">포인트 <span>100000</span></div>
+            </div>
+
+            <a href="#">주문내역</a>
+            <a href="#">북마크</a>
+            <a href="#">내가 단 댓글</a>
+            <a href="#">포인트 충전</a>
+            <a href="#">포인트 충전 내역</a>
+            <a href="#">내 정보 수정</a>
+            <a href="#">설정</a>
+
+        </div>
+    </div>
+</header>
+
+<!-- 알람 메세지-->
+{{#msg}}
+    <div class="alert alert-primary alert-dismissible">
+        {{msg}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{{/msg}}
