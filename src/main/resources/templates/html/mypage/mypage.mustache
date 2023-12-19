@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>마이 페이지</title>
+    <link rel="stylesheet" href="../../css/customer/customer.css"/>
+    <link rel="stylesheet" href="/css/owner/owner.css" />
+    <script src="/js/owner/owner.js" defer></script>
+</head>
+<body>
+{{>layouts/header}}
+<main class="container">
+    <aside class="sidebar">
+        <p>공지</p>
+        <br>
+        <ul class="list-unstyled">
+            <li><a href="#">공지사항</a></li>
+            <li><a href="#">서비스 소개</a></li>
+            <li><a href="#">자주 묻는 질문</a></li>
+        </ul>
+        <br>
+            <p>마이페이지</p>
+                <br>
+                    <ul class="list-unstyled">
+                        <li><a href="orderlist">주문내역</a></li>
+                        <li><a href="bookmark">북마크</a></li>
+                        <li><a href="info">내정보 수정</a></li>
+                        <li><a href="review"></a>내가 단 댓글</li>
+                        <li><a href="recharge">포인트 충전 내역</a></li>
+                        <li><a href="setting"></a>설정</li>
+                    </ul>
+                <h1 th:text="${ssg}"></h1>
+    </aside>
+    <section class="mainpage">내용입니다.</section>
+    <h1 th:text="${ssg}"></h1>
+</main>
+</body>
+</html>
