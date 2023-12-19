@@ -2,6 +2,7 @@ package com.delivery.domain.member.controller;
 
 import com.delivery.domain.member.dto.MemberDTO;
 import com.delivery.domain.member.service.MemberService;
+import jakarta.mail.Session;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -43,7 +44,7 @@ public class MemberController {
 
     @PostMapping("/member/login")
     public String login(@ModelAttribute MemberDTO memberDTO, HttpSession session
-                        , @RequestParam(defaultValue = "/") String redirectURL) {
+                        , @RequestParam(defaultValue = "/") String redirectURL, Model model) {
 
         MemberDTO loginResult = memberService.login(memberDTO);
 
@@ -53,9 +54,11 @@ public class MemberController {
             System.out.println("아이디 틀렸다~!");
             return "html/member/login";
         }
-
         session.setAttribute("loginEmail", loginResult.getMemberEmail());
         session.setAttribute("loginName", loginResult.getMemberName());
+        String loginName = (String) session.getAttribute("loginName");
+        model.addAttribute("loginNameTest", loginName);
+
         // 직전 페이지의 정보를 들고 와야됨
         //return "redirect:" + redirectURL;
         return "html/customer/test";
