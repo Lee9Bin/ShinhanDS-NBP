@@ -4,6 +4,7 @@ import com.delivery.domain.article.dto.ArticleDto;
 import com.delivery.domain.article.entity.ArticleEntity;
 import com.delivery.domain.article.repository.ArticleRepository;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,15 +16,16 @@ import java.util.List;
 import java.util.Optional;
 
 
-@Tag(name = "게시판", description = "게시판 관련 api 입니다.")
+//@Tag(name = "게시판", description = "게시판 관련 api 입니다.")
 @Controller // view 템플릿을 반환
 @RequestMapping("/articles")
 @Slf4j
+@RequiredArgsConstructor // final로 명시된 필드를 DI 적용해준다, autowired보다 좋다~~~~~
 public class ArticleController {
 
     // 스프링부트가 미리 생성해놓은 객체를 가져다가 자동으로 연결한다 -> DI
-    @Autowired
-    private ArticleRepository articleRepository;
+
+    private final ArticleRepository articleRepository;
 
     // 글 생성 뷰 이동
     @GetMapping("/new")
@@ -33,7 +35,7 @@ public class ArticleController {
 
     // 글 생성
     @PostMapping("/create")
-    public String create(ArticleDto form) {
+    public String create(@ModelAttribute ArticleDto form) {
         // dto에 담겨짐
         // System.out.println(form.toString()); 로깅 바꾸기
         log.info(form.toString());
@@ -98,7 +100,7 @@ public class ArticleController {
     }
 
     @PostMapping("/{id}/put")
-    public String editPut(ArticleDto form){
+    public String editPut(@ModelAttribute ArticleDto form){
 
         // dto를 entity로 변환
         ArticleEntity article = form.toEntity();
