@@ -12,7 +12,7 @@ public class ArticleDto {
     private String title;
     private String content;
 
-    public ArticleEntity toEntity(){
-        return new ArticleEntity(id, title, content);
+    public ArticleEntity toEntity() {
+        return new ArticleEntity(id,title, content);
     }
 }
