@@ -24,10 +24,6 @@ public class HomeController {
         return "html/owner/owner";
     }
 
-    @GetMapping("/test")
-    public String testLayout(){
-        return "html/customer/customer1";
-    }
 
 
 

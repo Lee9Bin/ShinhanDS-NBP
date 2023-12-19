@@ -3,6 +3,8 @@ package com.delivery.domain.article.controller;
 import com.delivery.domain.article.dto.ArticleDto;
 import com.delivery.domain.article.entity.ArticleEntity;
 import com.delivery.domain.article.repository.ArticleRepository;
+import com.delivery.domain.comment.dto.CommentDto;
+import com.delivery.domain.comment.service.CommentService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +28,7 @@ public class ArticleController {
     // 스프링부트가 미리 생성해놓은 객체를 가져다가 자동으로 연결한다 -> DI
 
     private final ArticleRepository articleRepository;
+    private final CommentService commentService;
 
     // 글 생성 뷰 이동
     @GetMapping("/new")
@@ -59,11 +62,13 @@ public class ArticleController {
 
         // 1. id로 데이터를 가져옴, id값이 ArticleEntity 타입이 아니여서 Optional로 넣기
         Optional<ArticleEntity> articleEntity = articleRepository.findById(id);
+        List<CommentDto> commentDtos = commentService.comments(id);
 
         // 2. 가져온 데이터를 모델에 등록
 //        model.addAttribute("article", articleEntity.orElse(null));
         if (articleEntity.isPresent()) {
             model.addAttribute("article", articleEntity.get());
+            model.addAttribute("commentDtods", commentDtos);
         }
 
         // 3. 보여줄 페이지 설정

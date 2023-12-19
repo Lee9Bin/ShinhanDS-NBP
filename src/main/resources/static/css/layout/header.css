@@ -1,0 +1,77 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+}
+
+header {
+    display: flex;
+    background-color: #e8f2f5;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    justify-content: space-between;
+    height: 100px;
+    margin: auto ;
+}
+
+header > div{
+    width: 140px;
+}
+
+#logo {
+    height: 64px;
+    cursor: pointer;
+    justify-content: center;
+    margin-top: 0.8rem;
+}
+.profile-section {
+    display: flex;
+    padding: 0 5px 0 30px;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+}
+
+.profile-section > img:nth-child(2):hover{
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
+}
+.profile-section:hover .profile-dropdown {
+    display: flex;
+    flex-direction: column;
+}
+.profile-dropdown {
+    display: none;
+    position: absolute;
+    width: 15rem;
+    text-align: center;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 10px;
+    z-index: 999;
+}
+.profile-dropdown a {
+    text-decoration: none;
+    color: #333;
+    padding: 8px;
+    transition: background-color 0.3s;
+    padding: 10px 0;
+}
+
+.profile-dropdown a:hover {
+    background-color: #f0eeeb;
+}
+
+.nav-bar-profile , .nav-bar-couponAndPoint{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+
+.nav-bar-profile > div > button{
+    cursor: pointer;
+}
