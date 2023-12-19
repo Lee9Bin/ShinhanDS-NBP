@@ -5,6 +5,16 @@
     border: 0;
     font-size: 100%;
 }
+<<<<<<< HEAD
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    margin: 0;
+}
+
+=======
 body {
     min-height: 100vh;
 }
@@ -12,10 +22,15 @@ body {
     display: flex;
     height: 100vh;
 }
+>>>>>>> b7a3b9f27586f33947331ae2bea47d6135f3f1a2
 
 .sidebar {
     flex-basis: 20%;
     color: #fff;
+<<<<<<< HEAD
+    height: 100%;
+=======
+>>>>>>> b7a3b9f27586f33947331ae2bea47d6135f3f1a2
     padding-top: 20px;
     padding: 1rem;
     background-color: #333;
