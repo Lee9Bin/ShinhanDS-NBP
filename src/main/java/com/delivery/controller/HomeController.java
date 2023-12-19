@@ -24,6 +24,4 @@ public class HomeController {
         return "html/customer/customer1";
     }
 
-
-
     }
