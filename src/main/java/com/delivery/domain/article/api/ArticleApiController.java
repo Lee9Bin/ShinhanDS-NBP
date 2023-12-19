@@ -4,6 +4,7 @@ import com.delivery.domain.article.dto.ArticleDto;
 import com.delivery.domain.article.entity.ArticleEntity;
 import com.delivery.domain.article.repository.ArticleRepository;
 import com.delivery.domain.article.service.ArticleService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,16 +17,17 @@ import java.util.Optional;
 @RestController // RestAPI 용 컨트롤러, 데이터 JSON을 반환
 @RequestMapping("/api/articles")
 @Slf4j
+@RequiredArgsConstructor
 public class ArticleApiController {
 
-    @Autowired // DI 외부에서 가져옴, 스프링부트가 미리 생성해놓은 객체를 가져다가 자동으로 연결한다
-    private ArticleService articleService;
+    // DI 외부에서 가져옴, 스프링부트가 미리 생성해놓은 객체를 가져다가 자동으로 연결한다
+    private final ArticleService articleService;
 
     // GET
     // 모든 api 가져오기
     @GetMapping("/")
     public List<ArticleEntity> index() {
-        return articleService.index();
+        return articleService.index(); //JSON
     }
 
     // 단일 api
@@ -39,8 +41,8 @@ public class ArticleApiController {
     public ResponseEntity<ArticleEntity> create(@RequestBody ArticleDto dto) {
         ArticleEntity created = articleService.create(dto);
         return (created != null) ?
-                ResponseEntity.status(HttpStatus.OK).body(created) :
-                ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+                ResponseEntity.status(HttpStatus.OK).body(created) : //200
+                ResponseEntity.status(HttpStatus.BAD_REQUEST).build(); //400
     }
 
 
