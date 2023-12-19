@@ -24,7 +24,7 @@ public class OrderDelivery {
 
     //회원 아이디
 
-    //식당 아이디
+    //식당 아이디///
 
     //배달
     @Column(nullable = false, length = 20)
