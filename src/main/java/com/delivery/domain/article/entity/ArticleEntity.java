@@ -1,6 +1,7 @@
 package com.delivery.domain.article.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,8 +20,11 @@ public class ArticleEntity {
     private Long id;
 
     @Column
+    @NotNull
     private String title;
+
     @Column
+    @NotNull
     private String content;
 
     // 수정을 할 때 전부 안하고 1개만 해도 가능하게 해줌
