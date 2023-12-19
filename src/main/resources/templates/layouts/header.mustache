@@ -8,8 +8,11 @@
         <img width="42px" src="../../img/user-circle.png" alt=""/>
         <div class="profile-dropdown">
 
+
             <div class="nav-bar-profile">
-                <div>사진 <span> <p th:text="${session.loginName} " style="display: inline;"></p></span></div>
+                {{#loginNameTest}}
+                    <div>{{loginNameTest}}님 안녕하세요!, 테스트</div>
+                {{/loginNameTest}}
 
                 <div>
                     <a href="/member/login">로그인</a>
