@@ -57,8 +57,8 @@ public class MemberController {
         session.setAttribute("loginEmail", loginResult.getMemberEmail());
         session.setAttribute("loginName", loginResult.getMemberName());
         // 직전 페이지의 정보를 들고 와야됨
-        return "redirect:" + redirectURL;
-        //return "html/customer/customer";
+        //return "redirect:" + redirectURL;
+        return "html/customer/test";
 
     }
 
