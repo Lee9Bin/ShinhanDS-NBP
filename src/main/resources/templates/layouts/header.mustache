@@ -8,10 +8,14 @@
         <img width="42px" src="../../img/user-circle.png" alt=""/>
         <div class="profile-dropdown">
 
+
             <div class="nav-bar-profile">
-                <div>사진 <span>김경영</span></div>
+                {{#loginNameTest}}
+                    <div>{{loginNameTest}}님 안녕하세요!, 테스트</div>
+                {{/loginNameTest}}
+
                 <div>
-                    <a href="#">로그아웃</a>
+                    <a href="/member/login">로그인</a>
                 </div>
             </div>
             <!-- 드롭다운 내용 추가 -->
@@ -32,7 +36,8 @@
     </div>
 </header>
 
-<!— 알람 메세지—>
+
+<!-- 알람 메세지-->
 {{#msg}}
     <div class="alert alert-primary alert-dismissible">
         {{msg}}

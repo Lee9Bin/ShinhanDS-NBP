@@ -25,6 +25,7 @@
 {{>layouts/header}}
 
 {{#article}}
+<<<<<<< HEAD
     <form action="/articles/{{id}}/put" class="container" method="post">
         <input type="hidden" name="id" value="{{id}}"/>
         <div class="mb-3">
@@ -39,6 +40,22 @@
         <button type="submit" class="btn btn-primary">제출</button>
         <a href="/articles/{{id}}" class="btn btn-primary">뒤로가기</a>
     </form>
+=======
+<form action="/articles/{{id}}/put" class="container" method="post">
+    <input type="hidden" name="id" value="{{id}}"/>
+    <div class="mb-3">
+        <label class="form-label">제목</label>
+        <input type="text" class="form-control" name="title" value="{{title}}">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">내용</label>
+        <textarea name="content" id="" cols="30" rows="10" class="form-control">{{content}}</textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">제출</button>
+    <a href="/articles/{{id}}" class="btn btn-primary">뒤로가기</a>
+</form>
+>>>>>>> b7a3b9f27586f33947331ae2bea47d6135f3f1a2
 {{/article}}
 
 {{>layouts/footer}}

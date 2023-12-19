@@ -7,32 +7,36 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+
+@Entity // DB가 해당 객체 인식 가능!
 @Table(name = "article")
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @Getter
 public class ArticleEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id // 대표값을 지정! 마치 주민번호처럼
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // 1,2,3 처럼 auto_increase
     private Long id;
 
-    @NotNull
     @Column
+    @NotNull
     private String title;
 
-    @NotNull
     @Column
+    @NotNull
     private String content;
 
+    // 수정을 할 때 전부 안하고 1개만 해도 가능하게 해줌
     public void patch(ArticleEntity articleEntity){
-        if(articleEntity.title !=null){
+        if (articleEntity.title != null) {
             this.title = articleEntity.title;
         }
-        if(articleEntity.content !=null){
+        if (articleEntity.content != null) {
             this.content = articleEntity.content;
         }
     }
+
 }
