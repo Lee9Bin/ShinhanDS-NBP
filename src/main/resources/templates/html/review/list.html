@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>list</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>img</th>
+        <br>
+        <th>id</th>
+        <br>
+        <th>title</th>
+        <br>
+        <th>writer</th>
+        <br>
+        <th>content</th>
+        <br>
+        <th>date</th>
+        <br>
+        <th>hits</th>
+    </tr>
+
+    <tr th:each="board: ${boardList}">
+        <td><img th:src="@{|/upload/${board.storedFileName}|}" alt="" style="width: 120px"></td>
+        <td th:text="${board.id}"></td>
+        <td><a th:href="@{|/board/${board.id}|}" th:text="${board.boardTitle}"></a></td>
+        <td th:text="${board.boardWriter}"></td>
+        <td th:text="${board.boardContents}"></td>
+        <td th:text="*{#temporals.format(board.boardCreatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+        <td th:text="${board.boardHits}" style="font-size: 30px"></td>
+
+    </tr>
+</table>
+<button onclick="indexReq()">index</button>
+</body>
+<script>
+    const indexReq = () => {
+        location.href = "/board/save";
+    }
+</script>
+
+</html>
