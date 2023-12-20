@@ -1,18 +1,29 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>주문 페이지</title>
-</head>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/html/link :: link"/> <!--메타 정보등-->
 <body>
-<h1>주문 페이지</h1>
-<form action="/orderDelivery/new" method="post">
-    <input type="hidden" name="storeId" value=""> <br>
-    <!-- <p id="check-result"></p> -->
-    주소: <input type="text" name="address"> <br>
-    요청 사항: <input type="text" name="requestContent"> <br>
 
-    <input type="submit" value="회원가입">
+<header th:replace="layouts/html/header :: header"/> <!--헤더 뼈대-->
 
-</form>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Title</th>
+        <th scope="col">Content</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="article : ${articleList}">
+        <th th:text="${article.id}"></th>
+        <td><a th:href="@{/articles/{id}(id=${article.id})}" th:text="${article.title}"></a></td>
+        <td th:text="${article.content}"></td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{/articles/new}" class="btn btn-primary">글 생성</a>
+
+<div th:replace="layouts/html/footer :: footer"/> <!--푸터 뼈대-->
+
 </body>
 </html>
