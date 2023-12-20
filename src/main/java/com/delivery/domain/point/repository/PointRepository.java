@@ -7,3 +7,4 @@ import org.springframework.data.jpa.repository.Query;
 public interface PointRepository extends JpaRepository<PointEntity, Long> {
 
 }
+

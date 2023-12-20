@@ -1,3 +1,4 @@
+
 package com.delivery.domain.point.dto;
 
 import com.delivery.domain.point.entity.PointEntity;
@@ -21,13 +22,18 @@ public class PointDto {
     private int amount;
     private String content;
 
+    private Long memberId;
+    private Long orderDeliveryId;
+
     public static PointDto toDto(PointEntity pointEntity){
         return new PointDto(
                 pointEntity.getId(),
                 pointEntity.getType(),
                 pointEntity.getPointTime(),
                 pointEntity.getAmount(),
-                pointEntity.getContent()
+                pointEntity.getContent(),
+                pointEntity.getMemberEntity().getId(),
+                pointEntity.getOrderDelivery().getId()
         );
     }
 
