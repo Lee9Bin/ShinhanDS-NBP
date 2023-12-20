@@ -20,7 +20,7 @@ public class MenuEntity {
 
     @NotNull
     @Column
-    private String price;
+    private int price;
 
     @NotNull
     @Column

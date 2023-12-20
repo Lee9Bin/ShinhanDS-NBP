@@ -1,9 +1,14 @@
 package com.delivery.domain.orderDelivery.entiy;
 
 
+<<<<<<< HEAD
 //import com.delivery.domain.orderDelivery.dto.OrderDeliveryDto;
+=======
+import com.delivery.domain.member.entity.MemberEntity;
+import com.delivery.domain.orderDelivery.dto.OrderDeliveryDto;
+import com.delivery.domain.store.entity.StoreEntity;
+>>>>>>> 075293dbe90009d932c5cebec99d1516d1eac9e8
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,10 +27,15 @@ public class OrderDelivery {
     @Column(name = "order_delivery_id")
     private Long id;
 
-    //회원 아이디
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private MemberEntity memberEntity; //회원 아이디
 
-    //식당 아이디///
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "store_name")
+    private StoreEntity storeEntity; //식당 아이디
 
+<<<<<<< HEAD
     //배달
 //    @Column(nullable = false, length = 20)
 //    @Enumerated(value = EnumType.STRING)
@@ -66,4 +76,44 @@ public class OrderDelivery {
 //                orderDeliveryDto.getTotalQuantity()
 //        );
 //    }
+=======
+    @Column(nullable = false, length = 20)
+    @Enumerated(value = EnumType.STRING)
+    private Status status;//배달 요청 상태
+
+    @CreatedDate
+    private LocalDateTime requestTime; //배달 요청 시간
+
+    @Column(nullable = false, length = 50)
+    private String address; //배달 주소
+
+    @Column
+    private String requestContent; //배달 요청사항
+
+    @Column(nullable = false)
+    private LocalDateTime deliveryTime; // 배달 시간
+
+    //==주문 상태 변경==//
+    public void cancel(Status status){
+        this.status = status;
+    }
+
+
+
+
+
+    //==엔티티 변환==//
+    public static OrderDelivery toEntity(OrderDeliveryDto orderDeliveryDto, MemberEntity memberEntity, StoreEntity storeEntity){
+        return new OrderDelivery(
+                orderDeliveryDto.getId(),
+                memberEntity,
+                storeEntity,
+                orderDeliveryDto.getStatus(),
+                orderDeliveryDto.getRequestTime(),
+                orderDeliveryDto.getAddress(),
+                orderDeliveryDto.getRequestContent(),
+                orderDeliveryDto.getDeliveryTime()
+        );
+    }
+>>>>>>> 075293dbe90009d932c5cebec99d1516d1eac9e8
 }
