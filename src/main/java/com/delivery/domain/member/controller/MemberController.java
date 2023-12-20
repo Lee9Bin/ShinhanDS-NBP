@@ -2,6 +2,7 @@ package com.delivery.domain.member.controller;
 
 import com.delivery.domain.member.dto.MemberDTO;
 import com.delivery.domain.member.service.MemberService;
+import jakarta.mail.Session;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -56,15 +57,16 @@ public class MemberController {
             isLoggedIn = false;
             return "html/member/login";
         }
-
         session.setAttribute("loginEmail", loginResult.getMemberEmail());
         session.setAttribute("loginName", loginResult.getMemberName());
+
         model.addAttribute("loginName", loginResult.getMemberName());
 
         model.addAttribute("loggedIn", isLoggedIn);
         session.setAttribute("LoggedIn", isLoggedIn);
 
         log.info("login session loginEmail: " + session.getAttribute("loginEmail"));
+
         // 직전 페이지의 정보를 들고 와야됨
         //return "redirect:" + redirectURL;
         return "html/customer/test";

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+
 @RestController // RestAPI 용 컨트롤러, 데이터 JSON을 반환
 @RequestMapping("/api/articles")
 @Slf4j
@@ -77,3 +78,4 @@ public class ArticleApiController {
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 }
+
