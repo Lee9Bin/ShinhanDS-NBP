@@ -42,4 +42,16 @@ public class MypageController {
 
         return "html/mypage/recharge";
     }
+
+//    @GetMapping("/review")
+//    public String review(Model model){
+//
+//        return "html/mypage/review";
+//    }
+
+    @GetMapping("/setting")
+    public String setting(Model model){
+
+        return "html/mypage/setting";
+    }
 }

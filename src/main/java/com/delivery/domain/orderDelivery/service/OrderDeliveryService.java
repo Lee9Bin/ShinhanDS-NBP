@@ -22,14 +22,14 @@ public class OrderDeliveryService {
 
     //등록하는 거니깐 기본 트랜잭션 걸어주기
     //주문하기
-    @Transactional
-    public Long save(@Valid OrderDeliveryDto orderDeliveryDto){
-        // 처음 주믄을 하면 요청수락대기 단계
-        orderDeliveryDto.setStatus(Status.WAIT);
-        orderDeliveryDto.setRequestTime(LocalDateTime.now());
-        OrderDelivery orderDelivery = OrderDelivery.toEntity(orderDeliveryDto);
-        orderDelivery.createDeliveryTime(10L);
-        OrderDelivery saveId = orderDeliveryRepository.save(orderDelivery);
-        return saveId.getId();
-    }
+//    @Transactional
+//    public Long save(@Valid OrderDeliveryDto orderDeliveryDto){
+//        // 처음 주믄을 하면 요청수락대기 단계
+//        orderDeliveryDto.setStatus(Status.WAIT);
+//        orderDeliveryDto.setRequestTime(LocalDateTime.now());
+//        OrderDelivery orderDelivery = OrderDelivery.toEntity(orderDeliveryDto);
+//        orderDelivery.createDeliveryTime(10L);
+//        OrderDelivery saveId = orderDeliveryRepository.save(orderDelivery);
+//        return saveId.getId();
+//    }
 }

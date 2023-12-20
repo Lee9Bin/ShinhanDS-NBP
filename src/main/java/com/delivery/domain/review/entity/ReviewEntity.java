@@ -1,11 +1,9 @@
 package com.delivery.domain.review.entity;
 
+import com.delivery.domain.review.dto.ReviewDto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 @Entity // DB가 해당 객체 인식 가능!
 @Table(name = "review")
@@ -13,6 +11,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Getter
+@Setter
 public class ReviewEntity {
 
     @Id // 대표값을 지정! 마치 주민번호처럼
@@ -38,5 +37,15 @@ public class ReviewEntity {
     @Column
     @NotNull
     private String score;
+
+    public static ReviewEntity toSaveEntity(ReviewDto reviewDto){
+        ReviewEntity reviewEntity = new ReviewEntity();
+        reviewEntity.setContent(reviewDto.getContent());
+        reviewEntity.setDate(reviewDto.getDate());
+        reviewEntity.setTitle(reviewDto.getTitle());
+        reviewEntity.setScore(reviewDto.getScore());
+        reviewEntity.setFix_date(reviewDto.getFix_date());
+        return reviewEntity;
+    }
 
 }

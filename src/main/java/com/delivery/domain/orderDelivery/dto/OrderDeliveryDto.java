@@ -28,16 +28,16 @@ public class OrderDeliveryDto {
     private Long payment;
     private Long totalQuantity;
 
-    public static OrderDeliveryDto toDto(OrderDelivery orderDelivery){
-        return new OrderDeliveryDto(
-                orderDelivery.getId(),
-                orderDelivery.getStatus(),
-                orderDelivery.getRequestTime(),
-                orderDelivery.getAddress(),
-                orderDelivery.getRequestContent(),
-                orderDelivery.getDeliveryTime(),
-                orderDelivery.getPayment(),
-                orderDelivery.getTotalQuantity()
-        );
-    }
+//    public static OrderDeliveryDto toDto(OrderDelivery orderDelivery){
+//        return new OrderDeliveryDto(
+//                orderDelivery.getId(),
+//                orderDelivery.getStatus(),
+//                orderDelivery.getRequestTime(),
+//                orderDelivery.getAddress(),
+//                orderDelivery.getRequestContent(),
+//                orderDelivery.getDeliveryTime(),
+//                orderDelivery.getPayment(),
+//                orderDelivery.getTotalQuantity()
+//        );
+//    }
 }
