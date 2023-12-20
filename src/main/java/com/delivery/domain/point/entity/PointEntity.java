@@ -46,10 +46,6 @@ public class PointEntity {
     @Column
     private int amount;
 
-    // 관련 내용 _ 어디서 썻나 .. 추가했나 ..
-    @Column
-    private String content;
-
     public static PointEntity toEntity(PointDto pointDto, MemberEntity memberEntity, OrderDelivery orderDelivery) {
         return new PointEntity(
                 pointDto.getId(),
@@ -57,8 +53,7 @@ public class PointEntity {
                 orderDelivery,
                 pointDto.getType(),
                 pointDto.getPointTime(),
-                pointDto.getAmount(),
-                pointDto.getContent()
+                pointDto.getAmount()
         );
     }
 }

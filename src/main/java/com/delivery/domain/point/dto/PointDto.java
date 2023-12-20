@@ -19,16 +19,13 @@ public class PointDto {
     private Type type;
     private LocalDateTime pointTime;
     private int amount;
-    private String content;
 
     public static PointDto toDto(PointEntity pointEntity){
         return new PointDto(
                 pointEntity.getId(),
                 pointEntity.getType(),
                 pointEntity.getPointTime(),
-                pointEntity.getAmount(),
-                pointEntity.getContent()
+                pointEntity.getAmount()
         );
     }
-
 }
