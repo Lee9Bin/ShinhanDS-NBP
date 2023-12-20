@@ -25,8 +25,6 @@ public class OrderDeliveryDto {
     private String address;
     private String requestContent;
     private LocalDateTime deliveryTime;
-    private Long payment;
-    private Long totalQuantity;
 
     public static OrderDeliveryDto toDto(OrderDelivery orderDelivery){
         return new OrderDeliveryDto(
@@ -35,9 +33,7 @@ public class OrderDeliveryDto {
                 orderDelivery.getRequestTime(),
                 orderDelivery.getAddress(),
                 orderDelivery.getRequestContent(),
-                orderDelivery.getDeliveryTime(),
-                orderDelivery.getPayment(),
-                orderDelivery.getTotalQuantity()
+                orderDelivery.getDeliveryTime()
         );
     }
 }
