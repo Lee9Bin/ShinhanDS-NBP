@@ -43,19 +43,28 @@ public class MemberController {
 
     @PostMapping("/member/login")
     public String login(@ModelAttribute MemberDTO memberDTO, HttpSession session
-                        , @RequestParam(defaultValue = "/") String redirectURL) {
+                        , @RequestParam(defaultValue = "/") String redirectURL, Model model) {
 
         MemberDTO loginResult = memberService.login(memberDTO);
 
         log.info(String.valueOf(loginResult));
 
+        boolean isLoggedIn = true;
+
         if (loginResult == null) {
             System.out.println("아이디 틀렸다~!");
+            isLoggedIn = false;
             return "html/member/login";
         }
 
         session.setAttribute("loginEmail", loginResult.getMemberEmail());
         session.setAttribute("loginName", loginResult.getMemberName());
+        model.addAttribute("loginName", loginResult.getMemberName());
+
+        model.addAttribute("loggedIn", isLoggedIn);
+        session.setAttribute("LoggedIn", isLoggedIn);
+
+        log.info("login session loginEmail: " + session.getAttribute("loginEmail"));
         // 직전 페이지의 정보를 들고 와야됨
         //return "redirect:" + redirectURL;
         return "html/customer/test";
@@ -80,6 +89,10 @@ public class MemberController {
         MemberDTO memberDTO = memberService.findById(id);  // 아이디에 해당하는 회원 정보 조회 (한명 걍 dto)
         model.addAttribute("member", memberDTO);  // 모델에 회원 정보를 담아서 전달
         session.setAttribute("loginName", memberDTO.getMemberName());
+
+        session.setAttribute("loginId", memberDTO.getId());
+
+        log.info("상세조회 session loginEmail: " + session.getAttribute("loginEmail"));
         return "html/member/detail";  // 회원 상세 정보 페이지의 HTML 파일명 리턴
     }
 
@@ -88,15 +101,19 @@ public class MemberController {
         String myEmail = (String) session.getAttribute("loginEmail");  // 세션에서 로그인 이메일 가져오기
         MemberDTO memberDTO = memberService.updateForm(myEmail);  // 내 정보 수정을 위한 회원 정보 조회
         model.addAttribute("updateMember", memberDTO);  // 모델에 수정할 회원 정보를 담아서 전달
-        return "html/member/update";  // 회원 정보 수정 페이지의 HTML 파일명 리턴ㅁ
+
+        log.info("updateform session loginEmail: " + session.getAttribute("loginEmail"));
+        return "html/member/update";  // 회원 정보 수정 페이지의 HTML 파일명 리턴
     }
 
     @PostMapping("/member/update")
-    public String update(@ModelAttribute MemberDTO memberDTO) {
+    public String update(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
         memberService.update(memberDTO);  // 회원 정보 수정
         // 수정된 회원 정보 페이지로 리다이렉트  @GetMapping("/member/{id}") 이 부분으로 가는거임
         // 그냥 냅다 주소로 가면 여기선 model 에 값을 안받아 뒀기에  ( model.addAttribute("member", memberDTO);)
         // ${member.id} 이 부분이 안보일거임 ㅇㅇ 그래서 리다이렉트로 하는거다~
+
+        log.info("update session loginEmail: " + session.getAttribute("loginEmail"));
         return "redirect:/member/" + memberDTO.getId();
     }
 
@@ -109,7 +126,7 @@ public class MemberController {
     @GetMapping("/member/logout")
     public String logout(HttpSession session) {
         session.invalidate();  // 세션 무효화
-        return "html/member/index";  // 인덱스 페이지의 HTML 파일명 리턴
+        return "html/customer/test";  // 인덱스 페이지의 HTML 파일명 리턴
     }
 
     @PostMapping("/member/email-check")

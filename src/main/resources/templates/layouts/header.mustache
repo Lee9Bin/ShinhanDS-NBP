@@ -9,12 +9,23 @@
         <div class="profile-dropdown">
 
             <div class="nav-bar-profile">
-                <div>사진 <span> <p th:text="${session.loginName} " style="display: inline;"></p></span></div>
 
-                <div>
-                    <a href="/member/login">로그인</a>
-                </div>
+                {{#loggedIn}}
+                    <div>사진 <span> {{#loginName}}{{loginName}} {{/loginName}} 님 </span></div>
+
+                    <div>
+                        <a href="/member/logout">로그아웃</a>
+                    </div>
+                {{/loggedIn}}
+                {{^loggedIn}}
+                    <div> <span> 비회원 님 </span></div>
+                    <div>
+                        <a href="/member/login">로그인</a>
+                    </div>
+                {{/loggedIn}}
+
             </div>
+
             <!-- 드롭다운 내용 추가 -->
             <div class="nav-bar-couponAndPoint">
                 <div class="coupon">쿠폰 <span>1장</span></div>
@@ -26,7 +37,7 @@
             <a href="#">내가 단 댓글</a>
             <a href="#">포인트 충전</a>
             <a href="#">포인트 충전 내역</a>
-            <a href="#">내 정보 수정</a>
+            <a href="/member/update">내 정보 수정</a>
             <a href="#">설정</a>
 
         </div>
