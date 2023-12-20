@@ -3,7 +3,6 @@ package com.delivery.domain.orderDelivery.entiy;
 
 import com.delivery.domain.member.entity.MemberEntity;
 import com.delivery.domain.orderDelivery.dto.OrderDeliveryDto;
-import com.delivery.domain.store.entity.StoreEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
