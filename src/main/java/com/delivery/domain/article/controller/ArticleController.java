@@ -3,6 +3,7 @@ package com.delivery.domain.article.controller;
 import com.delivery.domain.article.dto.ArticleDto;
 import com.delivery.domain.article.entity.ArticleEntity;
 import com.delivery.domain.article.repository.ArticleRepository;
+
 import com.delivery.domain.comment.dto.CommentDto;
 import com.delivery.domain.comment.service.CommentService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Optional;
+
 
 
 //@Tag(name = "게시판", description = "게시판 관련 api 입니다.")
@@ -91,6 +93,7 @@ public class ArticleController {
 
     // 데이터 수정하기
     // 수정 뷰 보여주기
+
     @GetMapping("/{id}/edit")
     public String edit(@PathVariable Long id, Model model){
 
@@ -139,7 +142,6 @@ public class ArticleController {
         }
         return "redirect:/articles";
     }
-
 
 
 }

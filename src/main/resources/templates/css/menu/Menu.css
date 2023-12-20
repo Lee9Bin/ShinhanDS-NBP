@@ -1,0 +1,146 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+}
+body {
+    min-height: 100vh;
+}
+.container {
+    display: flex;
+    height: 100vh;
+}
+.sidebar {
+    flex-basis: 20%;
+    color: #fff;
+    padding-top: 20px;
+    padding: 1rem;
+    background-color: #333;
+}
+p{
+    font-size: 30px;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+.mainpage {
+    flex-basis: 80%;
+    border: 1px solid darkgreen;
+    padding: 1rem;
+
+}
+.store_title{
+    border-bottom: 1px solid black;
+    width: 1000px;
+    margin-left: 20px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 30px;
+}
+.store_sub{
+    background-color: orange;
+    width: 1000px;
+    height: 30px;
+    margin-left: 20px;
+    border-radius: 10px;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+#btn_store{
+    width: 100px;
+    height: 30px;
+    font-size: large;
+    background-color: orange;
+    border-radius: 10px;
+    margin-left: 50px;
+
+}
+.store1{
+    /* border: 1px solid black; */
+    margin-left: 20px;
+    border-radius: 10px;
+    width: 1000px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 30px;
+}
+.image h2{
+    text-align:left;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 30px;
+}
+#store1_name{
+    background-color: oldlace;
+    width: 250px;
+    height: 30px;
+    margin-left: 10px;
+    font-size: 25px;
+}
+#store1_contect{
+    background-color: oldlace;
+    width: 250px;
+    height: 30px;
+    margin-left: 10px;
+    font-size: 25px;
+}
+#store1_context{
+    background-color: oldlace;
+    margin-left: 10px;
+    font-size: 25px;
+}
+.image{
+    /* border: 1px solid black;
+    border-radius: 10px; */
+    margin-left: 20px;
+    border-bottom: 1px solid black;
+    width: 1000px;
+    font-family: 'Noto Sans KR', sans-serif;
+    /* font-size: 30px; */
+}
+#btn_addmenu{
+    width: 300px;
+    height: 40px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: large;
+    background-color: orange;
+    border-radius: 10px;
+}
+#store1_addr{
+    background-color: oldlace;
+    width: 250px;
+    height: 30px;
+    margin-left: 10px;
+    font-size: 25px;
+}
+h5 {
+    font-weight: 700;
+    color: #fff;
+    margin: 20px 0;
+    font-family: 'Nanum Pen Script', cursive;
+    font-size: 20px;
+}
+
+ul li {
+    margin-bottom: 10px;
+    list-style: none;
+}
+
+ul li a {
+    color: rgba(255, 255, 255, 0.4);
+    text-decoration: none;
+    transition: 0.3s;
+    font-family: 'Nanum Pen Script', cursive;
+    font-size: 20px;
+}
+
+ul li a:hover {
+    color: white;
+}
+#btn_submit, #btn_cancel{
+    width: 500px;
+    height: 40px;
+    font-size: large;
+    background-color: orange;
+    border-radius: 10px;
+}
+.finish_space{
+    margin-left: 30px;
+}

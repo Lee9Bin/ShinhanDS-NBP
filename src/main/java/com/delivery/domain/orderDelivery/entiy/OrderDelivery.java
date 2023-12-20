@@ -1,9 +1,9 @@
 package com.delivery.domain.orderDelivery.entiy;
 
 
+import com.delivery.domain.member.entity.MemberEntity;
 import com.delivery.domain.orderDelivery.dto.OrderDeliveryDto;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,8 +23,11 @@ public class OrderDelivery {
     private Long id;
 
     //회원 아이디
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private MemberEntity memberEntity;
 
-    //식당 아이디///
+    //식당 아이디
 
     //배달
     @Column(nullable = false, length = 20)
@@ -43,27 +46,20 @@ public class OrderDelivery {
     @Column(nullable = false)
     private LocalDateTime deliveryTime;
 
-    @Column(nullable = false)
-    private Long payment;
-
-    @Column(nullable = false)
-    private Long totalQuantity;
-
     //배달 예상 시간
     public void createDeliveryTime(Long minute){
         deliveryTime = requestTime.plusMinutes(minute);
     }
 
-    public static OrderDelivery toEntity(OrderDeliveryDto orderDeliveryDto){
+    public static OrderDelivery toEntity(OrderDeliveryDto orderDeliveryDto, MemberEntity memberEntity){
         return new OrderDelivery(
                 orderDeliveryDto.getId(),
+                memberEntity,
                 orderDeliveryDto.getStatus(),
                 orderDeliveryDto.getRequestTime(),
                 orderDeliveryDto.getAddress(),
                 orderDeliveryDto.getRequestContent(),
-                orderDeliveryDto.getDeliveryTime(),
-                orderDeliveryDto.getPayment(),
-                orderDeliveryDto.getTotalQuantity()
+                orderDeliveryDto.getDeliveryTime()
         );
     }
 }

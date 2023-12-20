@@ -1,6 +1,5 @@
 package com.delivery.domain.article.service;
 
-
 import com.delivery.domain.article.dto.ArticleDto;
 import com.delivery.domain.article.entity.ArticleEntity;
 import com.delivery.domain.article.repository.ArticleRepository;
@@ -96,3 +95,4 @@ public class ArticleService {
         return articleEntityList;
     }
 }
+
