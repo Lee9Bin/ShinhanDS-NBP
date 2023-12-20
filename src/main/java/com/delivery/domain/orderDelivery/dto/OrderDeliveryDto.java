@@ -18,13 +18,13 @@ import java.time.LocalDateTime;
 public class OrderDeliveryDto {
 
     private Long id;
-    private Status status;
-    private LocalDateTime requestTime;
+    private Status status = Status.WAIT;
+    private LocalDateTime requestTime = LocalDateTime.now();
 
     @NotBlank(message = "주소는 빈값일 수 없다.")
     private String address;
     private String requestContent;
-    private LocalDateTime deliveryTime;
+    private LocalDateTime deliveryTime = requestTime.plusMinutes(30);
 
     public static OrderDeliveryDto toDto(OrderDelivery orderDelivery){
         return new OrderDeliveryDto(

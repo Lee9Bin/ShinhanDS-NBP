@@ -3,6 +3,7 @@ package com.delivery.domain.orderDelivery.entiy;
 
 import com.delivery.domain.member.entity.MemberEntity;
 import com.delivery.domain.orderDelivery.dto.OrderDeliveryDto;
+import com.delivery.domain.store.entity.StoreEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,39 +23,45 @@ public class OrderDelivery {
     @Column(name = "order_delivery_id")
     private Long id;
 
-    //회원 아이디
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
-    private MemberEntity memberEntity;
+    private MemberEntity memberEntity; //회원 아이디
 
-    //식당 아이디
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "store_name")
+    private StoreEntity storeEntity; //식당 아이디
 
-    //배달
     @Column(nullable = false, length = 20)
     @Enumerated(value = EnumType.STRING)
-    private Status status;
+    private Status status;//배달 요청 상태
 
     @CreatedDate
-    private LocalDateTime requestTime;
+    private LocalDateTime requestTime; //배달 요청 시간
 
     @Column(nullable = false, length = 50)
-    private String address;
+    private String address; //배달 주소
 
     @Column
-    private String requestContent;
+    private String requestContent; //배달 요청사항
 
     @Column(nullable = false)
-    private LocalDateTime deliveryTime;
+    private LocalDateTime deliveryTime; // 배달 시간
 
-    //배달 예상 시간
-    public void createDeliveryTime(Long minute){
-        deliveryTime = requestTime.plusMinutes(minute);
+    //==주문 상태 변경==//
+    public void cancel(Status status){
+        this.status = status;
     }
 
-    public static OrderDelivery toEntity(OrderDeliveryDto orderDeliveryDto, MemberEntity memberEntity){
+
+
+
+
+    //==엔티티 변환==//
+    public static OrderDelivery toEntity(OrderDeliveryDto orderDeliveryDto, MemberEntity memberEntity, StoreEntity storeEntity){
         return new OrderDelivery(
                 orderDeliveryDto.getId(),
                 memberEntity,
+                storeEntity,
                 orderDeliveryDto.getStatus(),
                 orderDeliveryDto.getRequestTime(),
                 orderDeliveryDto.getAddress(),
