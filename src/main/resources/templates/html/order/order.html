@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>주문 페이지</title>
+</head>
+<body>
+<h1>주문 페이지</h1>
+<form action="/orderDelivery/new" method="post">
+    <input type="hidden" name="storeId" value=""> <br>
+    <!-- <p id="check-result"></p> -->
+    주소: <input type="text" name="address"> <br>
+    요청 사항: <input type="text" name="requestContent"> <br>
+
+    <input type="submit" value="회원가입">
+
+</form>
+</body>
+</html>
