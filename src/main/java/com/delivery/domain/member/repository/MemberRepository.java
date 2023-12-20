@@ -11,4 +11,10 @@ public interface MemberRepository extends JpaRepository<MemberEntity, Long> {
     // 인터페이스는 추상 메서드
     Optional<MemberEntity> findByMemberEmail(String memberEmail);
     //Optional : null 방지
+
+
+    //1번 게시물의 전체 댓글
+
+
+
 }
