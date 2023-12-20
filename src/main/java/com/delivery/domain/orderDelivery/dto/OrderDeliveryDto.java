@@ -26,20 +26,7 @@ public class OrderDeliveryDto {
     private String requestContent;
     private LocalDateTime deliveryTime = requestTime.plusMinutes(30);
 
-<<<<<<< HEAD
-//    public static OrderDeliveryDto toDto(OrderDelivery orderDelivery){
-//        return new OrderDeliveryDto(
-//                orderDelivery.getId(),
-//                orderDelivery.getStatus(),
-//                orderDelivery.getRequestTime(),
-//                orderDelivery.getAddress(),
-//                orderDelivery.getRequestContent(),
-//                orderDelivery.getDeliveryTime(),
-//                orderDelivery.getPayment(),
-//                orderDelivery.getTotalQuantity()
-//        );
-//    }
-=======
+
     public static OrderDeliveryDto toDto(OrderDelivery orderDelivery){
         return new OrderDeliveryDto(
                 orderDelivery.getId(),
@@ -50,5 +37,5 @@ public class OrderDeliveryDto {
                 orderDelivery.getDeliveryTime()
         );
     }
->>>>>>> 075293dbe90009d932c5cebec99d1516d1eac9e8
+
 }

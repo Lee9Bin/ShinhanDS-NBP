@@ -34,14 +34,14 @@ public class MenuEntity {
     @Column
     private String photo;
 
-    public void patch(MenuEntity menuEntity){
-        if(menuEntity.price !=null){
-            this.price = menuEntity.price;
-        }
-        if(menuEntity.content !=null){
-            this.content = menuEntity.content;
-        }
-    }
+//    public void patch(MenuEntity menuEntity){
+//        if(menuEntity.price !=null){
+//            this.price = menuEntity.price;
+//        }
+//        if(menuEntity.content !=null){
+//            this.content = menuEntity.content;
+//        }
+//    }
 }
 
 

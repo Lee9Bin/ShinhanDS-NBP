@@ -11,7 +11,7 @@ import org.springframework.orm.jpa.JpaOptimisticLockingFailureException;
 public class MenuDto {
 
     private Long id;
-    private String price;
+    private int price;
     private String content;
     private String popular;
     private String photo;

@@ -1,11 +1,8 @@
 {{>layouts/link}}
-<link rel="stylesheet" href="/css/customer/customerHome.css">
-</head>
 <body>
 {{>layouts/header}}
 {{>layouts/swiper}}
 <!-- 콘텐츠 -->
-<div>
     <main>
         <section class="section-search">
             <div class="title-search">
@@ -17,129 +14,177 @@
                     />
                 </div>
                 <div class="search-section">
-                    <img width="32px" src="../../img/search.png" alt=""/>
+                    <img width="32px" src="/img/search.png" alt=""/>
                 </div>
             </div>
         </section>
-        <section class="category_box">
-            <div class="box">
-                <ul class="category">
 
-                    <li>
-                        <div>
-                            <div class="img_box">
-                                <img src="/img/delivery/pizza2.png" alt="이미지">
-                            </div>
-                        </div>
-                        <div class="name">피자</div>
-                    </li>
+        <section id="about" class="section">
+            <div class="section__header">
+                <strong class="section__tag">
+                    노량진 수산
+                </strong>
+                <h1 class="section__title">
+                    가게 목록
+                </h1>
 
-                    <li>
-                        <div>
-                            <div class="img_box">
-                                <img src="/img/delivery/chicken1.png" alt="이미지">
-                            </div>
-                        </div>
-                        <div class="name">치킨</div>
-                    </li>
+            </div>
+            <div class="list-button">
+                <button id="button-all">기본 순</button>
+                <button id="button-1">북마크</button>
+                <button id="button-2">주문 많은 순</button>
+                <button id="button-3">리뷰 많은 순</button>
+            </div>
 
-                    <li>
-                        <div>
-                            <div class="img_box">
-                                <img src="/img/delivery/hamburger4.png" alt="이미지">
-                            </div>
-                        </div>
-                        <div class="name">패스트푸드</div>
-                    </li>
+            <div class="about">
+                <div class="about__card category-1 box">
+                    <div class="about-store">
+<!--                    <img class="about__icon" src="/img/dog1.png" alt="a">-->
+                    <a href="javascript:void(0);" class="bookmark">
+                        <i class="fa-regular fa-bookmark"></i>
+                    </a>
+                    </div>
+                    <div class="about-store-comment">
+                    <h2 class="about__title _1">
+                        화홍루
+                    </h2>
+                    <p class="about__text">
+                        짜장면 맛집
+                    </p>
+                    </div>
+                </div>
+                <div class="about__card">
+                    <div class="about-store">
+<!--                        <img class="about__icon" src="/img/dog1.png" alt="a">-->
+                        <a href="javascript:void(0);" class="bookmark">
+                            <i class="fa-regular fa-bookmark"></i>
+                        </a>
+                    </div>
+                    <div class="about-store-comment">
+                        <h2 class="about__title _1">
+                            황금성
+                        </h2>
+                        <p class="about__text">
+                            짬뽕이 더 맛있음
+                        </p>
+                    </div>
+                </div>
+                <div class="about__card">
+                    <div class="about-store">
+<!--                        <img class="about__icon" src="/img/dog1.png" alt="a">-->
+                        <a href="javascript:void(0);" class="bookmark">
+                            <i class="fa-regular fa-bookmark"></i>
+                        </a>
+                    </div>
+                    <div class="about-store-comment">
+                        <h2 class="about__title _3">
+                            또복이네
+                        </h2>
+                        <p class="about__text">
+                            20년 전통 짜장면
+                        </p>
+                    </div>
+                </div>
+                <div class="about__card">
+                    <div class="about-store">
+<!--                        <img class="about__icon" src="/img/dog1.png" alt="a">-->
+                        <a href="javascript:void(0);" class="bookmark">
+                            <i class="fa-regular fa-bookmark"></i>
+                        </a>
+                    </div>
+                    <div class="about-store-comment">
+                        <h2 class="about__title _2">
+                            자바네
+                        </h2>
+                        <p class="about__text">
+                            간짜장 맛집
+                        </p>
+                    </div>
+                </div>
+                <div class="about__card">
+                    <div class="about-store">
+<!--                        <img class="about__icon" src="/img/dog1.png" alt="a">-->
+                        <a href="javascript:void(0);" class="bookmark">
+                            <i class="fa-regular fa-bookmark"></i>
+                        </a>
+                    </div>
+                    <div class="about-store-comment">
+                        <h2 class="about__title _1">
+                            화옹루
+                        </h2>
+                        <p class="about__text">
+                            전통 짜장면집
+                        </p>
+                    </div>
+                </div>
+                <div class="about__card">
+                    <div class="about-store">
+<!--                        <img class="about__icon" src="/img/dog1.png" alt="a">-->
+                        <a href="javascript:void(0);" class="bookmark">
+                            <i class="fa-regular fa-bookmark"></i>
+                        </a>
+                    </div>
+                    <div class="about-store-comment">
+                        <h2 class="about__title _2">
+                            화옹루
+                        </h2>
+                        <p class="about__text">
+                            전통 짜장면집
+                        </p>
+                    </div>
+                </div>
+                <div class="about__card">
+                    <div class="about-store">
+                        <a href="javascript:void(0);" class="bookmark">
+                            <i class="fa-regular fa-bookmark"></i>
+                        </a>
+                    </div>
+                    <div class="about-store-comment">
+                        <h2 class="about__title _3">
+                            화옹루
+                        </h2>
+                        <p class="about__text">
+                            전통 짜장면집
+                        </p>
+                    </div>
+                </div>
+                <div class="about__card">
+                    <div class="about-store">
+                        <a href="javascript:void(0);" class="bookmark">
+                            <i class="fa-regular fa-bookmark"></i>
+                        </a>
+                    </div>
+                    <div class="about-store-comment">
+                        <h2 class="about__title _1">
+                            화옹루
+                        </h2>
+                        <p class="about__text">
+                            전통 짜장면집
+                        </p>
+                    </div>
+                </div>
+            </div>
 
-                    <li>
-                        <div>
-                            <div class="img_box">
-                                <img src="/img/delivery/bunsik1.png" alt="이미지">
-                            </div>
-                        </div>
-                        <div class="name">분식</div>
-                    </li>
+            <button class="more-btn">더보기</button>
+        </section>
 
 
-                    <li>
-                        <div>
-                            <div class="img_box">
-                                <img src="/img/delivery/dessert2.png" alt="이미지">
-                            </div>
-                        </div>
-                        <div class="name">카페/디저트</div>
-                    </li>
 
-                    <li>
-                        <div>
-                            <div class="img_box">
-                                <img src="/img/delivery/cutlet1.png" alt="이미지">
-                            </div>
-                        </div>
-                        <div class="name">돈까스/일식</div>
-                    </li>
+        <section class="section">
 
-                    <li>
-                        <div>
-                            <div class="img_box">
-                                <img src="/img/delivery/chinese1.png" alt="이미지">
-                            </div>
-                        </div>
-                        <div class="name">중국집</div>
-                    </li>
-
-
-                    <li>
-                        <div>
-                            <div class="img_box">
-                                <img src="/img/delivery/jockbal1.png" alt="이미지">
-                            </div>
-                        </div>
-                        <div class="name">족발/보쌈</div>
-                    </li>
-
-                    <li>
-                        <div>
-                            <div class="img_box">
-                                <img src="/img/delivery/jockbal2.png" alt="이미지">
-                            </div>
-                        </div>
-                        <div class="name">야식</div>
-                    </li>
-
-                    <li>
-                        <div>
-                            <div class="img_box">
-                                <img src="/img/delivery/bibimbap.jpg" alt="이미지">
-                            </div>
-                        </div>
-                        <div class="name">한식</div>
-                    </li>
-
-                    <li>
-                        <div>
-                            <div class="img_box">
-                                <img src="/img/delivery/jockbal3.png" alt="이미지">
-                            </div>
-                        </div>
-                        <div class="name">1인분</div>
-                    </li>
-
-                    <li>
-                        <div>
-                            <div class="img_box">
-                                <img src="/img/delivery/dosirac.jpg" alt="이미지">
-                            </div>
-                        </div>
-                        <div class="name">도시락</div>
-                    </li>
-                </ul>
+            <!-- map-->
+            <!-- 지도 -->
+            <div class="map-cantainer">
+                <p>위치</p>
+                <div id="map" class="map"></div>
             </div>
         </section>
+
+
+
+
+
     </main>
-</div>
-<!-- 콘텐츠 -->
 
 
 <!-- 하단 메뉴 -->
@@ -149,23 +194,6 @@
 
 <!-- 푸터 -->
 {{>layouts/footer}}
-<!--<%@ include file="/WEB-INF/view//include/footer.jsp" %>-->
-<!-- 푸터 -->
-
-<script>
-    $(".category li").click(function(){
-        let address1 = $("#deleveryAddress1").val();
-        if(!address1) {
-            swal("배달 받으실 주소를 입력해 주세요");
-            return false;
-        }
-
-        const index = $(this).index();
-
-        location.href = "/store/" + (100+index) + "/" +address1;
-    })
-
-</script>
 
 </body>
 </html>

@@ -26,32 +26,20 @@ public class OrderDeliveryService {
     private final StoreRepository storeRepository;
 
     //등록하는 거니깐 기본 트랜잭션 걸어주기
-<<<<<<< HEAD
-    //주문하기
-//    @Transactional
-//    public Long save(@Valid OrderDeliveryDto orderDeliveryDto){
-//        // 처음 주믄을 하면 요청수락대기 단계
-//        orderDeliveryDto.setStatus(Status.WAIT);
-//        orderDeliveryDto.setRequestTime(LocalDateTime.now());
-//        OrderDelivery orderDelivery = OrderDelivery.toEntity(orderDeliveryDto);
-//        orderDelivery.createDeliveryTime(10L);
-//        OrderDelivery saveId = orderDeliveryRepository.save(orderDelivery);
-//        return saveId.getId();
-//    }
-=======
-    @Transactional //주문하기
-    public OrderDeliveryDto save(OrderDeliveryDto orderDeliveryDto, Long memberID, Long storeId){
-        // 처음 주믄을 하면 요청수락대기 단계
-        Optional<MemberEntity> targetMember = memberRepository.findById(memberID);
-        Optional<StoreEntity> targetStore = storeRepository.findById(storeId);
 
-        if(targetMember.isPresent() && targetStore.isPresent()){
-            OrderDelivery orderDelivery = OrderDelivery.toEntity(orderDeliveryDto, targetMember.get(), targetStore.get());
-            OrderDelivery saveEntity = orderDeliveryRepository.save(orderDelivery);
-            return OrderDeliveryDto.toDto(saveEntity);
-        }
-        return null;
-    }
+//    @Transactional //주문하기
+//    public OrderDeliveryDto save(OrderDeliveryDto orderDeliveryDto, Long memberID, Long storeId){
+//        // 처음 주믄을 하면 요청수락대기 단계
+//        Optional<MemberEntity> targetMember = memberRepository.findById(memberID);
+//        Optional<StoreEntity> targetStore = storeRepository.findById(storeId);
+//
+//        if(targetMember.isPresent() && targetStore.isPresent()){
+//            OrderDelivery orderDelivery = OrderDelivery.toEntity(orderDeliveryDto, targetMember.get(), targetStore.get());
+//            OrderDelivery saveEntity = orderDeliveryRepository.save(orderDelivery);
+//            return OrderDeliveryDto.toDto(saveEntity);
+//        }
+//        return null;
+//    }
 
     //주문 목록 가져오기
     public List<OrderDelivery> findAllByMemberEntity_Id(Long id){
@@ -86,5 +74,5 @@ public class OrderDeliveryService {
 
         return null;
     }
->>>>>>> 075293dbe90009d932c5cebec99d1516d1eac9e8
+
 }
