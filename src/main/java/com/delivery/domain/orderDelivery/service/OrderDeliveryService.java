@@ -30,10 +30,10 @@ public class OrderDeliveryService {
     public OrderDeliveryDto save(OrderDeliveryDto orderDeliveryDto, Long memberID, Long storeId){
         // 처음 주믄을 하면 요청수락대기 단계
         Optional<MemberEntity> targetMember = memberRepository.findById(memberID);
-        Optional<StoreEntity> targetStore = storeRepository.findById(storeId);
+        Optional<StoreEntity> targetStore = storeRepository.findById("storeId");
 
         if(targetMember.isPresent() && targetStore.isPresent()){
-            OrderDelivery orderDelivery = OrderDelivery.toEntity(orderDeliveryDto, targetMember.get(), targetStore.get());
+            OrderDelivery orderDelivery = OrderDelivery.toEntity(orderDeliveryDto, targetMember.get());
             OrderDelivery saveEntity = orderDeliveryRepository.save(orderDelivery);
             return OrderDeliveryDto.toDto(saveEntity);
         }
