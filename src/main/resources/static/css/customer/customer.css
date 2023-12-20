@@ -5,7 +5,6 @@
     font-size: 100%;
 }
 
-<<<<<<< HEAD
 header {
     display: flex;
     background-color: #e8f2f5;
@@ -74,9 +73,6 @@ header > div{
 .nav-bar-profile > div > button{
     cursor: pointer;
 }
-
-=======
->>>>>>> b7a3b9f27586f33947331ae2bea47d6135f3f1a2
 
 .section {
     width: 1068px;
@@ -238,7 +234,6 @@ header > div{
     height: 400px;
 }
 
-<<<<<<< HEAD
 footer {
     background-color: #040d22;
     position: relative;
@@ -295,5 +290,3 @@ footer .site-link li {
     margin: 0;
     margin-right: 20px;
 }
-=======
->>>>>>> b7a3b9f27586f33947331ae2bea47d6135f3f1a2
