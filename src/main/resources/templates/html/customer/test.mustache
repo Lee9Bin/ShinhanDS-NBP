@@ -19,182 +19,33 @@
             </div>
         </section>
 
-        <section id="about" class="section">
-            <div class="section__header">
-                <strong class="section__tag">
-                    노량진 수산
-                </strong>
-                <h1 class="section__title">
-                    가게 목록
-                </h1>
-
-            </div>
-            <div class="list-button">
-                <button id="button-all">기본 순</button>
-                <button id="button-1">북마크</button>
-                <button id="button-2">주문 많은 순</button>
-                <button id="button-3">리뷰 많은 순</button>
-            </div>
-
-            <div class="about">
-                <div class="about__card category-1 box">
-                    <div class="about-store">
-<!--                    <img class="about__icon" src="/img/dog1.png" alt="a">-->
-                    <a href="javascript:void(0);" class="bookmark">
-                        <i class="fa-regular fa-bookmark"></i>
-                    </a>
-                    </div>
-                    <div class="about-store-comment">
-                    <h2 class="about__title _1">
-                        화홍루
-                    </h2>
-                    <p class="about__text">
-                        짜장면 맛집
-                    </p>
-                    </div>
-                </div>
-                <div class="about__card">
-                    <div class="about-store">
-<!--                        <img class="about__icon" src="/img/dog1.png" alt="a">-->
-                        <a href="javascript:void(0);" class="bookmark">
-                            <i class="fa-regular fa-bookmark"></i>
-                        </a>
-                    </div>
-                    <div class="about-store-comment">
-                        <h2 class="about__title _1">
-                            황금성
-                        </h2>
-                        <p class="about__text">
-                            짬뽕이 더 맛있음
-                        </p>
-                    </div>
-                </div>
-                <div class="about__card">
-                    <div class="about-store">
-<!--                        <img class="about__icon" src="/img/dog1.png" alt="a">-->
-                        <a href="javascript:void(0);" class="bookmark">
-                            <i class="fa-regular fa-bookmark"></i>
-                        </a>
-                    </div>
-                    <div class="about-store-comment">
-                        <h2 class="about__title _3">
-                            또복이네
-                        </h2>
-                        <p class="about__text">
-                            20년 전통 짜장면
-                        </p>
-                    </div>
-                </div>
-                <div class="about__card">
-                    <div class="about-store">
-<!--                        <img class="about__icon" src="/img/dog1.png" alt="a">-->
-                        <a href="javascript:void(0);" class="bookmark">
-                            <i class="fa-regular fa-bookmark"></i>
-                        </a>
-                    </div>
-                    <div class="about-store-comment">
-                        <h2 class="about__title _2">
-                            자바네
-                        </h2>
-                        <p class="about__text">
-                            간짜장 맛집
-                        </p>
-                    </div>
-                </div>
-                <div class="about__card">
-                    <div class="about-store">
-<!--                        <img class="about__icon" src="/img/dog1.png" alt="a">-->
-                        <a href="javascript:void(0);" class="bookmark">
-                            <i class="fa-regular fa-bookmark"></i>
-                        </a>
-                    </div>
-                    <div class="about-store-comment">
-                        <h2 class="about__title _1">
-                            화옹루
-                        </h2>
-                        <p class="about__text">
-                            전통 짜장면집
-                        </p>
-                    </div>
-                </div>
-                <div class="about__card">
-                    <div class="about-store">
-<!--                        <img class="about__icon" src="/img/dog1.png" alt="a">-->
-                        <a href="javascript:void(0);" class="bookmark">
-                            <i class="fa-regular fa-bookmark"></i>
-                        </a>
-                    </div>
-                    <div class="about-store-comment">
-                        <h2 class="about__title _2">
-                            화옹루
-                        </h2>
-                        <p class="about__text">
-                            전통 짜장면집
-                        </p>
-                    </div>
-                </div>
-                <div class="about__card">
-                    <div class="about-store">
-                        <a href="javascript:void(0);" class="bookmark">
-                            <i class="fa-regular fa-bookmark"></i>
-                        </a>
-                    </div>
-                    <div class="about-store-comment">
-                        <h2 class="about__title _3">
-                            화옹루
-                        </h2>
-                        <p class="about__text">
-                            전통 짜장면집
-                        </p>
-                    </div>
-                </div>
-                <div class="about__card">
-                    <div class="about-store">
-                        <a href="javascript:void(0);" class="bookmark">
-                            <i class="fa-regular fa-bookmark"></i>
-                        </a>
-                    </div>
-                    <div class="about-store-comment">
-                        <h2 class="about__title _1">
-                            화옹루
-                        </h2>
-                        <p class="about__text">
-                            전통 짜장면집
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <button class="more-btn">더보기</button>
-        </section>
-
-
-
         <section class="section">
-
+        {{>layouts/menu}}
             <!-- map-->
             <!-- 지도 -->
             <div class="map-cantainer">
-                <p>위치</p>
+                <div class="section__title">
+                    찾아오시는 길
+                </div>
                 <div id="map" class="map"></div>
             </div>
         </section>
-
-
-
-
-
     </main>
 
 
 <!-- 하단 메뉴 -->
 {{>layouts/nav}}
-<!-- 하단 메뉴 -->
-
 
 <!-- 푸터 -->
 {{>layouts/footer}}
 
+<script>
+    const btn = document.querySelector('.more-btn')
+    btn.addEventListener('click',()=>{
+        // 더보기 버튼을 클릭하면 AJAX 또는 서버 리다이렉션을 통해 /moreStores로 이동
+        window.location.href = "/moreStores";
+    })
+</script>
 </body>
 </html>
 

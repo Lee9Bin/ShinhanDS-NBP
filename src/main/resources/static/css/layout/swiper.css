@@ -47,6 +47,12 @@
     transform: scale(1.4);
 }
 
+.con{
+    height: 100%;
+    background: url("/img/christmas5.jpeg");
+}
+
+
 /* 기본 슬라이드 프레임 */
 .wrap .swiper-wrapper {
     width: 100%;
@@ -82,7 +88,7 @@
     top: 0px;
     left: 0px;
     opacity: 0;
-    background: #fff;
+    background: #111;
 }
 .wrap .swiper-wrapper .swiper-slide-prev .inner,
 .wrap .swiper-wrapper .swiper-slide-next .inner {
@@ -176,5 +182,5 @@
 }
 .swiper-pagination-fraction span:nth-of-type(1) {
     font-size: 30px;
-    color: #fff;
+    color: #eee;
 }

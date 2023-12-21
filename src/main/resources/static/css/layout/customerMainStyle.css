@@ -84,43 +84,36 @@
     text-align: center;
 }
 
-.section__tag {
-    font-size: var(--font-size-tag);
-    color: var(--color-sub);
-}
 
-.section__title {
-    font-size: var(--font-size-title);
-    font-weight: bold;
-    color: var(--color-text);
-}
 
 #about {
     border-radius: 10px;
-    height: calc(100vh + 100px);
-    background-color: var(--color-light-bg);
+
 }
 
 .about {
-    height: 67%;
     display: grid;
     gap: 1em;
     margin-top: 45px;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
 
 }
 .about__card {
+    height: 30vh;
     text-align: center;
     color: white;
     background-color: var(--color-dark);
     border-radius: 12px;
+    box-shadow: 4px 4px 12px grey;
+    cursor: pointer
+
 }
 .about-store{
     height: 70%;
     border-radius: 12px 12px 0 0;
     background: url("/img/delivery/chinese2.png");
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
 
 
@@ -166,18 +159,24 @@
 /*가게*/
 
 .list-button{
-    margin: 5rem auto 0px;
+    margin: 3rem auto 0px;
     display: flex;
     justify-content: flex-end;
-    margin-right: 3rem;
+    margin-right: 2rem;
 }
 .list-button button{
     display: block;
     cursor: pointer;
     margin-right: 1rem;
+    border-radius: 12px;
+    width: 7rem;
+    height: 3rem;
+    border: none;
 }
 
-
+.list-button button:hover{
+    transform: scale(1.1);
+}
 
 .list-class:hover .bookmark, .bookmark.bookmarked {
     opacity: 1;
@@ -210,20 +209,29 @@
 .more-btn {
     display: block;
     margin: auto;
-    margin-top: 1.5rem;
-    width: 5rem;
+    margin-top: 1.5em;
+    width: 7rem;
     height: 3rem;
-    border-radius: 10px;
+    border-radius: 12px;
     border: none;
     cursor: pointer;
 }
 
 .more-btn:hover{
-    transform: scale(1.2);
+    transform: scale(1.1);
 }
 
 .map {
-    height: 400px;
+    margin: auto;
+    border-radius: 12px;
+    width: calc(80vw);
+    height: calc(30vw);
+}
+
+.section__title{
+    font-weight: bold;
+    font-size: larger;
+    margin: 5rem 0 2rem;
 }
 
 

@@ -5,17 +5,14 @@ footer {
 
 footer .container {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 
-.footer-product {
-    flex-basis: 20%;
-}
 .footer-customer {
-    flex-basis: 20%;
+    flex-basis: 30%;
 }
 .footer-company {
-    flex-basis: 20%;
+    flex-basis: 40%;
 }
 
 footer h5 {

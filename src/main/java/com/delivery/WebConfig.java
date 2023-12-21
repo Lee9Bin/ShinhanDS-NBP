@@ -18,16 +18,19 @@ public class WebConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler(resourcePath)
                 .addResourceLocations(savePath);
+
+
     }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // a
 
+
         registry.addInterceptor(new LogIntercepter())
                 .order(1)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/css/**", "/*.ico", "/error"); // 모든걸 허용하지만 얘네는 뺄거야!!
+                .excludePathPatterns("/css/**", "/*.ico", "/error", "/img/**", "/js/**");
 
         registry.addInterceptor(new LoginCheckInterceptor())
                 .order(2)
@@ -35,7 +38,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/","/mail","/mailOwner","/member/email-check", "/member/login", "/member/save", "/member/logout"
                         , "/css/**", "/html/**", "/img/**","/js/**", "/*.ico", "/error", "/session-info", "/owner/login", "/owner/save", "/owner/logout"
 
-                        ,"/owner/email-check", "/ownerSignIn", "/customer/", "/customer","/api/articles/**", "/articles/**", "/articles/new");
+                        ,"/owner/email-check", "/ownerSignIn", "/customer/**", "/customer/","/api/articles/**", "/articles/**", "/articles/new");
 
 
     }
