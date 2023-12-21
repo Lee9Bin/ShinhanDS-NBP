@@ -40,10 +40,11 @@
             console.log(currentPage);
             currentPage++; // 클릭할 때마다 페이지 번호 증가
             // 서버에 데이터 요청
-            console.log(currentPage);
+
             const response = await fetch(`/api/get-more-data?page=${currentPage}&pageSize=8`);
+            console.log(response);
             const newData = await response.json();
-            console.log(newData)
+            console.log("url err:"+newData)
 
             // 새로운 게시물을 동적으로 생성
             newData.forEach(item => {

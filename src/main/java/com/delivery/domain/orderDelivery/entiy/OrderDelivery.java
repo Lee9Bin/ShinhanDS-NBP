@@ -4,7 +4,6 @@ package com.delivery.domain.orderDelivery.entiy;
 import com.delivery.domain.member.entity.MemberEntity;
 import com.delivery.domain.orderDelivery.dto.OrderDeliveryDto;
 import com.delivery.domain.store.entity.StoreEntity;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,8 +30,6 @@ public class OrderDelivery {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_name")
     private StoreEntity storeEntity; //식당 아이디
-
-    //배달
 
     @Column(nullable = false, length = 20)
     @Enumerated(value = EnumType.STRING)
@@ -72,5 +69,4 @@ public class OrderDelivery {
                 orderDeliveryDto.getDeliveryTime()
         );
     }
-
 }

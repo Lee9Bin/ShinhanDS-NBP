@@ -27,19 +27,19 @@ public class OrderDeliveryService {
 
     //등록하는 거니깐 기본 트랜잭션 걸어주기
 
-//    @Transactional //주문하기
-//    public OrderDeliveryDto save(OrderDeliveryDto orderDeliveryDto, Long memberID, Long storeId){
-//        // 처음 주믄을 하면 요청수락대기 단계
-//        Optional<MemberEntity> targetMember = memberRepository.findById(memberID);
-//        Optional<StoreEntity> targetStore = storeRepository.findById(storeId);
-//
-//        if(targetMember.isPresent() && targetStore.isPresent()){
-//            OrderDelivery orderDelivery = OrderDelivery.toEntity(orderDeliveryDto, targetMember.get(), targetStore.get());
-//            OrderDelivery saveEntity = orderDeliveryRepository.save(orderDelivery);
-//            return OrderDeliveryDto.toDto(saveEntity);
-//        }
-//        return null;
-//    }
+    @Transactional //주문하기
+    public OrderDeliveryDto save(OrderDeliveryDto orderDeliveryDto, Long memberID, Long storeId){
+        // 처음 주믄을 하면 요청수락대기 단계
+        Optional<MemberEntity> targetMember = memberRepository.findById(memberID);
+        Optional<StoreEntity> targetStore = storeRepository.findById("abc");
+
+        if(targetMember.isPresent() && targetStore.isPresent()){
+            OrderDelivery orderDelivery = OrderDelivery.toEntity(orderDeliveryDto, targetMember.get(), targetStore.get());
+            OrderDelivery saveEntity = orderDeliveryRepository.save(orderDelivery);
+            return OrderDeliveryDto.toDto(saveEntity);
+        }
+        return null;
+    }
 
     //주문 목록 가져오기
     public List<OrderDelivery> findAllByMemberEntity_Id(Long id){
@@ -74,5 +74,4 @@ public class OrderDeliveryService {
 
         return null;
     }
-
 }

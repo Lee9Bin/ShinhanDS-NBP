@@ -1,5 +1,6 @@
 package com.delivery;
 
+
 import com.delivery.domain.member.intercepter.LogIntercepter;
 import com.delivery.domain.member.intercepter.LoginCheckInterceptor;
 import org.springframework.context.annotation.Configuration;
@@ -24,7 +25,6 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        // a
 
 
         registry.addInterceptor(new LogIntercepter())
@@ -38,7 +38,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/","/mail","/mailOwner","/member/email-check", "/member/login", "/member/save", "/member/logout"
                         , "/css/**", "/html/**", "/img/**","/js/**", "/*.ico", "/error", "/session-info", "/owner/login", "/owner/save", "/owner/logout"
 
-                        ,"/owner/email-check", "/ownerSignIn", "/customer/**", "/customer/","/api/articles/**", "/articles/**", "/articles/new");
+                        ,"/owner/email-check", "/ownerSignIn", "/customer/**", "/customer/","/api/articles/**", "/articles/**", "/articles/new", "/layouts/**");
 
 
     }

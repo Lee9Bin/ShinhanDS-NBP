@@ -33,6 +33,7 @@ public class DummyStoreApi {
                                                               @RequestParam(name = "pageSize", defaultValue = "8") int pageSize) {
         // 페이징 처리를 위한 Pageable 객체 생성
         Pageable pageable = PageRequest.of(page, pageSize);
+        log.info(pageable.toString());
 
         // 해당 페이지의 데이터를 가져옴
         Page<DummyStoreEntity> dummyStorePage = dummyStoreRepository.findAll(pageable);

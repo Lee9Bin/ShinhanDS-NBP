@@ -27,15 +27,16 @@ class OrderDeliveryServiceTest {
     @Autowired
     private StoreRepository storeRepository;
 
-//    @Test
-//    @Rollback(value = false)
-//    void 회워아이디랑_넣기() {
+    @Test
+    @Rollback(value = false)
+    void 회워아이디랑_넣기() {
 //        storeRepository.save(new StoreEntity(null,"나랑너랑","02-123-123",null,null,null,"마포구","ㅈㄷㄱ"));
-//        OrderDeliveryDto orderDeliveryDto = new OrderDeliveryDto(null, Status.WAIT, LocalDateTime.now(), "서울특별시", "맛있게 부탁드립니다.", LocalDateTime.now().plusMinutes(10));
-//        OrderDeliveryDto orderDelivery = orderDeliveryService.save(orderDeliveryDto, 2L,1L);
-//
-//        List<OrderDelivery> allByMemberId = orderDeliveryService.findAllByMemberEntity_Id(2L);
-//
-//        Assertions.assertThat(orderDelivery).isNotNull();
-//    }
+        OrderDeliveryDto orderDeliveryDto = new OrderDeliveryDto(null, Status.WAIT, LocalDateTime.now(), "서울특별시", "맛있게 부탁드립니다.", LocalDateTime.now().plusMinutes(10));
+        OrderDeliveryDto orderDelivery = orderDeliveryService.save(orderDeliveryDto, 2L,1L);
+
+        List<OrderDelivery> allByMemberId = orderDeliveryService.findAllByMemberEntity_Id(2L);
+
+        Assertions.assertThat(orderDelivery).isNotNull();
+    }
+
 }
