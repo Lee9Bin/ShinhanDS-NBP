@@ -5,6 +5,7 @@ import com.delivery.domain.orderDelivery.service.OrderDeliveryService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +18,10 @@ public class OrderDeliveryController {
     private final OrderDeliveryService orderDeliveryService;
 
     @GetMapping("/new")
-    public String createOrderDeliverForm(){
+    public String createOrderDeliverForm(Model model){
+        OrderDeliveryDto orderDeliveryDto = new OrderDeliveryDto();
+        orderDeliveryDto.setAddress("123123");
+        model.addAttribute("entity", orderDeliveryDto);
         return "html/order/order";
     }
 
