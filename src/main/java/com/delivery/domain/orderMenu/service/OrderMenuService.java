@@ -1,7 +1,6 @@
 package com.delivery.domain.orderMenu.service;
 
 import com.delivery.domain.orderDelivery.repositry.OrderDeliveryRepository;
-import com.delivery.domain.orderMenu.repository.OrderMenuRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class OrderMenuService {
-    private final OrderMenuRepository orderMenuRepository;
+    // private final OrderMenuRepository orderMenuRepository;
     // private final MenuRepository menuRepository;
     private final OrderDeliveryRepository orderDeliveryRepository;
 
