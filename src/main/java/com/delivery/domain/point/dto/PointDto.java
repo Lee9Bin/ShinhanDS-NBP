@@ -31,5 +31,4 @@ public class PointDto {
 //                pointEntity.getAmount()
 //        );
 //    }
-
 }
