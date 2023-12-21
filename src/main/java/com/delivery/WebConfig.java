@@ -1,5 +1,6 @@
 package com.delivery;
 
+
 import com.delivery.domain.member.intercepter.LogIntercepter;
 import com.delivery.domain.member.intercepter.LoginCheckInterceptor;
 import org.springframework.context.annotation.Configuration;
@@ -22,12 +23,11 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        // a
 
         registry.addInterceptor(new LogIntercepter())
                 .order(1)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/css/**", "/*.ico", "/error"); // 모든걸 허용하지만 얘네는 뺄거야!!
+                .excludePathPatterns("/css/**", "/*.ico", "/error", "/img/**", "/js/**");
 
         registry.addInterceptor(new LoginCheckInterceptor())
                 .order(2)

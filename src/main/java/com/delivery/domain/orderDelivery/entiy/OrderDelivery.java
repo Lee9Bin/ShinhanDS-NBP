@@ -1,13 +1,9 @@
 package com.delivery.domain.orderDelivery.entiy;
 
 
-<<<<<<< HEAD
-//import com.delivery.domain.orderDelivery.dto.OrderDeliveryDto;
-=======
 import com.delivery.domain.member.entity.MemberEntity;
 import com.delivery.domain.orderDelivery.dto.OrderDeliveryDto;
 import com.delivery.domain.store.entity.StoreEntity;
->>>>>>> 075293dbe90009d932c5cebec99d1516d1eac9e8
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -35,48 +31,6 @@ public class OrderDelivery {
     @JoinColumn(name = "store_name")
     private StoreEntity storeEntity; //식당 아이디
 
-<<<<<<< HEAD
-    //배달
-//    @Column(nullable = false, length = 20)
-//    @Enumerated(value = EnumType.STRING)
-//    private Status status;
-//
-//    @CreatedDate
-//    private LocalDateTime requestTime;
-//
-//    @Column(nullable = false, length = 50)
-//    private String address;
-//
-//    @Column
-//    private String requestContent;
-//
-//    @Column(nullable = false)
-//    private LocalDateTime deliveryTime;
-//
-//    @Column(nullable = false)
-//    private Long payment;
-//
-//    @Column(nullable = false)
-//    private Long totalQuantity;
-//
-//    //배달 예상 시간
-//    public void createDeliveryTime(Long minute){
-//        deliveryTime = requestTime.plusMinutes(minute);
-//    }
-
-//    public static OrderDelivery toEntity(OrderDeliveryDto orderDeliveryDto){
-//        return new OrderDelivery(
-//                orderDeliveryDto.getId(),
-//                orderDeliveryDto.getStatus(),
-//                orderDeliveryDto.getRequestTime(),
-//                orderDeliveryDto.getAddress(),
-//                orderDeliveryDto.getRequestContent(),
-//                orderDeliveryDto.getDeliveryTime(),
-//                orderDeliveryDto.getPayment(),
-//                orderDeliveryDto.getTotalQuantity()
-//        );
-//    }
-=======
     @Column(nullable = false, length = 20)
     @Enumerated(value = EnumType.STRING)
     private Status status;//배달 요청 상태
@@ -115,5 +69,4 @@ public class OrderDelivery {
                 orderDeliveryDto.getDeliveryTime()
         );
     }
->>>>>>> 075293dbe90009d932c5cebec99d1516d1eac9e8
 }

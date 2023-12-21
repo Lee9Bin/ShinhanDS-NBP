@@ -20,7 +20,6 @@ public class PointDto {
     private Type type;
     private LocalDateTime pointTime;
     private int amount;
-    private String content;
 
     private Long memberId;
     private Long orderDeliveryId;
@@ -30,11 +29,7 @@ public class PointDto {
                 pointEntity.getId(),
                 pointEntity.getType(),
                 pointEntity.getPointTime(),
-                pointEntity.getAmount(),
-                pointEntity.getContent(),
-                pointEntity.getMemberEntity().getId(),
-                pointEntity.getOrderDelivery().getId()
+                pointEntity.getAmount()
         );
     }
-
 }
