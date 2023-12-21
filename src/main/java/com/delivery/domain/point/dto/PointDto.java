@@ -1,7 +1,6 @@
 
 package com.delivery.domain.point.dto;
 
-import com.delivery.domain.point.entity.PointEntity;
 import com.delivery.domain.point.entity.Type;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,12 +23,13 @@ public class PointDto {
     private Long memberId;
     private Long orderDeliveryId;
 
-    public static PointDto toDto(PointEntity pointEntity){
-        return new PointDto(
-                pointEntity.getId(),
-                pointEntity.getType(),
-                pointEntity.getPointTime(),
-                pointEntity.getAmount()
-        );
-    }
+//    public static PointDto toDto(PointEntity pointEntity){
+//        return new PointDto(
+//                pointEntity.getId(),
+//                pointEntity.getType(),
+//                pointEntity.getPointTime(),
+//                pointEntity.getAmount()
+//        );
+//    }
+
 }
