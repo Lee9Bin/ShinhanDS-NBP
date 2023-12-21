@@ -1,5 +1,7 @@
 package com.delivery.domain.member.controller;
 
+import com.delivery.domain.dummyStore.entity.DummyStoreEntity;
+import com.delivery.domain.dummyStore.repository.DummyStoreRepository;
 import com.delivery.domain.member.dto.MemberDTO;
 import com.delivery.domain.member.service.MemberService;
 import jakarta.mail.Session;
@@ -19,6 +21,7 @@ public class MemberController {
 
     // 생성자 주입
     private final MemberService memberService;
+    private final DummyStoreRepository dummyStoreRepository;
 
     // 회원가입 페이지 출력 요청
     @GetMapping("/member/save") // 메인페이지에서 로그인한다고 href 건거 (링크 건건 거의 get)
@@ -46,11 +49,18 @@ public class MemberController {
     public String login(@ModelAttribute MemberDTO memberDTO, HttpSession session
                         , @RequestParam(defaultValue = "/") String redirectURL, Model model) {
 
-        MemberDTO loginResult = memberService.login(memberDTO);
+        // 디비에 담긴 가게 가져오기 5줄
+//        List<DummyStoreEntity> dummyStoreEntity = dummyStoreRepository.findAll();
+//        log.info(dummyStoreEntity.toString());
+//        session.setAttribute("stores", dummyStoreEntity);
+//        List<String> store = (List<String>) session.getAttribute("stores");
+//        model.addAttribute("stores", store);
 
+        MemberDTO loginResult = memberService.login(memberDTO);
         log.info(String.valueOf(loginResult));
 
         boolean isLoggedIn = true;
+
 
         if (loginResult == null) {
             System.out.println("아이디 틀렸다~!");
@@ -69,7 +79,7 @@ public class MemberController {
 
         // 직전 페이지의 정보를 들고 와야됨
         //return "redirect:" + redirectURL;
-        return "html/customer/test";
+        return "redirect:/customer/";
 
     }
 
@@ -128,7 +138,7 @@ public class MemberController {
     @GetMapping("/member/logout")
     public String logout(HttpSession session) {
         session.invalidate();  // 세션 무효화
-        return "html/customer/test";  // 인덱스 페이지의 HTML 파일명 리턴
+        return "redirect:/customer/";  // 인덱스 페이지의 HTML 파일명 리턴
     }
 
     @PostMapping("/member/email-check")

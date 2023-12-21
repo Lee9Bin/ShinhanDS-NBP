@@ -1,22 +1,5 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-size: 100%;
-}
-
 
 @charset "utf-8";
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
-
-
-ul,ol,li {
-    list-style: none;
-}
-a {
-    text-decoration: none;
-}
 
 /* 전체 풀 스크린 레이아웃 */
 .wrap {
@@ -25,7 +8,7 @@ a {
     overflow: hidden;
     position: relative;
     box-sizing: border-box;
-    background: linear-gradient(45deg, #ac8bef, #2ddbdc);
+    background: linear-gradient(45deg, #165b31, #f50606);
 }
 
 /* 제목 */
@@ -64,6 +47,12 @@ a {
     transform: scale(1.4);
 }
 
+.con{
+    height: 100%;
+    background: url("/img/christmas5.jpeg");
+}
+
+
 /* 기본 슬라이드 프레임 */
 .wrap .swiper-wrapper {
     width: 100%;
@@ -99,7 +88,7 @@ a {
     top: 0px;
     left: 0px;
     opacity: 0;
-    background: #fff;
+    background: #111;
 }
 .wrap .swiper-wrapper .swiper-slide-prev .inner,
 .wrap .swiper-wrapper .swiper-slide-next .inner {
@@ -193,5 +182,5 @@ a {
 }
 .swiper-pagination-fraction span:nth-of-type(1) {
     font-size: 30px;
-    color: #fff;
+    color: #eee;
 }

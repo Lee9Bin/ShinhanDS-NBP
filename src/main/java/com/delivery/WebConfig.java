@@ -19,10 +19,13 @@ public class WebConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler(resourcePath)
                 .addResourceLocations(savePath);
+
+
     }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+
 
         registry.addInterceptor(new LogIntercepter())
                 .order(1)
@@ -35,7 +38,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/","/mail","/mailOwner","/member/email-check", "/member/login", "/member/save", "/member/logout"
                         , "/css/**", "/html/**", "/img/**","/js/**", "/*.ico", "/error", "/session-info", "/owner/login", "/owner/save", "/owner/logout"
 
-                        ,"/owner/email-check", "/ownerSignIn", "/customer/", "/customer","/api/articles/**", "/articles/**", "/articles/new");
+                        ,"/owner/email-check", "/ownerSignIn", "/customer/**", "/customer/","/api/articles/**", "/articles/**", "/articles/new", "/layouts/**");
 
 
     }
