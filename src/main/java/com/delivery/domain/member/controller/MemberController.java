@@ -1,17 +1,15 @@
 package com.delivery.domain.member.controller;
 
-import com.delivery.domain.dummyStore.entity.DummyStoreEntity;
 import com.delivery.domain.dummyStore.repository.DummyStoreRepository;
 import com.delivery.domain.member.dto.MemberDTO;
 import com.delivery.domain.member.service.MemberService;
-import jakarta.mail.Session;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import jakarta.servlet.http.HttpSession;
 import java.util.List;
 
 @Slf4j
@@ -47,7 +45,7 @@ public class MemberController {
 
     @PostMapping("/member/login")
     public String login(@ModelAttribute MemberDTO memberDTO, HttpSession session
-                        , @RequestParam(defaultValue = "/") String redirectURL, Model model) {
+                        , Model model) {
 
         // 디비에 담긴 가게 가져오기 5줄
 //        List<DummyStoreEntity> dummyStoreEntity = dummyStoreRepository.findAll();
@@ -77,9 +75,12 @@ public class MemberController {
 
         log.info("login session loginEmail: " + session.getAttribute("loginEmail"));
 
+
+        String redirectURL = (String) session.getAttribute("redirectURL");
+        session.removeAttribute("redirectURL");
         // 직전 페이지의 정보를 들고 와야됨
         //return "redirect:" + redirectURL;
-        return "redirect:/customer/";
+        return "redirect:" + (redirectURL != null ? redirectURL : "/");
 
     }
 

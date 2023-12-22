@@ -12,9 +12,9 @@ public class MemberHomeController {
     @GetMapping("/")
     public String home(HttpSession session, Model model) {
 
-        if (session.getAttribute("loginEmail")!=null){
-            return "html/member/loginhome";
+        if (session.getAttribute("loginEmail") != null) {
+            return "redirect:/customer/";
         }
-            return "html/member/index";
+        return "html/member/login";
     }
 }
