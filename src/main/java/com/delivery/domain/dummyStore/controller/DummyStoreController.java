@@ -23,5 +23,4 @@ public class DummyStoreController {
         model.addAttribute("searchResults", searchResults);
         return "/html/store/StoreFindResult"; // 검색 결과를 보여줄 HTML 파일명
     }
-
 }

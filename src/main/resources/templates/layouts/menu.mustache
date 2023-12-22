@@ -8,25 +8,23 @@
 
     <div class="about">
         {{#stores}}
-            <div class="about__card category-1 box">
-                <a href="/store/{{id}}">
-
-                    <div class="about-store">
-                        <!--                    <img class="about__icon" src="/img/dog1.png" alt="a">-->
-                        <a href="javascript:void(0);" class="bookmark">
-                            <i class="fa-regular fa-bookmark"></i>
-                        </a>
-                    </div>
-                    <div class="about-store-comment">
-                        <h2 class="about__title _1">
-                            {{name}}
-                        </h2>
-                        <p class="about__text">
-                            {{description}}
-                        </p>
-                    </div>
+        <div class="about__card category-1 box">
+            <a href="/store/{{id}}" class="store-click" onclick="redirectToStore('{{id}}')">
+            <div class="about-store">
+                <a href="javascript:void(0);" class="bookmark">
+                    <i class="fa-regular fa-bookmark"></i>
                 </a>
             </div>
+            <div class="about-store-comment">
+                <h2 class="about__title _1">
+                    {{name}}
+                </h2>
+                <p class="about__text">
+                    {{description}}
+                </p>
+            </div>
+            </a>
+        </div>
 
         {{/stores}}
     </div>
@@ -55,7 +53,7 @@
                 newPost.className = 'about__card category-1 box';
 
                 newPost.innerHTML = `
-                <a href="/store/${item.id}">
+                <a href="/store/${item.id}" class="store-click" onclick="redirectToStore('${item.id}')">
                 <div class="about-store">
                     <a href="javascript:void(0);" class="bookmark">
                         <i class="fa-regular fa-bookmark"></i>
@@ -99,5 +97,13 @@
 
         // 스크롤이 필요한 경우에만 스크롤을 활성화
         aboutGrid.style.overflowY = hasOverflow ? 'auto' : 'hidden';
+    }
+
+    function redirectToStore(id) {
+        // 클릭한 경우의 추가 동작이 필요하다면 여기에 추가 로직을 작성할 수 있습니다.
+        // 예를 들어, 특별한 동작이 필요한 경우에만 이 함수를 사용하고,
+        // 일반적인 링크 이동은 a 태그 자체에 위임합니다.
+
+        window.location.href = "/store/" + id;
     }
 </script>

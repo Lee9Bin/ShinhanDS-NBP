@@ -22,7 +22,7 @@ public class DummyStoreEntity {
 
         private String name;
         private String description;
-        private int category;
+        private String category;
         private int rating;
         // 페이지 크기를 나타내는 정적상수
         public static final int PAGE_SIZE = 8;
