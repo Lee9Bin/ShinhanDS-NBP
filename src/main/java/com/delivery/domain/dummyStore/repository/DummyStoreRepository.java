@@ -9,4 +9,7 @@ import java.util.List;
 @Repository
 public interface DummyStoreRepository extends JpaRepository<DummyStoreEntity, Long> {
     List<DummyStoreEntity> findAll();
+
+    List<DummyStoreEntity> findByNameContainingIgnoreCase(String name);
+
 }
