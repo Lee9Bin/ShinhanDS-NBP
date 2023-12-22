@@ -8,22 +8,25 @@
 
     <div class="about">
         {{#stores}}
-        <div class="about__card category-1 box">
-            <div class="about-store">
-                <!--                    <img class="about__icon" src="/img/dog1.png" alt="a">-->
-                <a href="javascript:void(0);" class="bookmark">
-                    <i class="fa-regular fa-bookmark"></i>
+            <div class="about__card category-1 box">
+                <a href="/store/{{id}}">
+
+                    <div class="about-store">
+                        <!--                    <img class="about__icon" src="/img/dog1.png" alt="a">-->
+                        <a href="javascript:void(0);" class="bookmark">
+                            <i class="fa-regular fa-bookmark"></i>
+                        </a>
+                    </div>
+                    <div class="about-store-comment">
+                        <h2 class="about__title _1">
+                            {{name}}
+                        </h2>
+                        <p class="about__text">
+                            {{description}}
+                        </p>
+                    </div>
                 </a>
             </div>
-            <div class="about-store-comment">
-                <h2 class="about__title _1">
-                    {{name}}
-                </h2>
-                <p class="about__text">
-                    {{description}}
-                </p>
-            </div>
-        </div>
 
         {{/stores}}
     </div>
@@ -52,6 +55,7 @@
                 newPost.className = 'about__card category-1 box';
 
                 newPost.innerHTML = `
+                <a href="/store/${item.id}">
                 <div class="about-store">
                     <a href="javascript:void(0);" class="bookmark">
                         <i class="fa-regular fa-bookmark"></i>
@@ -61,20 +65,21 @@
                     <h2 class="about__title _1">${item.name}</h2>
                     <p class="about__text">${item.description}</p>
                 </div>
+                </a>
             `;
 
                 aboutGrid.appendChild(newPost);
 
             });
-                // 새로운 요소를 추가한 후에 about의 높이를 조절
-                adjustAboutHeight();
+            // 새로운 요소를 추가한 후에 about의 높이를 조절
+            adjustAboutHeight();
         } catch (error) {
             console.error('Error loading more data:', error);
         }
     });
     async function fetchRenderedHTMLFromServer() {
         try {
-            const response = await fetch('/customer/'); // 실제 엔드포인트에 맞게 수정
+            const response = await fetch('/customer/{id}'); // 실제 엔드포인트에 맞게 수정
             const html = await response.text();
             return html;
         } catch (error) {
@@ -85,7 +90,7 @@
         // 모든 .about__card의 높이를 가져와서 최대 높이를 찾음
         const maxCardHeight = Math.max(
                 ...Array.from(document.querySelectorAll('.about__card')).map(card => card.clientHeight)
-        );
+    );
 
         // .about의 높이 설정
         aboutGrid.style.height = `${aboutGrid.clientHeight}px`;
