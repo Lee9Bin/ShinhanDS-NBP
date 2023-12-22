@@ -154,8 +154,6 @@
 
 
 
-
-
 /*가게*/
 
 .list-button{
@@ -235,6 +233,13 @@
 }
 
 
+ /*식당 클릭*/
+.store-click{
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
 
 
 
