@@ -1,44 +1,47 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <header th:fragment="header">
-    <div></div>
-    <div>
-        <img id="logo" th:src="@{/img/logo.png}" alt="로고"/>
-    </div>
-    <div class="profile-section">
-        <img width="36px" th:src="@{/img/basket.png}" alt=""/>
-        <img width="42px" th:src="@{/img/user-circle.png}" alt=""/>
-        <div class="profile-dropdown">
-            <div class="nav-bar-profile">
-                <th:block th:if="${session.LoggedIn}">
-                    <div>사진 <span th:text="${session.loginName} + ' 님'"></span></div>
-                    <div>
-                        <a href="/member/logout">로그아웃</a>
-                    </div>
-                </th:block>
-                <th:block th:unless="${session.LoggedIn}">
-                    <div> <span> 비회원 님 </span></div>
-                    <div>
-                        <a href="/member/login">로그인</a>
-                    </div>
-                </th:block>
-            </div>
 
-            <!-- 드롭다운 내용 추가 -->
-            <div class="nav-bar-couponAndPoint">
-                <div class="coupon">쿠폰 <span>1장</span></div>
-                <div class="point">포인트 <span>100000</span></div>
-            </div>
-
-            <a href="#">주문내역</a>
-            <a href="#">북마크</a>
-            <a href="#">내가 단 댓글</a>
-            <a href="#">포인트 충전</a>
-            <a href="#">포인트 충전 내역</a>
-            <a href="/member/update">내 정보 수정</a>
-            <a href="#">설정</a>
+        <div></div>
+        <div class="main-logo">
+            NBP<span class="underscore">_</span>
         </div>
-    </div>
+        <div class="profile-section">
+            <div class="user">
+                <img width="60px" th:src="@{/img/user-circle.png}" alt=""/>
+            </div>
+            <div class="profile-dropdown">
+                <div class="nav-bar-profile">
+                    <th:block th:if="${session.LoggedIn}">
+                        <div>사진 <span th:text="${session.loginName} + ' 님'"></span></div>
+                        <div>
+                            <a th:href="@{/member/logout}">로그아웃</a>
+                        </div>
+                    </th:block>
+                    <th:block th:unless="${session.loginName}">
+                        <div> <span> 비회원 님 </span></div>
+                        <div>
+                            <a th:href="@{/member/login}">로그인</a>
+                        </div>
+                    </th:block>
+                </div>
+
+                <!-- 드롭다운 내용 추가 -->
+                <div class="nav-bar-couponAndPoint">
+                    <div class="coupon">쿠폰 <span>1장</span></div>
+                    <div class="point">포인트 <span>100000</span></div>
+                </div>
+
+                <a href="#">주문내역</a>
+                <a href="#">북마크</a>
+                <a href="#">내가 단 댓글</a>
+                <a href="#">포인트 충전</a>
+                <a href="#">포인트 충전 내역</a>
+                <a th:href="@{/member/update}">내 정보 수정</a>
+                <a href="#">설정</a>
+            </div>
+        </div>
+
 </header>
 
 
