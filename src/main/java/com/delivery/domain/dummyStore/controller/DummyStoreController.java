@@ -25,4 +25,14 @@ public class DummyStoreController {
 
         return "/html/store/StoreFindResult"; // 검색 결과를 보여줄 HTML 파일명
     }
+
+    // 점주 가게 등록 폼
+    @GetMapping("/owner/store/new")
+    public String registed(){
+        return "/layouts/owner/regist";
+    }
+
+
+
 }
+
