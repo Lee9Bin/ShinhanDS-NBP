@@ -10,6 +10,7 @@ import java.util.List;
 public interface DummyStoreRepository extends JpaRepository<DummyStoreEntity, Long> {
     List<DummyStoreEntity> findAll();
 
+    // 대소문자 구별하지 않고 검색
     List<DummyStoreEntity> findByNameContainingIgnoreCase(String name);
 
 }

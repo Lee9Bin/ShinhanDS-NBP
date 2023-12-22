@@ -69,8 +69,8 @@
                 aboutGrid.appendChild(newPost);
 
             });
-                // 새로운 요소를 추가한 후에 about의 높이를 조절
-                adjustAboutHeight();
+            // 새로운 요소를 추가한 후에 about의 높이를 조절
+            adjustAboutHeight();
         } catch (error) {
             console.error('Error loading more data:', error);
         }
@@ -88,7 +88,7 @@
         // 모든 .about__card의 높이를 가져와서 최대 높이를 찾음
         const maxCardHeight = Math.max(
                 ...Array.from(document.querySelectorAll('.about__card')).map(card => card.clientHeight)
-        );
+    );
 
         // .about의 높이 설정
         aboutGrid.style.height = `${aboutGrid.clientHeight}px`;
