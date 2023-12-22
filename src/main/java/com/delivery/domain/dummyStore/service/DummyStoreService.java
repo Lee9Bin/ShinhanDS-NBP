@@ -10,9 +10,11 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class DummyStoreService {
+
     private final DummyStoreRepository dummyStoreRepository;
 
     public List<DummyStoreEntity> searchStoresByName(String searchTerm) {
         return dummyStoreRepository.findByNameContainingIgnoreCase(searchTerm);
     }
+
 }
