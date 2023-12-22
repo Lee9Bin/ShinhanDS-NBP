@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/store")
 @RequiredArgsConstructor
-public class DummyStoreController {
+public class DummyMenuController {
 
     private final DummyStoreRepository dummyStoreRepository;
     private final DummyMenuRepository dummyMenuRepository;
