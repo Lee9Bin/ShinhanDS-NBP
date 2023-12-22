@@ -5,33 +5,57 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
-<form id="menuForm" action="/process-form" method="post">
-    <div id="menuList">
-        <div th:each="dummyMenu, stat : ${dummyMenuList}">
-            <a th:text="${stat.index}"></a>
-<!--            <label th:for="${'dummyMenus[' + stat.index + '].name'}" th:text="'Name ' + ${stat.index + 1}"></label>-->
-<!--            <input type="text" th:field="*{dummyMenus[__${stat.index}__].name}" />-->
-            <!-- 다른 필드들도 필요한 경우 추가 -->
-        </div>
-    </div>
+<!-- 일단 주석해놓음 테스트 action="/process-form" method="post"-->
+<form id="menuForm"  action="">
+<!--    storeId값 히든으로 받아오기-->
+    <input type="hidden" id="storeId" th:value="${storeId}" />
+    <div id="menuList"></div>
     <button type="button" onclick="addMenuForm()">Add Menu</button>
-    <button type="submit">Submit</button>
+    <button type="submit" id="submitMenu" >Submit</button>
 </form>
 
 <script th:inline="javascript">
     function addMenuForm() {
-        var menuList = document.getElementById('menuList');
-        var index = menuList.children.length;
+        let menuList = document.getElementById('menuList');
+        let index = menuList.children.length;
 
         // 동적으로 폼을 생성하고 추가
         var formHtml = '<div>';
-        formHtml += '<label th:for="${\'dummyMenus[\' + ' + index + ' + \'].name\'}" th:text="\'Name \' + ' + index + ' + 1"></label>';
-        formHtml += '<input type="text" th:field="*{dummyMenus[__' + index + '__].name}" />';
-        // 다른 필드들도 필요한 경우 추가
+        formHtml += '<label for="menu' + index + '" th:for="${\'dummyMenus[\' + ' + index + ' + \'].name\'}" th:text="\'Name \' + ' + index + ' + 1">메뉴 등록</label>';
+        formHtml += '<input class="menuName" type="text" th:field="*{dummyMenus[__' + index + '__].name}" />';
         formHtml += '</div>';
 
         menuList.insertAdjacentHTML('beforeend', formHtml);
     }
+
+    // store_id값 받아오기
+    const storeId = document.getElementById('storeId').value;
+
+    // 등록 버튼 누르고 이벤트 발동하기
+    const submitMenu = document.querySelector('#submitMenu');
+    let menuList = [];
+    submitMenu.addEventListener('click',(e)=>{
+        e.preventDefault();
+        const appendMenus = document.querySelectorAll('.menuName');
+
+        appendMenus.forEach(input => {
+            menuList.push(input.value);
+        })
+
+        // const jsonMenu = JSON.stringify(menuList);
+        const url = "/api/store/" + storeId + "/create";
+        fetch(url,{
+            headers:{
+                "Content-Type": "application/json"
+            },
+            method:'post',
+            body: JSON.stringify(menuList),
+        }).then(response => {
+            const message = (response.ok) ? "가게가 등록되었습니다!" : "가게 등록에 실패했습니다!";
+            alert(message);
+        })
+    })
+
 </script>
 </body>
 </html>
