@@ -3,7 +3,6 @@ package com.delivery.domain.orderDelivery.entiy;
 
 import com.delivery.domain.member.entity.MemberEntity;
 import com.delivery.domain.orderDelivery.dto.OrderDeliveryDto;
-import com.delivery.domain.store.entity.StoreEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,9 +26,9 @@ public class OrderDelivery {
     @JoinColumn(name = "member_id")
     private MemberEntity memberEntity; //회원 아이디
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "store_name")
-    private StoreEntity storeEntity; //식당 아이디
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "store_name")
+//    private StoreEntity storeEntity; //식당 아이디
 
     @Column(nullable = false, length = 20)
     @Enumerated(value = EnumType.STRING)
@@ -57,11 +56,11 @@ public class OrderDelivery {
 
 
     //==엔티티 변환==//
-    public static OrderDelivery toEntity(OrderDeliveryDto orderDeliveryDto, MemberEntity memberEntity, StoreEntity storeEntity){
+    public static OrderDelivery toEntity(OrderDeliveryDto orderDeliveryDto, MemberEntity memberEntity){
         return new OrderDelivery(
                 orderDeliveryDto.getId(),
                 memberEntity,
-                storeEntity,
+
                 orderDeliveryDto.getStatus(),
                 orderDeliveryDto.getRequestTime(),
                 orderDeliveryDto.getAddress(),

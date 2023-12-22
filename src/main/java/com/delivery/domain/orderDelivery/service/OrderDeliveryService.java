@@ -29,13 +29,17 @@ public class OrderDeliveryService {
 
     @Transactional //주문하기
     public OrderDeliveryDto save(OrderDeliveryDto orderDeliveryDto, Long memberID, Long storeId){
+                                //메뉴아이디랑 받아와야할듯
         // 처음 주믄을 하면 요청수락대기 단계
         Optional<MemberEntity> targetMember = memberRepository.findById(memberID);
         Optional<StoreEntity> targetStore = storeRepository.findById("abc");
 
         if(targetMember.isPresent() && targetStore.isPresent()){
-            OrderDelivery orderDelivery = OrderDelivery.toEntity(orderDeliveryDto, targetMember.get(), targetStore.get());
+            OrderDelivery orderDelivery = OrderDelivery.toEntity(orderDeliveryDto, targetMember.get());
             OrderDelivery saveEntity = orderDeliveryRepository.save(orderDelivery);
+            //주문정보 저장하고 주문 상품 담기
+
+
             return OrderDeliveryDto.toDto(saveEntity);
         }
         return null;
@@ -71,7 +75,6 @@ public class OrderDeliveryService {
             findEntity.cancel(Status.CANCEL);
             return OrderDeliveryDto.toDto(findEntity);
         }
-
         return null;
     }
 }

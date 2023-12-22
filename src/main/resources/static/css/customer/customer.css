@@ -1,0 +1,292 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+}
+
+header {
+    display: flex;
+    background-color: #e8f2f5;
+    position: relative;
+    justify-content: space-between;
+    height: 100px;
+    margin: auto ;
+}
+
+header > div{
+    width: 140px;
+}
+
+#logo {
+    height: 64px;
+    cursor: pointer;
+    justify-content: center;
+    margin-top: 0.8rem;
+}
+.profile-section {
+    display: flex;
+    padding: 0 5px 0 30px;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+}
+
+.profile-section > img:nth-child(2):hover{
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
+}
+.profile-section:hover .profile-dropdown {
+    display: flex;
+    flex-direction: column;
+}
+.profile-dropdown {
+    display: none;
+    position: absolute;
+    width: 15rem;
+    text-align: center;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 10px;
+    z-index: 1;
+}
+.profile-dropdown a {
+    text-decoration: none;
+    color: #333;
+    padding: 8px;
+    transition: background-color 0.3s;
+    padding: 10px 0;
+}
+
+.profile-dropdown a:hover {
+    background-color: #f0eeeb;
+}
+
+.nav-bar-profile , .nav-bar-couponAndPoint{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+
+.nav-bar-profile > div > button{
+    cursor: pointer;
+}
+
+.section {
+    width: 1068px;
+    margin: 3rem auto 0px;
+}
+.section-search {
+    display: flex;
+    margin-top: 3rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-input {
+    display: flex;
+    margin-right: 0.5rem;
+    margin-left: 3rem;
+    padding: 5px 5px 5px 12px;
+    align-items: center;
+    cursor: pointer;
+}
+.title-search {
+    display: flex;
+    background-color: #e8f2f5;
+    width: 60%;
+    height: 3rem;
+    align-items: center;
+    border: 1px solid #dddddd;
+    border-radius: 40px;
+    padding: 0 8px;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 5%);
+}
+
+.search {
+    border-radius: 40px;
+    height: 100%;
+    flex-basis: 95%;
+    background-color: #e8f2f5;
+}
+
+.search-input {
+    background-color: #e8f2f5;
+    border-radius: 40px;
+    padding: 0 10px;
+    height: 100%;
+    border: none;
+    width: 100%;
+}
+.search-input:focus {
+    outline: none;
+}
+
+.search-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e8f2f5;
+    border-radius: 50%;
+    flex-basis: 32px;
+    height: 32px;
+    flex-basis: 1;
+    cursor: pointer;
+}
+.input-section {
+    display: flex;
+    margin-right: 1rem;
+    padding: 5px 5px 5px 12px;
+    align-items: center;
+    /* border: 1px solid #dddddd; */
+    border-radius: 21px;
+    gap: 12px;
+    cursor: pointer;
+}
+
+.list-button{
+    margin: 5rem auto 0px;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 3rem;
+}
+.list-button button{
+    display: block;
+    cursor: pointer;
+    margin-right: 1rem;
+}
+.store-list {
+    max-width: 1200px;
+    padding: 20px;
+    width: 868px;
+    margin: auto;
+}
+
+.listing {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.listing-item {
+    position: relative;
+    margin: 10px;
+    border-radius: 8px;
+    height: 15rem;
+    width: 16rem;
+}
+
+.list-class {
+    cursor: pointer;
+    border-radius: 10px;
+    width: 100%;
+    height: 85%;
+    overflow: hidden;
+    position: relative;
+}
+
+.listing-item img:first-child {
+    width: 100%;
+    height: 200px;
+    border-radius: 8px;
+}
+.list-class:hover .bookmark, .bookmark.bookmarked {
+    opacity: 1;
+    cursor: pointer;
+}
+.bookmark , .bookmark-fill {
+    position: absolute;
+    z-index: 1;
+    top: 5px;
+    right: 10px;
+    text-align: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 30%;
+    background-color: #ffffff;
+
+}
+
+.bookmark i , .bookmark-fill i{
+    font-size: 1.5rem;
+    color: #ffa5a5;
+    line-height: 2rem
+}
+
+.bookmark i.bookmarked{
+    font-size: 1.5rem;
+    transform: scale(1.2);
+}
+
+.more-btn {
+    display: block;
+    margin: auto;
+    margin-top: 2rem;
+    width: 5rem;
+    height: 3rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.map {
+    height: 400px;
+}
+
+footer {
+    background-color: #040d22;
+    position: relative;
+    margin-top: 10%;
+}
+
+footer .container {
+    display: flex;
+    justify-content: center;
+}
+
+.footer-product {
+    flex-basis: 20%;
+}
+.footer-customer {
+    flex-basis: 20%;
+}
+.footer-company {
+    flex-basis: 20%;
+}
+
+footer h5 {
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.4);
+    margin: 20px 0;
+}
+
+footer ul li {
+    margin-bottom: 10px;
+}
+
+footer ul li a {
+    color: rgba(255, 255, 255, 0.4);
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+footer ul li a:hover {
+    color: white;
+}
+
+footer .site-link {
+    margin: 0;
+    margin-top: 60px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.05);
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+footer .site-link li {
+    color: rgba(255, 255, 255, 0.4);
+    margin: 0;
+    margin-right: 20px;
+}
