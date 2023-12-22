@@ -1,44 +1,37 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu Form</title>
+    <title>My Form</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
-
-<h2>메뉴 등록 폼</h2>
-
-<form action="/store/menu/new" method="post" id="menuForm">
-
-    <!-- 사용자가 입력한 메뉴 정보를 받는 동적 폼 -->
-    <div class="menu-item" th:each="index : ${#numbers.sequence(0, 2)}">
-        <label for="menuName" th:text="'메뉴 이름 ' + ${index + 1}"></label>
-        <input type="text" id="menuName" name="menuNames" required>
-        <br>
-        <label for="menuType" th:text="'메뉴 타입 ' + ${index + 1}"></label>
-        <input type="text" id="menuType" name="menuTypes" required>
-        <br><br>
+<form id="menuForm" action="/process-form" method="post">
+    <div id="menuList">
+        <div th:each="dummyMenu, stat : ${dummyMenuList}">
+            <a th:text="${stat.index}"></a>
+<!--            <label th:for="${'dummyMenus[' + stat.index + '].name'}" th:text="'Name ' + ${stat.index + 1}"></label>-->
+<!--            <input type="text" th:field="*{dummyMenus[__${stat.index}__].name}" />-->
+            <!-- 다른 필드들도 필요한 경우 추가 -->
+        </div>
     </div>
-
-    <!-- +버튼을 누를 때마다 동적으로 폼을 추가하는 JavaScript 코드 -->
-    <button type="button" onclick="addMenuItem()">+</button>
-
-    <br><br>
-
-    <button type="submit">확인</button>
-
+    <button type="button" onclick="addMenuForm()">Add Menu</button>
+    <button type="submit">Submit</button>
 </form>
 
 <script th:inline="javascript">
-    /*<![CDATA[*/
-    function addMenuItem() {
-        var form = document.getElementById('menuForm');
-        var newItem = document.querySelector('.menu-item').cloneNode(true);
-        form.insertBefore(newItem, form.lastChild);
-    }
-    /*]]>*/
-</script>
+    function addMenuForm() {
+        var menuList = document.getElementById('menuList');
+        var index = menuList.children.length;
 
+        // 동적으로 폼을 생성하고 추가
+        var formHtml = '<div>';
+        formHtml += '<label th:for="${\'dummyMenus[\' + ' + index + ' + \'].name\'}" th:text="\'Name \' + ' + index + ' + 1"></label>';
+        formHtml += '<input type="text" th:field="*{dummyMenus[__' + index + '__].name}" />';
+        // 다른 필드들도 필요한 경우 추가
+        formHtml += '</div>';
+
+        menuList.insertAdjacentHTML('beforeend', formHtml);
+    }
+</script>
 </body>
 </html>

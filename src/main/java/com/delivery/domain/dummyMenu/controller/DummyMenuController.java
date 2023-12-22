@@ -25,7 +25,9 @@ public class DummyMenuController {
 
     @GetMapping("/menu/new")
     public String menuSaveForm(Model model){
-        model.addAttribute("menuForm", new DummyMenuListDto());
+        List<DummyMenu> dummyMenuList = new ArrayList<>();
+
+        model.addAttribute("dummyMenuList", dummyMenuList);
         return "html/owner/menu_registration";
     }
 
