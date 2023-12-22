@@ -3,46 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>메뉴 등록</title>
+    <title>Menu Form</title>
 </head>
 <body>
 
-<form action="/store/submitMenu" method="post" th:object="${menuForm}">
-    <div th:each="menu, index : *{menuList}" th:remove="tag">
-        <div>
-            <label th:for="'menuName_' + ${index.index}" th:text="'메뉴 이름 ' + (${index.index} + 1)"></label>
-            <input type="text" th:id="'menuName_' + ${index.index}" th:field="*{menuList[__${index.index}__].menuName}" required>
-        </div>
-        <div>
-            <label th:for="'menuCategory_' + ${index.index}" th:text="'카테고리 ' + (${index.index} + 1)"></label>
-            <input type="text" th:id="'menuCategory_' + ${index.index}" th:field="*{menuList[__${index.index}__].menuCategory}" required>
-        </div>
-        <div>
-            <label th:for="'menuDescription_' + ${index.index}" th:text="'메뉴 설명 ' + (${index.index} + 1)"></label>
-            <textarea th:id="'menuDescription_' + ${index.index}" th:field="*{menuList[__${index.index}__].menuDescription}" required></textarea>
-        </div>
-        <div>
-            <label th:for="'menuPrice_' + ${index.index}" th:text="'가격 ' + (${index.index} + 1)"></label>
-            <input type="text" th:id="'menuPrice_' + ${index.index}" th:field="*{menuList[__${index.index}__].menuPrice}" required>
-        </div>
-        <div>
-            <label th:for="'menuImage_' + ${index.index}" th:text="'이미지 ' + (${index.index} + 1)"></label>
-            <input type="file" th:id="'menuImage_' + ${index.index}" th:field="*{menuList[__${index.index}__].menuImage}" accept="image/*" required>
-        </div>
-        <hr>
+<h2>메뉴 등록 폼</h2>
+
+<form action="/store/menu/new" method="post" id="menuForm">
+
+    <!-- 사용자가 입력한 메뉴 정보를 받는 동적 폼 -->
+    <div class="menu-item" th:each="index : ${#numbers.sequence(0, 2)}">
+        <label for="menuName" th:text="'메뉴 이름 ' + ${index + 1}"></label>
+        <input type="text" id="menuName" name="menuNames" required>
+        <br>
+        <label for="menuType" th:text="'메뉴 타입 ' + ${index + 1}"></label>
+        <input type="text" id="menuType" name="menuTypes" required>
+        <br><br>
     </div>
-    <button type="button" onclick="addMenu()">메뉴 추가</button>
-    <button type="submit">메뉴 등록</button>
+
+    <!-- +버튼을 누를 때마다 동적으로 폼을 추가하는 JavaScript 코드 -->
+    <button type="button" onclick="addMenuItem()">+</button>
+
+    <br><br>
+
+    <button type="submit">확인</button>
+
 </form>
 
 <script th:inline="javascript">
     /*<![CDATA[*/
-    function addMenu() {
-        var template = document.querySelector('div[th\\:each="menu, index : *{menuList}"]');
-        var clone = template.cloneNode(true);
-
-        var form = document.querySelector('form');
-        form.insertBefore(clone, form.lastChild);
+    function addMenuItem() {
+        var form = document.getElementById('menuForm');
+        var newItem = document.querySelector('.menu-item').cloneNode(true);
+        form.insertBefore(newItem, form.lastChild);
     }
     /*]]>*/
 </script>
