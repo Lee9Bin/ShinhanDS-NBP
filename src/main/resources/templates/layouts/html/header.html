@@ -10,13 +10,13 @@
         <img width="42px" th:src="@{/img/user-circle.png}" alt=""/>
         <div class="profile-dropdown">
             <div class="nav-bar-profile">
-                <th:block th:if="${loggedIn}">
-                    <div>사진 <span th:text="${loginName} + ' 님'"></span></div>
+                <th:block th:if="${session.LoggedIn}">
+                    <div>사진 <span th:text="${session.loginName} + ' 님'"></span></div>
                     <div>
                         <a href="/member/logout">로그아웃</a>
                     </div>
                 </th:block>
-                <th:block th:unless="${loggedIn}">
+                <th:block th:unless="${session.LoggedIn}">
                     <div> <span> 비회원 님 </span></div>
                     <div>
                         <a href="/member/login">로그인</a>
