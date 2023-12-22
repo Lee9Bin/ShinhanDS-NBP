@@ -1,7 +1,6 @@
 package com.delivery.domain.point.entity;
 
 import com.delivery.domain.member.entity.MemberEntity;
-import com.delivery.domain.orderDelivery.dto.OrderDeliveryDto;
 import com.delivery.domain.orderDelivery.entiy.OrderDelivery;
 import com.delivery.domain.point.dto.PointDto;
 import jakarta.persistence.*;
