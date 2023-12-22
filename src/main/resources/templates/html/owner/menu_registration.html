@@ -1,11 +1,51 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>메뉴 등록</title>
 </head>
 <body>
-    메뉴관리
+
+<form action="/store/submitMenu" method="post" th:object="${menuForm}">
+    <div th:each="menu, index : *{menuList}" th:remove="tag">
+        <div>
+            <label th:for="'menuName_' + ${index.index}" th:text="'메뉴 이름 ' + (${index.index} + 1)"></label>
+            <input type="text" th:id="'menuName_' + ${index.index}" th:field="*{menuList[__${index.index}__].menuName}" required>
+        </div>
+        <div>
+            <label th:for="'menuCategory_' + ${index.index}" th:text="'카테고리 ' + (${index.index} + 1)"></label>
+            <input type="text" th:id="'menuCategory_' + ${index.index}" th:field="*{menuList[__${index.index}__].menuCategory}" required>
+        </div>
+        <div>
+            <label th:for="'menuDescription_' + ${index.index}" th:text="'메뉴 설명 ' + (${index.index} + 1)"></label>
+            <textarea th:id="'menuDescription_' + ${index.index}" th:field="*{menuList[__${index.index}__].menuDescription}" required></textarea>
+        </div>
+        <div>
+            <label th:for="'menuPrice_' + ${index.index}" th:text="'가격 ' + (${index.index} + 1)"></label>
+            <input type="text" th:id="'menuPrice_' + ${index.index}" th:field="*{menuList[__${index.index}__].menuPrice}" required>
+        </div>
+        <div>
+            <label th:for="'menuImage_' + ${index.index}" th:text="'이미지 ' + (${index.index} + 1)"></label>
+            <input type="file" th:id="'menuImage_' + ${index.index}" th:field="*{menuList[__${index.index}__].menuImage}" accept="image/*" required>
+        </div>
+        <hr>
+    </div>
+    <button type="button" onclick="addMenu()">메뉴 추가</button>
+    <button type="submit">메뉴 등록</button>
+</form>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    function addMenu() {
+        var template = document.querySelector('div[th\\:each="menu, index : *{menuList}"]');
+        var clone = template.cloneNode(true);
+
+        var form = document.querySelector('form');
+        form.insertBefore(clone, form.lastChild);
+    }
+    /*]]>*/
+</script>
+
 </body>
 </html>

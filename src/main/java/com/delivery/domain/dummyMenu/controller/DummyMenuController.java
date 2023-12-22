@@ -4,6 +4,7 @@ import com.delivery.domain.dummyMenu.entity.DummyMenu;
 import com.delivery.domain.dummyMenu.repository.DummyMenuRepository;
 import com.delivery.domain.dummyStore.entity.DummyStoreEntity;
 import com.delivery.domain.dummyStore.repository.DummyStoreRepository;
+import java.util.ArrayList;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +22,12 @@ public class DummyMenuController {
 
     private final DummyStoreRepository dummyStoreRepository;
     private final DummyMenuRepository dummyMenuRepository;
+
+    @GetMapping("/menu/new")
+    public String menuSave(Model model){
+        model.addAttribute("menuForm", new ArrayList<>());
+        return "html/owner/menu_registration";
+    }
 
     @GetMapping("{id}")
     public String detail(@PathVariable Long id, Model model){
