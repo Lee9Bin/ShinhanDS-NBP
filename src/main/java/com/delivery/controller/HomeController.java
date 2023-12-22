@@ -16,7 +16,7 @@ public class HomeController {
     @GetMapping(value = "")
     public String ownerHome(Model model){
         log.info("ownerHome");
-        return "html/owner/owner";
+        return "html/owner/owner1";
     }
 
 }
