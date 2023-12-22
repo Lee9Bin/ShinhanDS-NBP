@@ -16,5 +16,5 @@ public class DummyStoreService {
     public List<DummyStoreEntity> searchStoresByName(String searchTerm) {
         return dummyStoreRepository.findByNameContainingIgnoreCase(searchTerm);
     }
-}
 
+}

@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -22,6 +22,7 @@ public class DummyStoreController {
     public String searchResultsPage(@RequestParam String searchTerm, Model model) {
         List<DummyStoreEntity> searchResults = dummyStoreService.searchStoresByName(searchTerm);
         model.addAttribute("searchResults", searchResults);
-        return "html/store/detail"; // 검색 결과를 보여줄 HTML 파일명
+
+        return "/html/store/StoreFindResult"; // 검색 결과를 보여줄 HTML 파일명
     }
 }
