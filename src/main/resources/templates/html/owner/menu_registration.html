@@ -7,39 +7,54 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </head>
 <body>
-<!-- 일단 주석해놓음 테스트 action="/process-form" method="post"-->
+
 <form id="menuForm" class="container w-50 p-3" >
 <!--    storeId값 히든으로 받아오기-->
-    <input type="hidden" id="storeId" th:value="${storeId}" />
+    <!-- mustache 예시 -->
+<!--    {{#stores}}-->
+<!--    <input type="hidden" id="new-content-article-id" value="{{id}}">-->
+<!--    {{#stores}}-->
+
+    <!-- ownerId 값이 포함된 store 가져오기 -->
+
+        <input type="hidden" id="storeId" th:value="${targetStore.id}" />
+
+<!--    &lt;!&ndash; ownerId 값이 포함된 store 가져오기 &ndash;&gt;-->
+<!--    <input type="hidden" id="storeId" th:value="${stores[0].id}" />-->
+
     <div id="menuList">
-    <div class="mb-4">
+        <div class="menuForm">
+
+
+    <div class="mt-4 mb-4">
         <label class="form-label">메뉴 이름</label>
-        <input type="text" class="form-control form-control-sm" name="name">
+        <input type="text" class="form-control form-control-sm name" name="name">
     </div>
     <div class="mb-4">
         <label class="form-label">가격</label>
-        <input type="text" class="form-control form-control-sm" name="price">
+        <input type="text" class="form-control form-control-sm price" name="price">
     </div>
 
     <div class="mb-4">
         <label class="form-label">내용</label>
-        <textarea name="content" id="" cols="10" rows="10" class="form-control"></textarea>
+        <textarea name="content" id="" cols="10" rows="10" class="form-control content"></textarea>
     </div>
 
     <div class="mb-3">
         <label class="form-label">카테고리</label>
-        <input type="text" class="form-control" name="category">
+        <input type="text" class="form-control category" name="category">
     </div>
 
     <div class="input-group mt-5">
-        <input type="file" class="form-control" id="inputGroupFile02" name="picturePath">
+        <input type="file" class="form-control picturePath" id="inputGroupFile02" name="picturePath">
         <label class="input-group-text" for="inputGroupFile02">업로드</label>
     </div>
+        </div>
 
     </div>
     <div class="mt-5 d-grid gap-2 d-md-flex justify-content-md-center">
-        <button type="button" onclick="addMenuForm()" class="btn btn-secondary">Add Menu</button>
-        <button type="submit" id="submitMenu" class="btn btn-secondary">Submit</button>
+        <button type="button" onclick="addMenuForm()" class="btn btn-secondary">메뉴 추가</button>
+        <button type="submit" id="submitMenu" class="btn btn-secondary">등록하기</button>
     </div>
 </form>
 
@@ -50,27 +65,28 @@
 
         // 동적으로 폼을 생성하고 추가
         const formHtml =
-            '<div class="mb-4">' +
+            '<div class="mt-5 mb-4">' +
             '    <label class="form-label">메뉴 이름</label>' +
-            '    <input type="text" class="form-control form-control-sm menuName" name="name">' +
+            '    <input type="text" class="form-control form-control-sm name" name="name">' +
             '</div>' +
             '<div class="mb-4">' +
             '    <label class="form-label">가격</label>' +
-            '    <input type="text" class="form-control form-control-sm menuName" name="price">' +
+            '    <input type="text" class="form-control form-control-sm price" name="price">' +
             '</div>' +
             '<div class="mb-4">' +
             '    <label class="form-label">내용</label>' +
-            '    <textarea name="content" id="" cols="10" rows="10" class="form-control menuName"></textarea>' +
+            '    <textarea name="content" id="" cols="10" rows="10" class="form-control content"></textarea>' +
             '</div>' +
             '<div class="mb-3">' +
             '    <label class="form-label">카테고리</label>' +
-            '    <input type="text" class="form-control menuName" name="category">' +
+            '    <input type="text" class="form-control category" name="category">' +
             '</div>' +
             '<div class="input-group mt-5">' +
-            '    <input type="file" class="form-control menuName" id="inputGroupFile02" name="picturePath">' +
+            '    <input type="file" class="form-control picturePath" id="inputGroupFile02" name="picturePath">' +
             '    <label class="input-group-text" for="inputGroupFile02">업로드</label>' +
             '</div>';
         const newMenuForm = document.createElement('div');
+        newMenuForm.classList.add('menuForm');
         newMenuForm.innerHTML = formHtml;
 
         menuList.appendChild(newMenuForm);
@@ -80,15 +96,32 @@
     // store_id값 받아오기
     const storeId = document.getElementById('storeId').value;
 
+
     // 등록 버튼 누르고 이벤트 발동하기
     const submitMenu = document.querySelector('#submitMenu');
     let menuList = [];
     submitMenu.addEventListener('click',(e)=>{
         e.preventDefault();
-        const appendMenus = document.querySelectorAll('.menuName');
 
-        appendMenus.forEach(input => {
-            menuList.push(input.value);
+        // 각 폼들 선택
+        const appendMenus = document.querySelectorAll('.menuForm');
+
+        appendMenus.forEach(data => {
+            let name = data.querySelector('.name').value;
+            let price = data.querySelector('.price').value;
+            let content = data.querySelector('.content').value;
+            let category = data.querySelector('.category').value;
+            let picturePath = data.querySelector('.picturePath').value;
+
+            const menuObj = {
+                name: name,
+                price: price,
+                content: content,
+                category: category,
+                picturePath: picturePath,
+                // 다른 필요한 속성들도 추가 가능
+            };
+            menuList.push(menuObj);
         })
 
         // const jsonMenu = JSON.stringify(menuList);
