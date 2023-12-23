@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/store")
+@RequestMapping("owner/store")
 @RequiredArgsConstructor
 public class DummyMenuController {
 
