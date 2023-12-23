@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("owner/store")
+@RequestMapping("/store")
 @RequiredArgsConstructor
 @Slf4j
 public class DummyMenuController {
@@ -45,7 +45,7 @@ public class DummyMenuController {
         dummyMenuService.save(dummyMenuDtoList, id);
 
         // 저장 후 다시 메뉴 등록 페이지로 이동
-        return "redirect:/owner/store/{id}/menu/new";
+        return "redirect:/store/{id}/menu/new";
     }
 //    @PostMapping("/menu/new")
 //    public String menuSave(@ModelAttribute ArrayList<DummyMenuDto> dummyMenuDtoList, Model model){

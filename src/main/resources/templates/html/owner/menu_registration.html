@@ -135,6 +135,7 @@
         }).then(response => {
             const message = (response.ok) ? "가게가 등록되었습니다!" : "가게 등록에 실패했습니다!";
             alert(message);
+            window.location.reload();
         })
     })
 
