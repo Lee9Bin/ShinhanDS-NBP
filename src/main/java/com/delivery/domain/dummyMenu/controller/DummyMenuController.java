@@ -26,13 +26,12 @@ public class DummyMenuController {
     @GetMapping("/menu/new")
     public String menuSaveForm(Model model){
         List<DummyMenu> dummyMenuList = new ArrayList<>();
-
         model.addAttribute("dummyMenuList", dummyMenuList);
         return "html/owner/menu_registration";
     }
 
-    @PostMapping("/menu/new")
-    public String menuSave(@ModelAttribute ArrayList<DummyMenuDto> dummyMenuDtoList, Model model){
+    @PostMapping("/menu/new/{id}")
+    public String menuSave(@PathVariable Long id,@RequestBody ArrayList<DummyMenuDto> dummyMenuDtoList, Model model){
         for(DummyMenuDto dummyMenuDto : dummyMenuDtoList){
             System.out.println(dummyMenuDto.toString());
         }
