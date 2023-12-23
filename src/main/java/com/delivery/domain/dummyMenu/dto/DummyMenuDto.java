@@ -34,10 +34,12 @@ public class DummyMenuDto {
     private String picturePath;
 
     public static DummyMenuDto toDummyMenuDto(DummyMenu dummyMenu, DummyStoreEntity dummyStoreEntity){
+        Long storeId = (dummyStoreEntity != null) ? dummyStoreEntity.getId() : null;
+
         return new DummyMenuDto(
                 dummyMenu.getId(),
                 dummyMenu.getName(),
-                dummyStoreEntity.getId(),
+                storeId,
                 dummyMenu.getPrice(),
                 dummyMenu.getContent(),
                 dummyMenu.getCategory(),
