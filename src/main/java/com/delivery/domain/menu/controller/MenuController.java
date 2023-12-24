@@ -1,7 +1,6 @@
 package com.delivery.domain.menu.controller;
 
 import com.delivery.domain.menu.dto.MenuDto;
-import com.delivery.domain.menu.repository.MenuRepository;
 import com.delivery.domain.menu.service.MenuService;
 import com.delivery.domain.store.entity.StoreEntity;
 import com.delivery.domain.store.repository.StoreRepository;
@@ -50,14 +49,7 @@ public class MenuController {
         return "redirect:/store/{id}/menu/new";
     }
 
-    // @PostMapping("/menu/new/{id}")
-    // public String menuSave(@PathVariable Long id, @RequestBody List<DummyMenuDto> dummyMenuDtoList, Model model) {
-    //     for (DummyMenuDto dummyMenuDto : dummyMenuDtoList) {
-    //         // 여기서 받아온 데이터로 메뉴를 저장하거나 다른 작업을 수행할 수 있습니다.
-    //         // 예시로 저장만 하는 코드를 추가했습니다.
-    //         System.out.println(dummyMenuDto.toString());
-    //     }
-    //     return "html/owner/menu_registration";
+
 
 
     @GetMapping("{id}")
