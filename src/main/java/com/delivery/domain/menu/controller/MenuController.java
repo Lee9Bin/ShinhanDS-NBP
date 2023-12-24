@@ -1,6 +1,8 @@
 package com.delivery.domain.menu.controller;
 
 import com.delivery.domain.menu.dto.MenuDto;
+import com.delivery.domain.menu.entity.MenuEntity;
+import com.delivery.domain.menu.repository.MenuRepository;
 import com.delivery.domain.menu.service.MenuService;
 import com.delivery.domain.store.entity.StoreEntity;
 import com.delivery.domain.store.repository.StoreRepository;
@@ -26,6 +28,7 @@ public class MenuController {
 
     private final StoreRepository storeRepository;
     private final MenuService menuService;
+    private final MenuRepository menuRepository;
 
     @GetMapping("/{id}/menu/new")
     public String menuSaveForm(Model model, @PathVariable Long id) {
@@ -55,12 +58,12 @@ public class MenuController {
     @GetMapping("{id}")
     public String detail(@PathVariable Long id, Model model) {
         Optional<StoreEntity> targetStore = storeRepository.findById(id);
-        // List<StoreMenuEntity> dummyMenuListEntity = storeMenuRepository.findAllByDummyStoreEntity_Id(id);
+        List<MenuEntity> menuListEntity = menuRepository.findAllByStoreEntity_Id(id);
 
         if (targetStore.isPresent()) {
             model.addAttribute("store", targetStore.get());
-            // model.addAttribute("menuList", dummyMenuListEntity);
-//            model.addAttribute("base64Image", storePicturePath);
+            model.addAttribute("menuList", menuListEntity);
+           // model.addAttribute("base64Image", storePicturePath);
             return "html/store/detail";
         }
         // 예시로 null을 반환하였습니다. 실제 상황에 맞게 수정하세요.

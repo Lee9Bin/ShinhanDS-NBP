@@ -1,6 +1,5 @@
 package com.delivery.domain.store.api;
 
-import com.delivery.domain.dummyStore.dto.DummyStore;
 import com.delivery.domain.store.dto.StoreDto;
 import com.delivery.domain.store.entity.StoreEntity;
 import com.delivery.domain.store.repository.StoreRepository;
