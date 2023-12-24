@@ -1,47 +1,54 @@
 package com.delivery.domain.menu.entity;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
+import com.delivery.domain.menu.dto.MenuDto;
+import com.delivery.domain.store.entity.StoreEntity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-@Table(name = "menu")
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Getter
+@ToString
 public class MenuEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "menu_id")
     private Long id;
 
-    @NotNull
-    @Column
+    //식당 아이디
+    @ManyToOne
+    @JoinColumn(name = "store_id")
+    private StoreEntity storeEntity;
+
+    private String name;
+
     private int price;
 
-    @NotNull
-    @Column
     private String content;
 
-    @NotNull
-    @Column
-    private String popular;
+    private String category;
 
-    @NotNull
-    @Column
-    private String photo;
-
-//    public void patch(MenuEntity menuEntity){
-//        if(menuEntity.price !=null){
-//            this.price = menuEntity.price;
-//        }
-//        if(menuEntity.content !=null){
-//            this.content = menuEntity.content;
-//        }
-//    }
+    private String picturePath;
+    //== 엔티티 변환 메서드 ==//
+    public static MenuEntity toEntity(MenuDto menuDto, StoreEntity storeEntity){
+        return new MenuEntity(
+                menuDto.getId(),
+                storeEntity,
+                menuDto.getName(),
+                menuDto.getPrice(),
+                menuDto.getContent(),
+                menuDto.getCategory(),
+                menuDto.getPicturePath()
+        );
+    }
 }
-
-

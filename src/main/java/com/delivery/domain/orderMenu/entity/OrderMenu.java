@@ -26,9 +26,9 @@ public class OrderMenu {
     private Long id;
 
     //주문 아이디
-    @ManyToOne
-    @JoinColumn(name = "order_delivery_id")
-    private OrderDelivery orderDelivery;
+    // @ManyToOne
+    // @JoinColumn(name = "order_delivery_id")
+    // private OrderDelivery orderDelivery;
     //메뉴 아이디///
     // @ManyToOne
     // @JoinColumn(name = "menu_id")
