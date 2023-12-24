@@ -1,7 +1,7 @@
 package com.delivery.domain.store.dto;
 
-import com.delivery.domain.store.entity.StoreEntity;
 import com.delivery.domain.owner.entity.OwnerEntity;
+import com.delivery.domain.store.entity.StoreEntity;
 import lombok.*;
 
 @Getter
@@ -11,7 +11,6 @@ import lombok.*;
 @ToString
 public class StoreDto {
     private Long id;
-    //점주 아이디
     private Long ownerId;
     private String name;
     private String description;
@@ -29,6 +28,18 @@ public class StoreDto {
                 storeEntity.getCategory(),
                 storeEntity.getRating(),
                 storeEntity.getFile()
+        );
+    }
+
+    public StoreEntity toEntity(OwnerEntity ownerEntity) {
+        return new StoreEntity(
+                this.id,
+                ownerEntity,
+                this.name,
+                this.description,
+                this.category,
+                this.rating,
+                this.file
         );
     }
 }

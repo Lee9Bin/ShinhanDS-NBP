@@ -9,25 +9,13 @@
 <body>
 
 <form id="menuForm" class="container w-50 p-3" >
-    <!--    storeId값 히든으로 받아오기-->
-    <!-- mustache 예시 -->
-    <!--    {{#stores}}-->
-    <!--    <input type="hidden" id="new-content-article-id" value="{{id}}">-->
-    <!--    {{#stores}}-->
-
     <!-- ownerId 값이 포함된 store 가져오기 -->
 
     <input type="hidden" id="storeId" th:value="${targetStore.id}" />
     <input type="hidden" id="ownerId" th:value="${targetStore.getOwnerEntity().id}" />
 
-
-    <!--    &lt;!&ndash; ownerId 값이 포함된 store 가져오기 &ndash;&gt;-->
-    <!--    <input type="hidden" id="storeId" th:value="${stores[0].id}" />-->
-
     <div id="menuList">
         <div class="menuForm">
-
-
             <div class="mt-4 mb-4">
                 <label class="form-label">메뉴 이름</label>
                 <input type="text" class="form-control form-control-sm name" name="name">
@@ -58,7 +46,6 @@
         <button type="button" onclick="addMenuForm()" class="btn btn-secondary">메뉴 추가</button>
         <button type="submit" id="submitMenu" class="btn btn-secondary">등록하기</button>
         <a th:href="@{/owner/{ownerId}(ownerId=${targetStore.getOwnerEntity().id})}" class="btn btn-secondary">뒤로가기</a>
-
     </div>
 </form>
 
@@ -129,7 +116,7 @@
         })
 
         // const jsonMenu = JSON.stringify(menuList);
-        const url = "/api/store/" + storeId + "/create";
+        const url = "/store/" + storeId + "/menu/new";
         fetch(url,{
             headers:{
                 "Content-Type": "application/json"
@@ -137,9 +124,9 @@
             method:'post',
             body: JSON.stringify(menuList),
         }).then(response => {
-            const message = (response.ok) ? "가게가 등록되었습니다!" : "가게 등록에 실패했습니다!";
+            const message = (response.ok) ? "메뉴가 등록되었습니다!" : "메뉴 등록에 실패했습니다!";
             alert(message);
-            window.location.href = "/store/" + storeId;
+            // window.location.href = "/store/" + storeId;
         })
     })
 

@@ -34,10 +34,13 @@ public class StoreController {
 
     // 점주 가게 등록 폼
     @GetMapping("/owner/store/new")
-    public String storeSaveForm(Model model) {
-        model.addAttribute("storeDto", new StoreDto());
 
-        return "/layouts/html/regist";
+    public String storeSaveForm(HttpSession session, Model model) {
+        Long ownerId = (Long) session.getAttribute("ownerId");
+        model.addAttribute("ownerId",ownerId);
+        model.addAttribute("storeDto", new StoreDto());
+        return "/layouts/owner/regist";
+
     }
 
     //점주 가게 등록 저장

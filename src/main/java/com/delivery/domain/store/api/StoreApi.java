@@ -1,18 +1,17 @@
 package com.delivery.domain.store.api;
 
-
+import com.delivery.domain.store.dto.StoreDto;
 import com.delivery.domain.store.entity.StoreEntity;
 import com.delivery.domain.store.repository.StoreRepository;
+import com.delivery.domain.store.service.StoreService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,10 +21,13 @@ import java.util.List;
 public class StoreApi {
 
     private final StoreRepository storeRepository;
+    private final StoreService storeService;
 
     @Autowired
-    public StoreApi(StoreRepository storeRepository) {
+    public StoreApi(StoreRepository storeRepository, StoreService storeService) {
         this.storeRepository = storeRepository;
+        this.storeService = storeService;
+
     }
 
     @GetMapping("/get-more-data")
@@ -45,4 +47,14 @@ public class StoreApi {
         return ResponseEntity.ok().body(newData);
     }
 
+    @PostMapping("/new/store/{ownerId}/create")
+    public ResponseEntity<StoreDto> create(@PathVariable Long ownerId, @RequestBody StoreDto storeDto) {
+
+        log.info("ownerId = {}", ownerId);
+
+        log.info("dummyStore = {}", storeDto);
+
+        storeService.save(storeDto, ownerId);
+        return ResponseEntity.status(HttpStatus.CREATED).build(); // 201 성공!!
+    }
 }
