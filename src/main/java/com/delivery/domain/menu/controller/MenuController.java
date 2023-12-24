@@ -41,13 +41,13 @@ public class MenuController {
     }
 
     @PostMapping("/menu/new")
-    public String menuSave(@PathVariable Long id, @RequestBody List<MenuDto> menuDtoList, Model model) {
+    public String menuSave(HttpSession session,@RequestBody List<MenuDto> menuDtoList, Model model) {
         for (MenuDto menuDto : menuDtoList) {
             // 여기서 받아온 데이터로 메뉴를 저장하거나 다른 작업을 수행할 수 있습니다.
             // 예시로 저장만 하는 코드를 추가했습니다.
             System.out.println("메뉴 리스트입니다."+menuDto.toString());
         }
-        return "redirect:/store/{id}/menu/new";
+        return "redirect:/owner/";
     }
     // @GetMapping("{id}")
     // public String detail(@PathVariable Long id, Model model) {

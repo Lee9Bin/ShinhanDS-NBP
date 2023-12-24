@@ -85,7 +85,7 @@
     }
 
     // store_id값 받아오기
-    const storeId = document.getElementById('storeId').value;
+    // const storeId = document.getElementById('storeId').value;
 
 
     // 등록 버튼 누르고 이벤트 발동하기
@@ -116,7 +116,7 @@
         })
 
         // const jsonMenu = JSON.stringify(menuList);
-        const url = "/store/" + storeId + "/menu/new";
+        const url = "/store/menu/new";
         fetch(url,{
             headers:{
                 "Content-Type": "application/json"
