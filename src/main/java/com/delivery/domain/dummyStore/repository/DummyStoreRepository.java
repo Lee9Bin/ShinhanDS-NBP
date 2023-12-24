@@ -15,5 +15,4 @@ public interface DummyStoreRepository extends JpaRepository<DummyStoreEntity, Lo
     // 대소문자 구별하지 않고 검색
     List<DummyStoreEntity> findByNameContainingIgnoreCase(String name);
 
-    Optional<DummyStoreEntity> findByOwnerEntity_Id(Long aLong);
 }

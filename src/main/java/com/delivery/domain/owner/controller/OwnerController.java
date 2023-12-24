@@ -1,5 +1,7 @@
 package com.delivery.domain.owner.controller;
 
+import com.delivery.domain.dummyStore.entity.DummyStoreEntity;
+import com.delivery.domain.dummyStore.repository.DummyStoreRepository;
 import
         com.delivery.domain.owner.dto.OwnerDTO;
 import com.delivery.domain.owner.service.OwnerService;
@@ -11,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Controller
@@ -19,6 +22,7 @@ public class OwnerController {
 
     // 생성자 주입
     private final OwnerService ownerService;
+    private final DummyStoreRepository dummyStoreRepository;
 
 
     // 회원가입 페이지 출력 요청
@@ -57,12 +61,38 @@ public class OwnerController {
         }
 
         session.setAttribute("ownerId", loginResult.getId());
-        session.setAttribute("loginEmail", loginResult.getOwnerEmail());
-        session.setAttribute("loginName", loginResult.getOwnerName());
+        session.setAttribute("ownerLoginEmail", loginResult.getOwnerEmail());
+        session.setAttribute("ownerLoginName", loginResult.getOwnerName());
         // 직전 페이지의 정보를 들고 와야됨
-        return "/html/owner/owner1";
+        return "redirect:/owner/" + loginResult.getId();
+
 
     }
+
+    @GetMapping(value = "/owner/{ownerId}")
+//    @PathVariable Long articleId
+    public String ownerHome(Model model, @PathVariable Long ownerId, HttpSession session){
+        OwnerDTO ownerDTO = ownerService.findById(ownerId);
+        // owner의 값 불러옴 3번 - 채원이
+        log.info("bb - " + ownerDTO.toString());
+        Optional<DummyStoreEntity> dummyStoreEntity = dummyStoreRepository.findByOwnerEntity_Id(ownerId);
+        log.info("aa - " + dummyStoreEntity.toString());
+        model.addAttribute("owner", ownerDTO);  // 모델에 회원 정보를 담아서 전달
+        dummyStoreEntity.ifPresent(store -> model.addAttribute("ownerStore", store));
+
+        // 아이디에 해당하는 회원 정보 조회 (한명 걍 dto)
+        session.setAttribute("loginName", ownerDTO.getOwnerName());
+
+
+        // dummyStoreEntity가 null이 아니고 존재하면 모델에 추가
+//        dummyStoreEntity.ifPresent(entity -> model.addAttribute("stores", Collections.singletonList(entity)));
+        return "layouts/owner/ownerNewMain";
+
+    }
+
+
+
+
 
     @GetMapping("/loginOwnerhome")
     public String loginHome(HttpSession session) {
