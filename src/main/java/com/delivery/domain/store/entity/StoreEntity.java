@@ -13,13 +13,14 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 @Getter
-@Setter
+@AllArgsConstructor
 public class StoreEntity {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
 
-        @ManyToOne
+        //점주테이블 조인
+        @OneToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "owner_id")
         private OwnerEntity ownerEntity;
 
@@ -32,19 +33,8 @@ public class StoreEntity {
         public static final int PAGE_SIZE = 8;
         // 가게사진
 
-
-        public StoreEntity(Long id, OwnerEntity ownerEntity, String name, String description, String category, int rating, String file) {
-                this.id = id;
-                this.ownerEntity = ownerEntity;
-                this.name = name;
-                this.description = description;
-                this.category = category;
-                this.rating = rating;
-                this.file = file;
-        }
-
         // toDummyStoreEntity 메소드 수정
-        public static StoreEntity toDummyStoreEntity(StoreDto storeDto, OwnerEntity ownerEntity) {
+        public static StoreEntity toStoreEntity(StoreDto storeDto, OwnerEntity ownerEntity) {
                 return new StoreEntity(
                         storeDto.getId(),
                         ownerEntity,
@@ -55,8 +45,6 @@ public class StoreEntity {
                         storeDto.getFile()
                 );
         }
-
-
 }
 
 

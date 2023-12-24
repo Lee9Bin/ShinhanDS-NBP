@@ -36,4 +36,8 @@ public class MenuService {
         }
         return null;
     }
+
+    // public List<MenuDto> findAllByStoreEntity_Id(Long id){
+    //
+    // }
 }
