@@ -1,6 +1,9 @@
 package com.delivery.domain.owner.controller;
 
-import com.delivery.domain.owner.dto.OwnerDTO;
+import com.delivery.domain.dummyStore.entity.DummyStoreEntity;
+import com.delivery.domain.dummyStore.repository.DummyStoreRepository;
+import
+        com.delivery.domain.owner.dto.OwnerDTO;
 import com.delivery.domain.owner.service.OwnerService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Controller
@@ -18,6 +22,8 @@ public class OwnerController {
 
     // 생성자 주입
     private final OwnerService ownerService;
+    private final DummyStoreRepository dummyStoreRepository;
+
 
     // 회원가입 페이지 출력 요청
     @GetMapping("/owner/save") // 메인페이지에서 로그인한다고 href 건거 (링크 건건 거의 get)
@@ -54,10 +60,33 @@ public class OwnerController {
             return "html/owner/login";
         }
 
-        session.setAttribute("loginEmail", loginResult.getOwnerEmail());
-        session.setAttribute("loginName", loginResult.getOwnerName());
+        session.setAttribute("ownerId", loginResult.getId());
+        session.setAttribute("ownerLoginEmail", loginResult.getOwnerEmail());
+        session.setAttribute("ownerLoginName", loginResult.getOwnerName());
         // 직전 페이지의 정보를 들고 와야됨
-        return "/html/owner/loginOwnerhome";
+        return "redirect:/owner/" + loginResult.getId();
+
+
+    }
+
+    @GetMapping(value = "/owner/{ownerId}")
+//    @PathVariable Long articleId
+    public String ownerHome(Model model, @PathVariable Long ownerId, HttpSession session){
+        OwnerDTO ownerDTO = ownerService.findById(ownerId);
+        // owner의 값 불러옴 3번 - 채원이
+        log.info("bb - " + ownerDTO.toString());
+        Optional<DummyStoreEntity> dummyStoreEntity = dummyStoreRepository.findByOwnerEntity_Id(ownerId);
+        log.info("aa - " + dummyStoreEntity.toString());
+        model.addAttribute("owner", ownerDTO);  // 모델에 회원 정보를 담아서 전달
+        dummyStoreEntity.ifPresent(store -> model.addAttribute("ownerStore", store));
+
+        // 아이디에 해당하는 회원 정보 조회 (한명 걍 dto)
+        session.setAttribute("loginName", ownerDTO.getOwnerName());
+
+
+        // dummyStoreEntity가 null이 아니고 존재하면 모델에 추가
+//        dummyStoreEntity.ifPresent(entity -> model.addAttribute("stores", Collections.singletonList(entity)));
+        return "layouts/owner/ownerNewMain";
 
     }
 
@@ -74,13 +103,13 @@ public class OwnerController {
         return "html/owner/list";  // 회원 목록 페이지의 HTML 파일명 리턴
     }
 
-    @GetMapping("/owner/{id}")
-    public String findById(@PathVariable Long id, Model model, HttpSession session) {
-        OwnerDTO ownerDTO = ownerService.findById(id);  // 아이디에 해당하는 회원 정보 조회 (한명 걍 dto)
-        model.addAttribute("owner", ownerDTO);  // 모델에 회원 정보를 담아서 전달
-        session.setAttribute("loginName", ownerDTO.getOwnerName());
-        return "html/owner/detail";  // 회원 상세 정보 페이지의 HTML 파일명 리턴
-    }
+//    @GetMapping("/owner/{id}")
+//    public String findById(@PathVariable Long id, Model model, HttpSession session) {
+//        OwnerDTO ownerDTO = ownerService.findById(id);  // 아이디에 해당하는 회원 정보 조회 (한명 걍 dto)
+//        model.addAttribute("owner", ownerDTO);  // 모델에 회원 정보를 담아서 전달
+//        session.setAttribute("loginName", ownerDTO.getOwnerName());
+//        return "html/owner/detail";  // 회원 상세 정보 페이지의 HTML 파일명 리턴
+//    }
 
     @GetMapping("/owner/update")
     public String updateForm(HttpSession session, Model model) {
@@ -119,3 +148,4 @@ public class OwnerController {
         return checkResult;  // 중복 여부에 따른 결과 리턴
     }
 }
+

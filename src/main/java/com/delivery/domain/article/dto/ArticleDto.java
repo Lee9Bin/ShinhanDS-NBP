@@ -16,4 +16,6 @@ public class ArticleDto {
     public ArticleEntity toEntity() {
         return new ArticleEntity(id,title, content);
     }
+
+
 }

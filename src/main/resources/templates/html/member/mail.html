@@ -108,6 +108,11 @@
         var number1 = $("#number").val();
         var number2 = $("#Confirm").val();
 
+        if (number1 === "") {
+            alert("인증번호를 입력하세요.");
+            return;
+        }
+
         if (number1 == number2) {
             alert("인증되었습니다.");
             enableInputFields();
@@ -145,7 +150,7 @@
                     console.log("사용가능한 이메일");
                     checkResult.style.color = "green";
                     checkResult.innerHTML = "사용가능한 이메일";
-                    disableSubmitButton()
+                    disableSubmitButton();
                 } else {
                     console.log("이미 사용중인 이메일");
                     checkResult.style.color = "red";
