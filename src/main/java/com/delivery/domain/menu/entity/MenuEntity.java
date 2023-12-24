@@ -1,7 +1,7 @@
-package com.delivery.domain.dummyMenu.entity;
+package com.delivery.domain.menu.entity;
 
-import com.delivery.domain.dummyMenu.dto.DummyMenuDto;
-import com.delivery.domain.dummyStore.entity.DummyStoreEntity;
+import com.delivery.domain.menu.dto.MenuDto;
+import com.delivery.domain.store.entity.StoreEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,16 +19,16 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @ToString
-public class DummyMenu {
+public class MenuEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "dummy_menu_id")
+    @Column(name = "menu_id")
     private Long id;
 
     //식당 아이디
     @ManyToOne
-    @JoinColumn(name = "dummy_store_id")
-    private DummyStoreEntity dummyStoreEntity;
+    @JoinColumn(name = "store_id")
+    private StoreEntity storeEntity;
 
     private String name;
 
@@ -40,15 +40,15 @@ public class DummyMenu {
 
     private String picturePath;
     //== 엔티티 변환 메서드 ==//
-    public static DummyMenu toEntity(DummyMenuDto dummyMenuDto, DummyStoreEntity dummyStoreEntity){
-        return new DummyMenu(
-                dummyMenuDto.getId(),
-                dummyStoreEntity,
-                dummyMenuDto.getName(),
-                dummyMenuDto.getPrice(),
-                dummyMenuDto.getContent(),
-                dummyMenuDto.getCategory(),
-                dummyMenuDto.getPicturePath()
+    public static MenuEntity toEntity(MenuDto menuDto, StoreEntity storeEntity){
+        return new MenuEntity(
+                menuDto.getId(),
+                storeEntity,
+                menuDto.getName(),
+                menuDto.getPrice(),
+                menuDto.getContent(),
+                menuDto.getCategory(),
+                menuDto.getPicturePath()
         );
     }
 }

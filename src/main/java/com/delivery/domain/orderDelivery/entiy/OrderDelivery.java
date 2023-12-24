@@ -22,9 +22,9 @@ public class OrderDelivery {
     @Column(name = "order_delivery_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
-    private MemberEntity memberEntity; //회원 아이디
+    // @ManyToOne(fetch = FetchType.LAZY)
+    // @JoinColumn(name = "member_id")
+    // private MemberEntity memberEntity; //회원 아이디
 
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "store_name")
@@ -53,13 +53,11 @@ public class OrderDelivery {
 
 
 
-
-
     //==엔티티 변환==//
     public static OrderDelivery toEntity(OrderDeliveryDto orderDeliveryDto, MemberEntity memberEntity){
         return new OrderDelivery(
                 orderDeliveryDto.getId(),
-                memberEntity,
+                // memberEntity,
 
                 orderDeliveryDto.getStatus(),
                 orderDeliveryDto.getRequestTime(),

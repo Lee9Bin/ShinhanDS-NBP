@@ -32,7 +32,7 @@ public class OrderDeliveryService {
                                 //메뉴아이디랑 받아와야할듯
         // 처음 주믄을 하면 요청수락대기 단계
         Optional<MemberEntity> targetMember = memberRepository.findById(memberID);
-        Optional<StoreEntity> targetStore = storeRepository.findById("abc");
+        Optional<StoreEntity> targetStore = storeRepository.findById(storeId);
 
         if(targetMember.isPresent() && targetStore.isPresent()){
             OrderDelivery orderDelivery = OrderDelivery.toEntity(orderDeliveryDto, targetMember.get());
@@ -49,7 +49,7 @@ public class OrderDeliveryService {
     public List<OrderDelivery> findAllByMemberEntity_Id(Long id){
         Optional<MemberEntity> targetMember = memberRepository.findById(id);
         if (targetMember.isPresent()){
-            return orderDeliveryRepository.findAllByMemberEntity_Id(id);
+            // return orderDeliveryRepository.findAllByMemberEntity_Id(id);
         }
 
         return null;

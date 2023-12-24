@@ -1,6 +1,6 @@
-package com.delivery.domain.dummyStore.entity;
+package com.delivery.domain.store.entity;
 
-import com.delivery.domain.dummyStore.dto.DummyStore;
+import com.delivery.domain.store.dto.StoreDto;
 import com.delivery.domain.owner.entity.OwnerEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,7 +14,7 @@ import lombok.*;
 @ToString
 @Getter
 @Setter
-public class DummyStoreEntity {
+public class StoreEntity {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
@@ -33,7 +33,7 @@ public class DummyStoreEntity {
         // 가게사진
 
 
-        public DummyStoreEntity(Long id, OwnerEntity ownerEntity, String name, String description, String category, int rating, String file) {
+        public StoreEntity(Long id, OwnerEntity ownerEntity, String name, String description, String category, int rating, String file) {
                 this.id = id;
                 this.ownerEntity = ownerEntity;
                 this.name = name;
@@ -44,15 +44,15 @@ public class DummyStoreEntity {
         }
 
         // toDummyStoreEntity 메소드 수정
-        public static DummyStoreEntity toDummyStoreEntity(DummyStore dummyStore, OwnerEntity ownerEntity) {
-                return new DummyStoreEntity(
-                        dummyStore.getId(),
+        public static StoreEntity toDummyStoreEntity(StoreDto storeDto, OwnerEntity ownerEntity) {
+                return new StoreEntity(
+                        storeDto.getId(),
                         ownerEntity,
-                        dummyStore.getName(),
-                        dummyStore.getDescription(),
-                        dummyStore.getCategory(),
-                        dummyStore.getRating(),
-                        dummyStore.getFile()
+                        storeDto.getName(),
+                        storeDto.getDescription(),
+                        storeDto.getCategory(),
+                        storeDto.getRating(),
+                        storeDto.getFile()
                 );
         }
 

@@ -1,8 +1,8 @@
-package com.delivery.domain.dummyStore.controller;
+package com.delivery.domain.store.controller;
 
-import com.delivery.domain.dummyStore.dto.DummyStore;
-import com.delivery.domain.dummyStore.entity.DummyStoreEntity;
-import com.delivery.domain.dummyStore.service.DummyStoreService;
+import com.delivery.domain.store.dto.StoreDto;
+import com.delivery.domain.store.entity.StoreEntity;
+import com.delivery.domain.store.service.StoreService;
 import groovy.util.logging.Slf4j;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -21,12 +21,12 @@ import java.util.UUID;
 @Controller
 @Slf4j
 @RequiredArgsConstructor
-public class DummyStoreController {
-    private final DummyStoreService dummyStoreService;
+public class StoreController {
+    private final StoreService storeService;
 
     @GetMapping("/searchResults")
     public String searchResultsPage(@RequestParam String searchTerm, Model model) {
-        List<DummyStoreEntity> searchResults = dummyStoreService.searchStoresByName(searchTerm);
+        List<StoreEntity> searchResults = storeService.searchStoresByName(searchTerm);
         model.addAttribute("searchResults", searchResults);
 
         return "/html/store/StoreFindResult"; // 검색 결과를 보여줄 HTML 파일명
@@ -72,14 +72,14 @@ public class DummyStoreController {
                 file.transferTo(dest);
 
 
-                DummyStore storeDto = new DummyStore();
+                StoreDto storeDto = new StoreDto();
                 storeDto.setName(name);
                 storeDto.setDescription(description);
                 storeDto.setCategory(category);
                 storeDto.setRating(rating);
                 storeDto.setFile(fileName);
 
-                dummyStoreService.saveStore(storeDto, Long.valueOf(ownerId));
+                storeService.saveStore(storeDto, Long.valueOf(ownerId));
             } catch (IOException e) {
                 e.printStackTrace();
                 // 파일 저장 중 예외 발생 시 예외 처리 로직 추가

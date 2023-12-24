@@ -1,11 +1,10 @@
-package com.delivery.domain.dummyMenu.controller;
+package com.delivery.domain.menu.controller;
 
-import com.delivery.domain.dummyMenu.dto.DummyMenuDto;
-import com.delivery.domain.dummyMenu.entity.DummyMenu;
-import com.delivery.domain.dummyMenu.repository.DummyMenuRepository;
-import com.delivery.domain.dummyMenu.service.DummyMenuService;
-import com.delivery.domain.dummyStore.entity.DummyStoreEntity;
-import com.delivery.domain.dummyStore.repository.DummyStoreRepository;
+import com.delivery.domain.menu.dto.MenuDto;
+import com.delivery.domain.menu.repository.MenuRepository;
+import com.delivery.domain.menu.service.MenuService;
+import com.delivery.domain.store.entity.StoreEntity;
+import com.delivery.domain.store.repository.StoreRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -24,41 +23,33 @@ import java.util.Optional;
 @RequestMapping("/store")
 @RequiredArgsConstructor
 @Slf4j
-public class DummyMenuController {
+public class MenuController {
 
-    private final DummyStoreRepository dummyStoreRepository;
-    private final DummyMenuRepository dummyMenuRepository;
-    private final DummyMenuService dummyMenuService;
+    private final StoreRepository storeRepository;
+    private final MenuService menuService;
 
     @GetMapping("/{id}/menu/new")
     public String menuSaveForm(Model model, @PathVariable Long id) {
-        Optional<DummyStoreEntity> targetStore = dummyStoreRepository.findById(id);
+        Optional<StoreEntity> targetStore = storeRepository.findById(id);
 
-        // targetStore가 존재하면 모델에 추가
-        targetStore.ifPresent(store -> model.addAttribute("targetStore", store));
-
-        // 빈 DummyMenuDto를 생성하여 모델에 추가
-        model.addAttribute("dummyMenuDtoList", List.of(new DummyMenuDto()));
+        if (targetStore.isPresent()){
+            model.addAttribute("targetStore", targetStore.get());
+        }
 
         return "html/owner/menu_registration";
+
     }
 
     @PostMapping("/{id}/menu/new")
-    public String menuSave(@ModelAttribute("dummyMenuDtoList") List<DummyMenuDto> dummyMenuDtoList,
+    public String menuSave(@ModelAttribute("dummyMenuDtoList") List<MenuDto> menuDtoList,
                            @PathVariable Long id) {
         // DummyMenuService를 사용하여 메뉴 저장
-        dummyMenuService.save(dummyMenuDtoList, id);
+        menuService.save(menuDtoList, id);
 
         // 저장 후 다시 메뉴 등록 페이지로 이동
         return "redirect:/store/{id}/menu/new";
     }
 
-    // @GetMapping("/menu/new/{id}")
-    // public String menuSaveForm(@PathVariable Long id, Model model) {
-    //     model.addAttribute("storeId", id);
-    //     return "html/owner/menu_registration";
-    // }
-    //
     // @PostMapping("/menu/new/{id}")
     // public String menuSave(@PathVariable Long id, @RequestBody List<DummyMenuDto> dummyMenuDtoList, Model model) {
     //     for (DummyMenuDto dummyMenuDto : dummyMenuDtoList) {
@@ -71,12 +62,12 @@ public class DummyMenuController {
 
     @GetMapping("{id}")
     public String detail(@PathVariable Long id, Model model) {
-        Optional<DummyStoreEntity> targetStore = dummyStoreRepository.findById(id);
-        List<DummyMenu> dummyMenuList = dummyMenuRepository.findAllByDummyStoreEntity_Id(id);
+        Optional<StoreEntity> targetStore = storeRepository.findById(id);
+        // List<StoreMenuEntity> dummyMenuListEntity = storeMenuRepository.findAllByDummyStoreEntity_Id(id);
 
         if (targetStore.isPresent()) {
             model.addAttribute("store", targetStore.get());
-            model.addAttribute("menuList", dummyMenuList);
+            // model.addAttribute("menuList", dummyMenuListEntity);
 //            model.addAttribute("base64Image", storePicturePath);
             return "html/store/detail";
         }

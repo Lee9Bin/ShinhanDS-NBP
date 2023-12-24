@@ -1,7 +1,7 @@
 package com.delivery.domain.owner.controller;
 
-import com.delivery.domain.dummyStore.entity.DummyStoreEntity;
-import com.delivery.domain.dummyStore.repository.DummyStoreRepository;
+import com.delivery.domain.store.entity.StoreEntity;
+import com.delivery.domain.store.repository.StoreRepository;
 import
         com.delivery.domain.owner.dto.OwnerDTO;
 import com.delivery.domain.owner.service.OwnerService;
@@ -22,7 +22,7 @@ public class OwnerController {
 
     // 생성자 주입
     private final OwnerService ownerService;
-    private final DummyStoreRepository dummyStoreRepository;
+    private final StoreRepository storeRepository;
 
 
     // 회원가입 페이지 출력 요청
@@ -75,7 +75,7 @@ public class OwnerController {
         OwnerDTO ownerDTO = ownerService.findById(ownerId);
         // owner의 값 불러옴 3번 - 채원이
         log.info("bb - " + ownerDTO.toString());
-        Optional<DummyStoreEntity> dummyStoreEntity = dummyStoreRepository.findByOwnerEntity_Id(ownerId);
+        Optional<StoreEntity> dummyStoreEntity = storeRepository.findByOwnerEntity_Id(ownerId);
         log.info("aa - " + dummyStoreEntity.toString());
         model.addAttribute("owner", ownerDTO);  // 모델에 회원 정보를 담아서 전달
         dummyStoreEntity.ifPresent(store -> model.addAttribute("ownerStore", store));
