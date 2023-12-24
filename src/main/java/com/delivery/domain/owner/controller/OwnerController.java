@@ -1,6 +1,7 @@
 package com.delivery.domain.owner.controller;
 
-import com.delivery.domain.owner.dto.OwnerDTO;
+import
+        com.delivery.domain.owner.dto.OwnerDTO;
 import com.delivery.domain.owner.service.OwnerService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -59,7 +60,7 @@ public class OwnerController {
         session.setAttribute("loginEmail", loginResult.getOwnerEmail());
         session.setAttribute("loginName", loginResult.getOwnerName());
         // 직전 페이지의 정보를 들고 와야됨
-        return "/html/owner/loginOwnerhome";
+        return "/html/owner/owner1";
 
     }
 
@@ -76,13 +77,13 @@ public class OwnerController {
         return "html/owner/list";  // 회원 목록 페이지의 HTML 파일명 리턴
     }
 
-    @GetMapping("/owner/{id}")
-    public String findById(@PathVariable Long id, Model model, HttpSession session) {
-        OwnerDTO ownerDTO = ownerService.findById(id);  // 아이디에 해당하는 회원 정보 조회 (한명 걍 dto)
-        model.addAttribute("owner", ownerDTO);  // 모델에 회원 정보를 담아서 전달
-        session.setAttribute("loginName", ownerDTO.getOwnerName());
-        return "html/owner/detail";  // 회원 상세 정보 페이지의 HTML 파일명 리턴
-    }
+//    @GetMapping("/owner/{id}")
+//    public String findById(@PathVariable Long id, Model model, HttpSession session) {
+//        OwnerDTO ownerDTO = ownerService.findById(id);  // 아이디에 해당하는 회원 정보 조회 (한명 걍 dto)
+//        model.addAttribute("owner", ownerDTO);  // 모델에 회원 정보를 담아서 전달
+//        session.setAttribute("loginName", ownerDTO.getOwnerName());
+//        return "html/owner/detail";  // 회원 상세 정보 페이지의 HTML 파일명 리턴
+//    }
 
     @GetMapping("/owner/update")
     public String updateForm(HttpSession session, Model model) {
@@ -121,3 +122,4 @@ public class OwnerController {
         return checkResult;  // 중복 여부에 따른 결과 리턴
     }
 }
+

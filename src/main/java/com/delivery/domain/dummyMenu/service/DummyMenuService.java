@@ -22,37 +22,18 @@ public class DummyMenuService {
     private final DummyMenuRepository dummyMenuRepository;
     private final DummyStoreRepository dummyStoreRepository;
 
-    //메뉴 저장
-//    public void save(List<DummyMenuDto> dummyMenuDtoList, Long dummyStoreId){
-//        Optional<DummyStoreEntity> targetStore = dummyStoreRepository.findById(dummyStoreId);
-//
-//        if(targetStore.isPresent()){
-//            for(DummyMenuDto dummyMenuDto : dummyMenuDtoList){
-//                DummyMenu entity = DummyMenu.toEntity(dummyMenuDto, targetStore.get());
-//                dummyMenuRepository.save(entity);
-//            }
-//        }
-//    }
 
-
-    // 경영 수정 json에서 받은거 저장하기
-    public void save(List<DummyMenuDto> dummyMenuDtoList, Long storeId){
+    // 메뉴 저장
+    public DummyMenuDto save(List<DummyMenuDto> dummyMenuDtoList, Long storeId) {
         Optional<DummyStoreEntity> targetStore = dummyStoreRepository.findById(storeId);
 
-        if(targetStore.isPresent()){
-            for(DummyMenuDto dummyMenuDto : dummyMenuDtoList){
-                DummyMenu entity = dummyMenuDto.toEntity(targetStore.get());
+        if (targetStore.isPresent()) {
+            for (DummyMenuDto dummyMenuDto : dummyMenuDtoList) {
+                // DummyMenuDto에서 DummyMenu 엔터티로 변환하는 메서드 사용
+                DummyMenu entity = dummyMenuDto.toEntity(targetStore.orElse(null)); // orElse 사용하여 null 체크
                 dummyMenuRepository.save(entity);
             }
         }
+        return null;
     }
-
-    //메뉴 찾기
-//    public DummyMenuDto findById(Long id) {
-//        Optional<DummyMenu> optionalDummyMenu = dummyMenuRepository.findById(id);
-//
-//        if(optionalDummyMenu.isPresent()){
-//            return DummyMenuDto.toDummyMenuDto(optionalDummyMenu.get(),);
-//        }
-//    }
 }
