@@ -11,8 +11,8 @@
 <form id="menuForm" class="container w-50 p-3" >
     <!-- ownerId 값이 포함된 store 가져오기 -->
 
-    <input type="hidden" id="storeId" th:value="${targetStore.id}" />
-    <input type="hidden" id="ownerId" th:value="${targetStore.getOwnerEntity().id}" />
+<!--    <input type="hidden" id="storeId" th:value="${targeStore.id}" />-->
+<!--    <input type="hidden" id="ownerId" th:value="${targetStore.getOwnerEntity().id}" />-->
 
     <div id="menuList">
         <div class="menuForm">
@@ -45,7 +45,8 @@
     <div class="mt-5 d-grid gap-2 d-md-flex justify-content-md-center">
         <button type="button" onclick="addMenuForm()" class="btn btn-secondary">메뉴 추가</button>
         <button type="submit" id="submitMenu" class="btn btn-secondary">등록하기</button>
-        <a th:href="@{/owner/{ownerId}(ownerId=${targetStore.getOwnerEntity().id})}" class="btn btn-secondary">뒤로가기</a>
+<!--        th:href="@{/owner/{ownerId}(ownerId=${targetStore.getOwnerEntity().id})}"-->
+        <a class="btn btn-secondary">뒤로가기</a>
     </div>
 </form>
 
