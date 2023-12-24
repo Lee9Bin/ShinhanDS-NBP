@@ -1,25 +1,33 @@
 package com.delivery.domain.store.dto;
 
 import com.delivery.domain.store.entity.StoreEntity;
-import lombok.AllArgsConstructor;
-import lombok.ToString;
+import com.delivery.domain.owner.entity.OwnerEntity;
+import lombok.*;
 
-import java.sql.Time;
-import java.sql.Date;
-
+@Getter
+@Setter
+@NoArgsConstructor
 @AllArgsConstructor
 @ToString
 public class StoreDto {
+    private Long id;
+    private Long ownerId;
+    private String name;
+    private String description;
+    private String category;
+    private int rating;
+    private String file;
 
-    private String title;
-    private String tel;
-    private Time opentime;
-    private Time endtime;
-    private Date restdate;
-    private String addr;
-    private String content;
 
-    public StoreEntity toEntity(){
-        return new StoreEntity(title, tel, opentime, endtime, restdate, addr, content);
+    public static StoreDto toDummyStore(StoreEntity storeEntity, OwnerEntity ownerEntity){
+        return new StoreDto(
+                storeEntity.getId(),
+                ownerEntity.getId(),
+                storeEntity.getName(),
+                storeEntity.getDescription(),
+                storeEntity.getCategory(),
+                storeEntity.getRating(),
+                storeEntity.getFile()
+        );
     }
 }

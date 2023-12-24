@@ -24,7 +24,7 @@
             <span th:text="${menuItem.name}"></span>
             <span th:text="${menuItem.content}"></span>
             <span th:text="${menuItem.price}"></span>
-            <input type="checkbox" th:name="'selectedMenus'" th:value="${menuItem.dummyStoreEntity.getId()}"/>
+            <input type="checkbox" th:name="'selectedMenus'" th:value="${menuItem.storeEntity.getId()}"/>
         </div>
         <!-- 더 많은 메뉴 아이템 추가 가능 -->
     </div>
