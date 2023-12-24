@@ -1,4 +1,4 @@
-package com.delivery.domain.dummyMenu.service;
+package com.delivery.domain.menu.service;
 
 import org.springframework.boot.test.context.SpringBootTest;
 

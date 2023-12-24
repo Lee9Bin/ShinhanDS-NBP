@@ -13,5 +13,5 @@ public interface OrderDeliveryRepository extends JpaRepository<OrderDelivery, Lo
     // findById(ID) : 엔티티 하나를 조회한다. 내부에서 EntityManager.find() 호출
     // getOne(ID) : 엔티티를 프록시로 조회한다. 내부에서 EntityManager.getReference() 호출
     // findAll(…) : 모든 엔티티를 조회한다. 정렬( Sort )이나 페이징( Pageable ) 조건을 파라미터로 제공할 수 있다.
-    List<OrderDelivery> findAllByMemberEntity_Id(Long MemberId);
+    // List<OrderDelivery> findAllByMemberEntity_Id(Long MemberId);
 }

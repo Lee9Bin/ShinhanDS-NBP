@@ -1,6 +1,6 @@
 package com.delivery.domain.member.controller;
 
-import com.delivery.domain.dummyStore.repository.DummyStoreRepository;
+import com.delivery.domain.store.repository.StoreRepository;
 import com.delivery.domain.member.dto.MemberDTO;
 import com.delivery.domain.member.service.MemberService;
 import jakarta.servlet.http.HttpSession;
@@ -19,7 +19,7 @@ public class MemberController {
 
     // 생성자 주입
     private final MemberService memberService;
-    private final DummyStoreRepository dummyStoreRepository;
+    private final StoreRepository storeRepository;
 
     // 회원가입 페이지 출력 요청
     @GetMapping("/member/save") // 메인페이지에서 로그인한다고 href 건거 (링크 건건 거의 get)

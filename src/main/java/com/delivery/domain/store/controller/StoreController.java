@@ -2,76 +2,97 @@ package com.delivery.domain.store.controller;
 
 import com.delivery.domain.store.dto.StoreDto;
 import com.delivery.domain.store.entity.StoreEntity;
-import com.delivery.domain.store.repository.StoreRepository;
-import jakarta.validation.constraints.NotNull;
+import com.delivery.domain.store.service.StoreService;
+import groovy.util.logging.Slf4j;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
+import java.util.UUID;
 
 @Controller
-@RequestMapping("/owner2")
 @Slf4j
 @RequiredArgsConstructor
 public class StoreController {
+    private final StoreService storeService;
 
-    private final StoreRepository ownerRepository;
+    @GetMapping("/searchResults")
+    public String searchResultsPage(@RequestParam String searchTerm, Model model) {
+        List<StoreEntity> searchResults = storeService.searchStoresByName(searchTerm);
+        model.addAttribute("searchResults", searchResults);
 
-    //조회페이지
-    @GetMapping("/new")
-    public String allStore(){
-        return "html/owner2/ownerStore";}
-
-    //등록페이지
-    @PostMapping("/create")
-    public String create(@ModelAttribute StoreDto form){
-
-        StoreEntity owner = form.toEntity();
-        StoreEntity saved =ownerRepository.save(owner);
-
-        return "redirect:/owner2/" + saved;
+        return "/html/store/StoreFindResult"; // 검색 결과를 보여줄 HTML 파일명
     }
 
-    @GetMapping("")
-    public String list(Model model){
-
-        List<StoreEntity> ownerEntityList = ownerRepository.findAll();
-
-
-        model.addAttribute("ownerList", ownerEntityList);
-        return "html/owner2/ownerStoreList";
+    // 점주 가게 등록 폼
+    @GetMapping("/owner/store/new")
+    public String storeSaveForm(HttpSession session, Model model) {
+        Long ownerId = (Long) session.getAttribute("ownerId");
+        model.addAttribute("ownerId",ownerId);
+        return "/layouts/owner/regist";
     }
 
-    //수정페이지
-    @GetMapping("/edit/{title}")
-    public String editStoreForm(@ModelAttribute String title, Model model){
+    //MultipartFile은 파일 업로드를 처리하기 위한 객체로, 일반적인 폼 필드와는 다르게 별도로 처리해야 합니다.  ? ?? ?
+    @PostMapping("/owner/store/new")
+    public String storeSave(@RequestParam String name,
+                            @RequestParam String description,
+                            @RequestParam String category,
+                            @RequestParam int rating,
+                            @RequestParam("file") MultipartFile file,
+                            HttpSession session) {
 
-        Optional<StoreEntity> ownerEntity = ownerRepository.findById(title);
+        String ownerId = session.getAttribute("ownerId").toString();
 
-        if(ownerEntity.isPresent()){
-            model.addAttribute("owner", ownerEntity.get());
+        String ownerName = (String) session.getAttribute("loginName");
+
+        if (!file.isEmpty()) {
+            // 파일이 비어있지 않은 경우에만 처리
+            try {
+                // 파일 저장 로직 추가
+                // 예시: 파일을 서버의 특정 경로에 저장
+                String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename(); // 이름중복방지
+                String filePath = "/static/file/" + fileName;
+                System.out.println("Filepath : " + filePath);
+                File dest = new File(filePath); //transferTo 메서드를 사용하여 파일을 서버에 저장
+
+
+                // 디렉터리 생성 로직 추가
+                File directory = new File(dest.getParent());
+                if (!directory.exists()) {
+                    directory.mkdirs();  // 디렉터리 생성
+                }
+
+
+                file.transferTo(dest);
+
+
+                StoreDto storeDto = new StoreDto();
+                storeDto.setName(name);
+                storeDto.setDescription(description);
+                storeDto.setCategory(category);
+                storeDto.setRating(rating);
+                storeDto.setFile(fileName);
+
+                storeService.saveStore(storeDto, Long.valueOf(ownerId));
+            } catch (IOException e) {
+                e.printStackTrace();
+                // 파일 저장 중 예외 발생 시 예외 처리 로직 추가
+            }
+        } else {
+            // 파일이 비어있을 경우에 대한 처리
         }
 
-        return "html/owner2/ownerStoreRe";}
-
-    @PostMapping("/edit/{title}/put")
-    @NotNull
-    public String edit(@ModelAttribute StoreDto form){
-
-        StoreEntity owner = form.toEntity();
-        log.info(form.toString());
-
-        Optional<StoreEntity> target = ownerRepository.findById(owner.getTitle());
-
-        if(target.isPresent()){
-            ownerRepository.save(owner);
-        }
-
-        return "redirect:/owner2/" + owner.getTitle();
+        return "/layouts/owner/regist";
     }
+
 
 }
+
