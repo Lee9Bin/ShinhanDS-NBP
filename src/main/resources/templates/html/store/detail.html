@@ -20,7 +20,7 @@
 
         <h2>메뉴</h2>
         <div th:each="menuItem : ${menuList}" class="menu-item">
-            <img th:src="@{'/img/menu/' + ${menuItem.picturePath}}" alt="Store Image"/>
+            <img th:src="@{'/img/menu/' + ${menuItem}}" alt="Store Image"/>
             <span th:text="${menuItem.name}"></span>
             <span th:text="${menuItem.content}"></span>
             <span th:text="${menuItem.price}"></span>

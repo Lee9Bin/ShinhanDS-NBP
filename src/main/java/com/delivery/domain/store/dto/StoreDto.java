@@ -11,6 +11,7 @@ import lombok.*;
 @ToString
 public class StoreDto {
     private Long id;
+    //점주 아이디
     private Long ownerId;
     private String name;
     private String description;
@@ -19,7 +20,7 @@ public class StoreDto {
     private String file;
 
 
-    public static StoreDto toDummyStore(StoreEntity storeEntity, OwnerEntity ownerEntity){
+    public static StoreDto toStoreDto(StoreEntity storeEntity, OwnerEntity ownerEntity){
         return new StoreDto(
                 storeEntity.getId(),
                 ownerEntity.getId(),
