@@ -72,4 +72,13 @@ public class StoreService {
 
         return StoreDto.toStoreDto(updateEntity, ownerEntity.get());
     }
+
+    //가게 삭제
+    @Transactional
+    public void delete(Long ownerId){
+        Optional<StoreEntity> storeEntity = storeRepository.findById(ownerId);
+        if(storeEntity.isPresent()){
+            storeRepository.delete(storeEntity.get());
+        }
+    }
 }
