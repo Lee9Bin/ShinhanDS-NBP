@@ -29,7 +29,6 @@ public class MenuController {
 
     private final StoreRepository storeRepository;
     private final MenuService menuService;
-    private final MenuRepository menuRepository;
 
     @GetMapping("/menu/new")
     public String menuSaveForm(Model model, HttpSession session) {
@@ -39,35 +38,17 @@ public class MenuController {
         if (targetStore.isPresent()){
             model.addAttribute("targetStore", targetStore.get());
         }
-
         return "html/owner/menu_registration";
-
     }
-    // @PostMapping("/{id}/menu/new")
-    // public String menuSave(@ModelAttribute("dummyMenuDtoList") List<MenuDto> menuDtoList,
-    //                        @PathVariable Long id) {
-    //     // DummyMenuService를 사용하여 메뉴 저장
-    //     // menuService.save(menuDtoList, id);
-    //
-    //     for (MenuDto menuDto : menuDtoList) {
-    //                 // 여기서 받아온 데이터로 메뉴를 저장하거나 다른 작업을 수행할 수 있습니다.
-    //                 // 예시로 저장만 하는 코드를 추가했습니다.
-    //                 System.out.println("menuDto: 메뉴 리스트 입니다."+menuDto.toString());
-    //             }
-    //
-    //     // 저장 후 다시 메뉴 등록 페이지로 이동
-    //     return "redirect:/store/{id}/menu/new";
-    // }
 
 
     @PostMapping("/menu/new")
-
     public String menuSave(HttpSession session, @RequestBody List<MenuDto> menuDtoList, Model model) {
-        for (MenuDto menuDto : menuDtoList) {
-            // 여기서 받아온 데이터로 메뉴를 저장하거나 다른 작업을 수행할 수 있습니다.
-            // 예시로 저장만 하는 코드를 추가했습니다.
-            System.out.println("메뉴 리스트입니다."+menuDto.toString());
-        }
+        Long ownerId = (Long) session.getAttribute("ownerId");
+        Optional<StoreEntity> storeEntity = storeRepository.findByOwnerEntity_Id(ownerId);
+
+        menuService.save(menuDtoList, storeEntity.get().getId());
+
         return "redirect:/owner/";
     }
 

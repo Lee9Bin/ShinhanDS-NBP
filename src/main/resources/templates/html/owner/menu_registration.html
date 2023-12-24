@@ -85,7 +85,7 @@
     }
 
     // store_id값 받아오기
-    // const storeId = document.getElementById('storeId').value;
+    const storeId = document.getElementById('storeId').value;
 
 
     // 등록 버튼 누르고 이벤트 발동하기
@@ -126,7 +126,7 @@
         }).then(response => {
             const message = (response.ok) ? "메뉴가 등록되었습니다!" : "메뉴 등록에 실패했습니다!";
             alert(message);
-            window.location.href = "/store/" + storeId;
+            window.location.href = "/owner/store/" + storeId;
         })
     })
 
