@@ -12,6 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,12 +65,20 @@ public class DummyMenuController {
         Optional<DummyStoreEntity> targetStore = dummyStoreRepository.findById(id);
         List<DummyMenu> dummyMenuList = dummyMenuRepository.findAllByDummyStoreEntity_Id(id);
         if(targetStore.isPresent()){
+//            String storePicturePath = targetStore.get().getPicturePath();
             model.addAttribute("store", targetStore.get());
             model.addAttribute("menuList", dummyMenuList);
+//            model.addAttribute("base64Image", storePicturePath);
             return "html/store/detail";
         }
 
 
         return null;
+    }
+
+    private String encodeImageToBase64(String picturePath) throws IOException {
+        Path imagePath = Paths.get("path/to/your/image/directory", picturePath);
+        byte[] imageBytes = Files.readAllBytes(imagePath);
+        return Base64.getEncoder().encodeToString(imageBytes);
     }
 }
