@@ -5,13 +5,12 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
-<!-- 일단 주석해놓음 테스트 action="/process-form" method="post"-->
-<form id="menuForm"  action="">
-<!--    storeId값 히든으로 받아오기-->
+<form id="menuForm" action="">
+    <!-- storeId 값을 히든으로 받아오기 -->
     <input type="hidden" id="storeId" th:value="${storeId}" />
     <div id="menuList"></div>
     <button type="button" onclick="addMenuForm()">Add Menu</button>
-    <button type="submit" id="submitMenu" >Submit</button>
+    <button type="submit" id="submitMenu">Submit</button>
 </form>
 
 <script th:inline="javascript">
@@ -21,40 +20,58 @@
 
         // 동적으로 폼을 생성하고 추가
         var formHtml = '<div>';
-        formHtml += '<label for="menu' + index + '" th:for="${\'dummyMenus[\' + ' + index + ' + \'].name\'}" th:text="\'Name \' + ' + index + ' + 1">메뉴 등록</label>';
+        formHtml += '<label for="name' + index + '" th:for="${\'dummyMenus[\' + ' + index + ' + \'].name\'}" th:text="\'Name \' + ' + index + ' + 1">메뉴 등록</label>';
         formHtml += '<input class="menuName" type="text" th:field="*{dummyMenus[__' + index + '__].name}" />';
+
+        formHtml += '<label for="price' + index + '" th:for="${\'dummyMenus[\' + ' + index + ' + \'].price\'}" th:text="\'Price \' + ' + index + ' + 1">메뉴 가격</label>';
+        formHtml += '<input class="menuPrice" type="text" th:field="*{dummyMenus[__' + index + '__].price}" />';
+
+        formHtml += '<label for="content' + index + '" th:for="${\'dummyMenus[\' + ' + index + ' + \'].content\'}" th:text="\'Content \' + ' + index + ' + 1">메뉴 설명</label>';
+        formHtml += '<input class="menuContent" type="text" th:field="*{dummyMenus[__' + index + '__].content}" />';
+
+        formHtml += '<label for="category' + index + '" th:for="${\'dummyMenus[\' + ' + index + ' + \'].category\'}" th:text="\'Category \' + ' + index + ' + 1">카테고리</label>';
+        formHtml += '<input class="menuCategory" type="text" th:field="*{dummyMenus[__' + index + '__].category}" />';
+
         formHtml += '</div>';
 
         menuList.insertAdjacentHTML('beforeend', formHtml);
     }
 
-    // store_id값 받아오기
-    const storeId = document.getElementById('storeId').value;
-
     // 등록 버튼 누르고 이벤트 발동하기
     const submitMenu = document.querySelector('#submitMenu');
-    let menuList = [];
-    submitMenu.addEventListener('click',(e)=>{
+    submitMenu.addEventListener('click', (e) => {
         e.preventDefault();
+
+        // store_id 값 받아오기
+        const storeId = document.getElementById('storeId').value;
+
+        let menuList = [];
         const appendMenus = document.querySelectorAll('.menuName');
 
         appendMenus.forEach(input => {
-            menuList.push(input.value);
-        })
+            const priceInput = input.parentElement.querySelector('.menuPrice');
+            const contentInput = input.parentElement.querySelector('.menuContent');
+            const categoryInput = input.parentElement.querySelector('.menuCategory');
+            menuList.push({
+                "name": input.value,
+                "price": priceInput.value,
+                "content": contentInput.value,
+                "category": categoryInput.value
+            });
+        });
 
-        // const jsonMenu = JSON.stringify(menuList);
-        const url = "/api/store/" + storeId + "/create";
-        fetch(url,{
-            headers:{
+        const url = "/store/menu/new/" + storeId;
+        fetch(url, {
+            headers: {
                 "Content-Type": "application/json"
             },
-            method:'post',
+            method: 'post',
             body: JSON.stringify(menuList),
         }).then(response => {
             const message = (response.ok) ? "가게가 등록되었습니다!" : "가게 등록에 실패했습니다!";
             alert(message);
-        })
-    })
+        });
+    });
 
 </script>
 </body>
