@@ -30,16 +30,4 @@ public class StoreDto {
                 storeEntity.getFile()
         );
     }
-
-    public StoreEntity toEntity(OwnerEntity ownerEntity) {
-        return new StoreEntity(
-                this.id,
-                ownerEntity,
-                this.name,
-                this.description,
-                this.category,
-                this.rating,
-                this.file
-        );
-    }
 }

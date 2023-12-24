@@ -77,7 +77,7 @@ public class MenuController {
         if (targetStore.isPresent()) {
             model.addAttribute("store", targetStore.get());
             model.addAttribute("menuList", menuListEntity);
-           // model.addAttribute("base64Image", storePicturePath);
+            // model.addAttribute("base64Image", storePicturePath);
             return "html/store/detail";
         }
         // 예시로 null을 반환하였습니다. 실제 상황에 맞게 수정하세요.
