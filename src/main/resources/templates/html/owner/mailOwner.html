@@ -109,6 +109,10 @@
         var number1 = $("#number").val();
         var number2 = $("#Confirm").val();
 
+        if (number1 === "") {
+            alert("인증번호를 입력하세요.");
+            return;
+        }
         if (number1 == number2) {
             alert("인증되었습니다.");
             enableInputFields();
@@ -146,7 +150,7 @@
                     console.log("사용가능한 이메일");
                     checkResult.style.color = "green";
                     checkResult.innerHTML = "사용가능한 이메일";
-                    enableSubmitButton();
+                    disableSubmitButton();
 
                 } else {
                     console.log("이미 사용중인 이메일");
@@ -164,11 +168,11 @@
 
     // 이메일 인증 후 입력
     function enableInputFields() {
-        $("#memberPassword").prop("disabled", false);
-        $("#memberName").prop("disabled", false);
-        $("#memberPhone").prop("disabled", false);
-        $("#memberNickname").prop("disabled", false);
-        $("#memberAddress").prop("disabled", false);
+        $("#ownerPassword").prop("disabled", false);
+        $("#ownerName").prop("disabled", false);
+        $("#ownerPhone").prop("disabled", false);
+        $("#ownerNickname").prop("disabled", false);
+        $("#ownerAddress").prop("disabled", false);
     }
 
     // 이메일 인증 후 입력
@@ -191,10 +195,11 @@
                 <input type="text" name="ownerEmail" id="ownerEmail" onkeyup="emailCheck()" placeholder="이메일 입력">
             </div>
             <div>
-                <button type="button" id="sendBtn" name="sendBtn" onclick="sendNumber()" disabled>인증번호</button>
+                <button type="button" id="sendBtn" name="sendBtn" onclick="sendNumber()">인증번호</button>
             </div>
-            <p id="check-result"></p>
         </div>
+        <p id="check-result"></p>
+        <br>
         <div id="mail_number" name="mail_number">
             <div class="input-div">
                 <input type="text" name="number" id="number" placeholder="인증 번호 입력">
@@ -203,12 +208,13 @@
                 <button type="button" name="confirmBtn" id="confirmBtn" onclick="confirmNumber()">인증확인</button>
             </div>
         </div>
+        <br>
         <input type="text" id="Confirm" name="Confirm" style="display: none" value="">
-        비밀번호: <input type="password" name="memberPassword" id="memberPassword" disabled> <br>
-        이름: <input type="text" name="memberName" id="memberName" disabled> <br>
-        폰번호: <input type="text" name="memberPhone" id="memberPhone" disabled> <br>
-        닉네임: <input type="text" name="memberNickname" id="memberNickname" disabled> <br>
-        주소: <input type="text" name="memberAddress" id="memberAddress" disabled> <br>
+        비밀번호: <input type="password" name="ownerPassword" id="ownerPassword" disabled> <br>
+        이름: <input type="text" name="ownerName" id="ownerName" disabled> <br>
+        폰번호: <input type="text" name="ownerPhone" id="ownerPhone" disabled> <br>
+        닉네임: <input type="text" name="ownerNickname" id="ownerNickname" disabled> <br>
+        주소: <input type="text" name="ownerAddress" id="ownerAddress" disabled> <br>
         <input type="submit" value="회원가입" id="submitBtn" disabled>
     </form>
 </div>

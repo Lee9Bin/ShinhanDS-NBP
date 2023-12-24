@@ -90,10 +90,6 @@ public class OwnerController {
 
     }
 
-
-
-
-
     @GetMapping("/loginOwnerhome")
     public String loginHome(HttpSession session) {
 
