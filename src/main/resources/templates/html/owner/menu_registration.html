@@ -116,7 +116,7 @@
         })
 
         // const jsonMenu = JSON.stringify(menuList);
-        const url = "/store/" + storeId + "/menu/new";
+        const url = "/store/menu/new";
         fetch(url,{
             headers:{
                 "Content-Type": "application/json"
@@ -126,7 +126,7 @@
         }).then(response => {
             const message = (response.ok) ? "메뉴가 등록되었습니다!" : "메뉴 등록에 실패했습니다!";
             alert(message);
-            // window.location.href = "/store/" + storeId;
+            window.location.href = "/store/" + storeId;
         })
     })
 
