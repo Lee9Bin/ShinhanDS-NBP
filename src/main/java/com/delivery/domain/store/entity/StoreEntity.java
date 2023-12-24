@@ -33,7 +33,6 @@ public class StoreEntity {
         public static final int PAGE_SIZE = 8;
         // 가게사진
 
-        // toDummyStoreEntity 메소드 수정
         public static StoreEntity toStoreEntity(StoreDto storeDto, OwnerEntity ownerEntity) {
                 return new StoreEntity(
                         storeDto.getId(),

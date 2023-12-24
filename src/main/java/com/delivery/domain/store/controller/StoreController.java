@@ -34,7 +34,6 @@ public class StoreController {
 
     // 점주 가게 등록 폼
     @GetMapping("/owner/store/new")
-
     public String storeSaveForm(HttpSession session, Model model) {
         Long ownerId = (Long) session.getAttribute("ownerId");
         model.addAttribute("ownerId",ownerId);
@@ -50,7 +49,7 @@ public class StoreController {
         return "redirect:/owner/" + session.getAttribute("ownerId");
     }
 
-    //점주 수정 폼
+    //점주 가게 수정 폼
     @GetMapping("/owner/store/update")
     public String storeUpdateForm(Model model, HttpSession session) {
         StoreDto storeDto = storeService.findById((Long) session.getAttribute("ownerId"));
@@ -59,7 +58,7 @@ public class StoreController {
         return "layouts/html/update";
     }
 
-    //점주 수정
+    //점주 가게 수정
     @PostMapping("/owner/store/update")
     public String storeUpdateForm(@ModelAttribute StoreDto storeDto, HttpSession session) {
         log.info("수정폼에서 넘어온 폼 객체입니다."+storeDto);
