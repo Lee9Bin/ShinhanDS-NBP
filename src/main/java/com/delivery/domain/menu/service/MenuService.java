@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,7 +38,16 @@ public class MenuService {
         return null;
     }
 
-    // public List<MenuDto> findAllByStoreEntity_Id(Long id){
-    //
-    // }
+    //해당 가게 메뉴 조회
+    public List<MenuDto> findAllByStoreEntity_Id(Long storeId){
+        List<MenuEntity> menuEntityList = menuRepository.findAllByStoreEntity_Id(storeId);
+        List<MenuDto> menuDtoList = new ArrayList<>();
+
+        for (MenuEntity menuEntity : menuEntityList){
+            menuDtoList.add(MenuDto.toMenuDto(menuEntity, storeRepository.findById(storeId).get()));
+        }
+
+        return menuDtoList;
+    }
+
 }
