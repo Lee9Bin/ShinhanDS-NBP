@@ -40,7 +40,7 @@ public class WebConfig implements WebMvcConfigurer {
 
                         , "/owner/email-check", "/ownerSignIn", "/customer/**", "/customer/", "/api/articles/**"
                                      
-                        , "/articles/**", "/articles/new", "/layouts/**", "/api/get-more-data", "/searchResults","/store/**", "/api/**","/owner/**");
+                        , "/articles/**", "/articles/new", "/layouts/**", "/api/get-more-data", "/searchResults","/store/**", "/api/**", "/owner/**");
 
 
     }
