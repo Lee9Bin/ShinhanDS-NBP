@@ -45,8 +45,7 @@
     <div class="mt-5 d-grid gap-2 d-md-flex justify-content-md-center">
         <button type="button" onclick="addMenuForm()" class="btn btn-secondary">메뉴 추가</button>
         <button type="submit" id="submitMenu" class="btn btn-secondary">등록하기</button>
-<!--        th:href="@{/owner/{ownerId}(ownerId=${targetStore.getOwnerEntity().id})}"-->
-        <a class="btn btn-secondary">뒤로가기</a>
+        <a th:href="@{/owner/}" class="btn btn-secondary">뒤로가기</a>
     </div>
 </form>
 
