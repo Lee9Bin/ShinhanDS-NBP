@@ -64,18 +64,19 @@ public class OwnerController {
         session.setAttribute("ownerLoginEmail", loginResult.getOwnerEmail());
         session.setAttribute("ownerLoginName", loginResult.getOwnerName());
         // 직전 페이지의 정보를 들고 와야됨
-        return "redirect:/owner/" + loginResult.getId();
+        return "redirect:/owner/";
 
 
     }
 
-    @GetMapping(value = "/owner/{ownerId}")
+    @GetMapping(value = "/owner/")
 //    @PathVariable Long articleId
-    public String ownerHome(Model model, @PathVariable Long ownerId, HttpSession session){
-        OwnerDTO ownerDTO = ownerService.findById(ownerId);
+    public String ownerHome(Model model, HttpSession session){
+        Long newOwnerId = (Long) session.getAttribute("ownerId");
+        OwnerDTO ownerDTO = ownerService.findById(newOwnerId);
         // owner의 값 불러옴 3번 - 채원이
         log.info("bb - " + ownerDTO.toString());
-        Optional<StoreEntity> dummyStoreEntity = storeRepository.findByOwnerEntity_Id(ownerId);
+        Optional<StoreEntity> dummyStoreEntity = storeRepository.findByOwnerEntity_Id(newOwnerId);
         log.info("aa - " + dummyStoreEntity.toString());
         model.addAttribute("owner", ownerDTO);  // 모델에 회원 정보를 담아서 전달
 //        if (!dummyStoreEntity.isEmpty()) {
@@ -100,7 +101,7 @@ public class OwnerController {
         return "loginOwnerhome";  // 회원 상세 정보 페이지의 HTML 파일명 리턴
     }
 
-    @GetMapping("/owner/")
+    @GetMapping("/owner/list")
     public String findAll(Model model) {
         List<OwnerDTO> ownerDTOList = ownerService.findAll();  // 모든 회원 정보 조회 (여러명 list)
         model.addAttribute("ownerList", ownerDTOList);  // 모델에 회원 목록을 담아서 전달
