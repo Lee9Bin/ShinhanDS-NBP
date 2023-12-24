@@ -1,12 +1,15 @@
 package com.delivery.domain.store.service;
 
+
 import com.delivery.domain.owner.repository.OwnerRepository;
 import com.delivery.domain.store.dto.StoreDto;
 import com.delivery.domain.store.entity.StoreEntity;
 import com.delivery.domain.store.repository.StoreRepository;
+
 import com.delivery.domain.owner.entity.OwnerEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,10 +20,12 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 @Slf4j
+
 public class StoreService {
 
     private final OwnerRepository ownerRepository;
     private final StoreRepository storeRepository;
+
 
     //가게 키워드 검색
     public List<StoreEntity> searchStoresByName(String searchTerm) {
@@ -41,6 +46,7 @@ public class StoreService {
             log.info("성공적으로 저장");
         }
     }
+
 
     //가게조회
     public StoreDto findById(Long ownerId){

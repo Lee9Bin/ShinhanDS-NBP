@@ -67,7 +67,6 @@ public class MenuController {
         }
         return "redirect:/store/{id}/menu/new";
     }
-
     @GetMapping("{id}")
     public String detail(@PathVariable Long id, Model model) {
         Optional<StoreEntity> targetStore = storeRepository.findById(id);
