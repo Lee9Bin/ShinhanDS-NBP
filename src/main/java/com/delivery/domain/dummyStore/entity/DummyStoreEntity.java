@@ -19,7 +19,7 @@ public class DummyStoreEntity {
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
 
-        @ManyToOne
+        @OneToOne
         @JoinColumn(name = "owner_id")
         private OwnerEntity ownerEntity;
 

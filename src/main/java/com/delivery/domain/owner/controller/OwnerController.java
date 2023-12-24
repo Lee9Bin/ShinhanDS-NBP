@@ -2,8 +2,7 @@ package com.delivery.domain.owner.controller;
 
 import com.delivery.domain.dummyStore.entity.DummyStoreEntity;
 import com.delivery.domain.dummyStore.repository.DummyStoreRepository;
-import
-        com.delivery.domain.owner.dto.OwnerDTO;
+import com.delivery.domain.owner.dto.OwnerDTO;
 import com.delivery.domain.owner.service.OwnerService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -76,8 +75,13 @@ public class OwnerController {
         // owner의 값 불러옴 3번 - 채원이
         log.info("bb - " + ownerDTO.toString());
         Optional<DummyStoreEntity> dummyStoreEntity = dummyStoreRepository.findByOwnerEntity_Id(ownerId);
+//        List<DummyStoreEntity> dummyStoreEntity = dummyStoreRepository.findByOwnerEntity_Id(ownerId);
         log.info("aa - " + dummyStoreEntity.toString());
         model.addAttribute("owner", ownerDTO);  // 모델에 회원 정보를 담아서 전달
+//        if (!dummyStoreEntity.isEmpty()) {
+//            DummyStoreEntity dummyStore = dummyStoreEntity.get(0);
+//            model.addAttribute("ownerStore", dummyStore);
+//        }
         dummyStoreEntity.ifPresent(store -> model.addAttribute("ownerStore", store));
 
         // 아이디에 해당하는 회원 정보 조회 (한명 걍 dto)

@@ -1,18 +1,17 @@
 package com.delivery.domain.dummyStore.api;
 
-
+import com.delivery.domain.dummyStore.dto.DummyStore;
 import com.delivery.domain.dummyStore.entity.DummyStoreEntity;
 import com.delivery.domain.dummyStore.repository.DummyStoreRepository;
+import com.delivery.domain.dummyStore.service.DummyStoreService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,10 +21,11 @@ import java.util.List;
 public class DummyStoreApi {
 
     private final DummyStoreRepository dummyStoreRepository;
-
+    private final DummyStoreService dummyStoreService;
     @Autowired
-    public DummyStoreApi(DummyStoreRepository dummyStoreRepository) {
+    public DummyStoreApi(DummyStoreRepository dummyStoreRepository,DummyStoreService dummyStoreService) {
         this.dummyStoreRepository = dummyStoreRepository;
+        this.dummyStoreService = dummyStoreService;
     }
 
     @GetMapping("/get-more-data")
@@ -45,4 +45,14 @@ public class DummyStoreApi {
         return ResponseEntity.ok().body(newData);
     }
 
+    @PostMapping("/new/store/{ownerId}/create")
+    public ResponseEntity<DummyStore> create(@PathVariable Long ownerId, @RequestBody DummyStore dummyStore) {
+
+        log.info("ownerId = {}", ownerId);
+
+        log.info("dummyStore = {}", dummyStore);
+
+        dummyStoreService.save(dummyStore, ownerId);
+        return ResponseEntity.status(HttpStatus.CREATED).build(); // 201 성공!!
+    }
 }

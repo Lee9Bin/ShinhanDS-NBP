@@ -2,6 +2,7 @@ package com.delivery.domain.dummyStore.dto;
 
 import com.delivery.domain.dummyStore.entity.DummyStoreEntity;
 import com.delivery.domain.owner.entity.OwnerEntity;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 @Getter
@@ -11,7 +12,10 @@ import lombok.*;
 @ToString
 public class DummyStore {
     private Long id;
+
+    @JsonProperty("owner_id")
     private Long ownerId;
+
     private String name;
     private String description;
     private String category;
@@ -19,7 +23,21 @@ public class DummyStore {
     private String file;
 
 
-    public static DummyStore toDummyStore(DummyStoreEntity dummyStoreEntity, OwnerEntity ownerEntity){
+
+
+    public DummyStoreEntity toEntity(OwnerEntity ownerEntity) {
+        return new DummyStoreEntity(
+                this.id,
+                ownerEntity,
+                this.name,
+                this.description,
+                this.category,
+                this.rating,
+                this.file
+        );
+    }
+
+    public static DummyStore toDummyStore(DummyStoreEntity dummyStoreEntity, OwnerEntity ownerEntity) {
         return new DummyStore(
                 dummyStoreEntity.getId(),
                 ownerEntity.getId(),

@@ -12,6 +12,8 @@ public interface DummyStoreRepository extends JpaRepository<DummyStoreEntity, Lo
     List<DummyStoreEntity> findAll();
 
     Optional<DummyStoreEntity> findByOwnerEntity_Id(Long aLong);
+//    List<DummyStoreEntity> findByOwnerEntity_Id(Long ownerId);
+
     // 대소문자 구별하지 않고 검색
     List<DummyStoreEntity> findByNameContainingIgnoreCase(String name);
 
