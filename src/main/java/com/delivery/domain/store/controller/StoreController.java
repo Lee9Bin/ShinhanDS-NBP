@@ -39,7 +39,7 @@ public class StoreController {
         Long ownerId = (Long) session.getAttribute("ownerId");
         model.addAttribute("ownerId",ownerId);
         model.addAttribute("storeDto", new StoreDto());
-        return "/layouts/owner/regist";
+        return "/layouts/html/regist";
 
     }
 
