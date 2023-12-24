@@ -59,7 +59,7 @@ public class OwnerController {
         session.setAttribute("loginEmail", loginResult.getOwnerEmail());
         session.setAttribute("loginName", loginResult.getOwnerName());
         // 직전 페이지의 정보를 들고 와야됨
-        return "/html/owner/loginOwnerhome";
+        return "/html/owner/owner1";
 
     }
 
