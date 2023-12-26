@@ -29,8 +29,6 @@ public class MenuDto {
 
     private String category;
 
-    private String picturePath;
-
     public static MenuDto toMenuDto(MenuEntity dummyMenuEntity, StoreEntity storeEntity){
         Long storeId = (storeEntity != null) ? storeEntity.getId() : null;
 
@@ -40,8 +38,7 @@ public class MenuDto {
                 storeId,
                 dummyMenuEntity.getPrice(),
                 dummyMenuEntity.getContent(),
-                dummyMenuEntity.getCategory(),
-                dummyMenuEntity.getPicturePath()
+                dummyMenuEntity.getCategory()
         );
     }
 

@@ -16,7 +16,7 @@ public class StoreDto {
     private String name;
     private String description;
     private String category;
-    private int rating;
+
     private StoreFileEntity storeFileEntity;
 
 
@@ -27,7 +27,6 @@ public class StoreDto {
                 storeEntity.getName(),
                 storeEntity.getDescription(),
                 storeEntity.getCategory(),
-                storeEntity.getRating(),
                 storeFileEntity
         );
     }
