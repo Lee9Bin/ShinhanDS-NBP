@@ -1,7 +1,8 @@
-package com.delivery.domain.file.service;
+package com.delivery.domain.storefile.service;
 
-import com.delivery.domain.file.entity.FileEntity;
-import com.delivery.domain.file.repository.FileRepository;
+import com.delivery.domain.store.entity.StoreEntity;
+import com.delivery.domain.storefile.entity.StoreFileEntity;
+import com.delivery.domain.storefile.repository.StoreFileRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -13,14 +14,14 @@ import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
-public class FileService {
+public class StoreFileService {
 
     @Value("${file.dir}")
     private String fileDir;
 
-    private final FileRepository fileRepository;
+    private final StoreFileRepository storeFileRepository;
 
-    public Long saveFile(MultipartFile files) throws IOException {
+    public Long saveFile(MultipartFile files, StoreEntity storeEntity) throws IOException {
         if (files.isEmpty()) {
             return null;
         }
@@ -41,7 +42,8 @@ public class FileService {
         String savedPath = fileDir + savedName;
 
         // 파일 엔티티 생성
-        FileEntity file = FileEntity.builder()
+        StoreFileEntity file = StoreFileEntity.builder()
+                .storeEntity(storeEntity)
                 .orgNm(origName)
                 .savedNm(savedName)
                 .savedPath(savedPath)
@@ -51,7 +53,7 @@ public class FileService {
         files.transferTo(new File(savedPath));
 
         // 데이터베이스에 파일 정보 저장
-        FileEntity savedFile = fileRepository.save(file);
+        StoreFileEntity savedFile = storeFileRepository.save(file);
 
         return savedFile.getId();
     }

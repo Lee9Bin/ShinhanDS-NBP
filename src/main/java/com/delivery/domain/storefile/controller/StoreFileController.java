@@ -1,8 +1,8 @@
-package com.delivery.domain.file.controller;
+package com.delivery.domain.storefile.controller;
 
-import com.delivery.domain.file.entity.FileEntity;
-import com.delivery.domain.file.repository.FileRepository;
-import com.delivery.domain.file.service.FileService;
+import com.delivery.domain.storefile.entity.StoreFileEntity;
+import com.delivery.domain.storefile.repository.StoreFileRepository;
+import com.delivery.domain.storefile.service.StoreFileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -21,31 +21,31 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-public class FileController {
+public class StoreFileController {
 
-    private final FileService fileService;
-    private final FileRepository fileRepository;
+    private final StoreFileService storeFileService;
+    private final StoreFileRepository storeFileRepository;
 
 
-    @GetMapping("/upload")
-    public String testUploadForm(){
-        return "layouts/testImage";
-    }
-    @PostMapping("/upload")
-    public String uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("files") List<MultipartFile> files) throws IOException {
-        fileService.saveFile(file);
-
-        for (MultipartFile multipartFile : files) {
-            fileService.saveFile(multipartFile);
-        }
-
-        return "redirect:/";
-    }
+//    @GetMapping("/upload")
+//    public String testUploadForm(){
+//        return "layouts/testImage";
+//    }
+//    @PostMapping("/upload")
+//    public String uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("files") List<MultipartFile> files) throws IOException {
+//        storeFileService.saveFile(file);
+//
+//        for (MultipartFile multipartFile : files) {
+//            storeFileService.saveFile(multipartFile);
+//        }
+//
+//        return "redirect:/";
+//    }
 
     @GetMapping("/view")
     public String view(Model model) {
 
-        List<FileEntity> files = fileRepository.findAll();
+        List<StoreFileEntity> files = storeFileRepository.findAll();
         model.addAttribute("all",files);
         return "layouts/view";
     }
@@ -56,7 +56,7 @@ public class FileController {
     @ResponseBody
     public Resource downloadImage(@PathVariable("fileId") Long id, Model model) throws IOException{
 
-        FileEntity file = fileRepository.findById(id).orElse(null);
+        StoreFileEntity file = storeFileRepository.findById(id).orElse(null);
         return new UrlResource("file:" + file.getSavedPath());
     }
 
@@ -64,7 +64,7 @@ public class FileController {
     @GetMapping("/attach/{id}")
     public ResponseEntity<Resource> downloadAttach(@PathVariable Long id) throws MalformedURLException {
 
-        FileEntity file = fileRepository.findById(id).orElse(null);
+        StoreFileEntity file = storeFileRepository.findById(id).orElse(null);
 
         UrlResource resource = new UrlResource("file:" + file.getSavedPath());
 

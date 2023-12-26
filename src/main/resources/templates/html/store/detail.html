@@ -10,7 +10,8 @@
 <section>
     <!-- Menu Section -->
     <div class="store-detail">
-        <img class="store-image" th:src="@{http://또리커피.com/images/header_logo.png}" alt="Store Image"/>
+        <img th:src="|/images/${store.storeFileEntity.getId()}|" width="150" height="150">
+        <p th:text="${store.storeFileEntity.getOrgNm()}"></p>
 
         <div class="store-info" >
             <h2 th:text="${store.name}">가게 이름</h2>
