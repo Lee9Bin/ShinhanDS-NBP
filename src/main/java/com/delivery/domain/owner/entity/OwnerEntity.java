@@ -8,7 +8,7 @@ import lombok.Setter;
 @Entity
 @Setter
 @Getter
-@Table(name = "owner_table")
+@Table(name = "owner")
 public class OwnerEntity {
     @Id // pk 지정
     @GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment

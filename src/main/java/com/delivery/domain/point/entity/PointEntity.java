@@ -12,7 +12,7 @@ import org.springframework.data.annotation.CreatedDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "point_transaction")
+@Table(name = "point")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor

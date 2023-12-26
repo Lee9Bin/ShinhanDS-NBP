@@ -14,6 +14,7 @@ import lombok.*;
 @ToString
 @Getter
 @AllArgsConstructor
+@Table(name = "store")
 public class StoreEntity {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
