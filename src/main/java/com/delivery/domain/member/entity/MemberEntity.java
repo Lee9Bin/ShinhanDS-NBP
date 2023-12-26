@@ -9,7 +9,7 @@ import jakarta.persistence.*;
 @Entity
 @Setter
 @Getter
-@Table(name = "member_table")
+@Table(name = "member")
 public class MemberEntity {
     @Id // pk 지정
     @GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment
