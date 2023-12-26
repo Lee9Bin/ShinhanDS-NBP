@@ -1,7 +1,6 @@
 package com.delivery.domain.store.controller;
 
 import com.delivery.domain.menu.dto.MenuDto;
-import com.delivery.domain.menu.entity.MenuEntity;
 import com.delivery.domain.menu.service.MenuService;
 import com.delivery.domain.store.dto.StoreDto;
 import com.delivery.domain.store.entity.StoreEntity;
