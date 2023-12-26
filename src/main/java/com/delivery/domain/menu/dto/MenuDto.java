@@ -31,7 +31,7 @@ public class MenuDto {
 
     private String picturePath;
 
-    public static MenuDto toDummyMenuDto(MenuEntity dummyMenuEntity, StoreEntity storeEntity){
+    public static MenuDto toMenuDto(MenuEntity dummyMenuEntity, StoreEntity storeEntity){
         Long storeId = (storeEntity != null) ? storeEntity.getId() : null;
 
         return new MenuDto(
