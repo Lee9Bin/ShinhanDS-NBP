@@ -16,7 +16,7 @@ public class StoreDto {
     private String description;
     private String category;
     private int rating;
-    private String file;
+
 
 
     public static StoreDto toStoreDto(StoreEntity storeEntity, OwnerEntity ownerEntity){
@@ -26,8 +26,7 @@ public class StoreDto {
                 storeEntity.getName(),
                 storeEntity.getDescription(),
                 storeEntity.getCategory(),
-                storeEntity.getRating(),
-                storeEntity.getFile()
+                storeEntity.getRating()
         );
     }
 }

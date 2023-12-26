@@ -1,7 +1,5 @@
-package com.delivery.domain.file.entity;
+package com.delivery.domain.menufile.entity;
 
-import com.delivery.domain.owner.entity.OwnerEntity;
-import com.delivery.domain.store.entity.StoreEntity;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -9,23 +7,19 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @NoArgsConstructor
-@Table(name = "file")
+@Table(name = "menu_file")
 @Entity
 @Getter
 @Setter
-public class FileEntity {
+public class MenuFileEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="file_id")
+    @Column(name="menu_file_id")
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "owner_id")
-    private OwnerEntity ownerEntity;
-
-    @ManyToOne
-    @JoinColumn(name = "store_id")
-    private StoreEntity storeEntity;
+//    @ManyToOne
+//    @JoinColumn(name = "store_id")
+//    private StoreEntity storeEntity;
 
     private String orgNm;
 
@@ -34,7 +28,7 @@ public class FileEntity {
     private String savedPath;
 
     @Builder
-    public FileEntity(Long id, String orgNm, String savedNm, String savedPath) {
+    public MenuFileEntity(Long id, String orgNm, String savedNm, String savedPath) {
         this.id = id;
         this.orgNm = orgNm;
         this.savedNm = savedNm;

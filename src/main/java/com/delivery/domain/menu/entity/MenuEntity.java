@@ -40,7 +40,6 @@ public class MenuEntity {
 
     private String category;
 
-    private String picturePath;
     //== 엔티티 변환 메서드 ==//
     public static MenuEntity toEntity(MenuDto menuDto, StoreEntity storeEntity){
         return new MenuEntity(
@@ -49,8 +48,7 @@ public class MenuEntity {
                 menuDto.getName(),
                 menuDto.getPrice(),
                 menuDto.getContent(),
-                menuDto.getCategory(),
-                menuDto.getPicturePath()
+                menuDto.getCategory()
         );
     }
 }

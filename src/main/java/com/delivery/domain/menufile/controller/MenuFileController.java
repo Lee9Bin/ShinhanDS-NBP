@@ -1,9 +1,10 @@
-package com.delivery.domain.file.controller;
+package com.delivery.domain.menufile.controller;
 
-import com.delivery.domain.file.entity.FileEntity;
-import com.delivery.domain.file.repository.FileRepository;
-import com.delivery.domain.file.service.FileService;
+import com.delivery.domain.menufile.entity.MenuFileEntity;
+import com.delivery.domain.menufile.repository.MenuFileRepository;
+import com.delivery.domain.menufile.service.MenuFileService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
@@ -21,18 +22,19 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-public class FileController {
+@Slf4j
+public class MenuFileController {
 
-    private final FileService fileService;
-    private final FileRepository fileRepository;
+    private final MenuFileService fileService;
+    private final MenuFileRepository fileRepository;
 
 
-    @GetMapping("/upload")
-    public String testUploadForm(){
-        return "layouts/testImage";
+    @GetMapping("/menu-upload")
+    public String menuTestUploadForm(){
+        return "layouts/menuImage";
     }
-    @PostMapping("/upload")
-    public String uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("files") List<MultipartFile> files) throws IOException {
+    @PostMapping("/menu-upload")
+    public String menuUploadFile(@RequestParam("file") MultipartFile file, @RequestParam("files") List<MultipartFile> files) throws IOException {
         fileService.saveFile(file);
 
         for (MultipartFile multipartFile : files) {
@@ -42,29 +44,32 @@ public class FileController {
         return "redirect:/";
     }
 
-    @GetMapping("/view")
-    public String view(Model model) {
+    @GetMapping("/menu-view")
+    public String menuView(Model model) {
 
-        List<FileEntity> files = fileRepository.findAll();
-        model.addAttribute("all",files);
-        return "layouts/view";
+        List<MenuFileEntity> files = fileRepository.findAll();
+        files.forEach( a-> log.info("test --> " + a.toString()));
+
+        model.addAttribute("menu",files);
+        return "layouts/menuView";
     }
 
 
+    //   이미지 출력
     //   이미지 출력
     @GetMapping("/images/{fileId}")
     @ResponseBody
     public Resource downloadImage(@PathVariable("fileId") Long id, Model model) throws IOException{
 
-        FileEntity file = fileRepository.findById(id).orElse(null);
-        return new UrlResource("file:" + file.getSavedPath());
+        MenuFileEntity menuFile = fileRepository.findById(id).orElse(null);
+        return new UrlResource("file:" + menuFile.getSavedPath());
     }
 
     // 첨부 파일 다운로드
-    @GetMapping("/attach/{id}")
-    public ResponseEntity<Resource> downloadAttach(@PathVariable Long id) throws MalformedURLException {
+    @GetMapping("/menu/attach/{id}")
+    public ResponseEntity<Resource> menuDownloadAttach(@PathVariable Long id) throws MalformedURLException {
 
-        FileEntity file = fileRepository.findById(id).orElse(null);
+        MenuFileEntity file = fileRepository.findById(id).orElse(null);
 
         UrlResource resource = new UrlResource("file:" + file.getSavedPath());
 

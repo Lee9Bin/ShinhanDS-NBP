@@ -1,7 +1,7 @@
-package com.delivery.domain.file.service;
+package com.delivery.domain.menufile.service;
 
-import com.delivery.domain.file.entity.FileEntity;
-import com.delivery.domain.file.repository.FileRepository;
+import com.delivery.domain.menufile.entity.MenuFileEntity;
+import com.delivery.domain.menufile.repository.MenuFileRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -13,12 +13,12 @@ import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
-public class FileService {
+public class MenuFileService {
 
     @Value("${file.dir}")
     private String fileDir;
 
-    private final FileRepository fileRepository;
+    private final MenuFileRepository fileRepository;
 
     public Long saveFile(MultipartFile files) throws IOException {
         if (files.isEmpty()) {
@@ -41,7 +41,7 @@ public class FileService {
         String savedPath = fileDir + savedName;
 
         // 파일 엔티티 생성
-        FileEntity file = FileEntity.builder()
+        MenuFileEntity file = MenuFileEntity.builder()
                 .orgNm(origName)
                 .savedNm(savedName)
                 .savedPath(savedPath)
@@ -51,7 +51,7 @@ public class FileService {
         files.transferTo(new File(savedPath));
 
         // 데이터베이스에 파일 정보 저장
-        FileEntity savedFile = fileRepository.save(file);
+        MenuFileEntity savedFile = fileRepository.save(file);
 
         return savedFile.getId();
     }

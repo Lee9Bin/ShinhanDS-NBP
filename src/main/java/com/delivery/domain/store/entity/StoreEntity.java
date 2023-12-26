@@ -29,7 +29,6 @@ public class StoreEntity {
         private String description;
         private String category;
         private int rating;
-        private String file;
         // 페이지 크기를 나타내는 정적상수
         public static final int PAGE_SIZE = 8;
         // 가게사진
@@ -41,8 +40,7 @@ public class StoreEntity {
                         storeDto.getName(),
                         storeDto.getDescription(),
                         storeDto.getCategory(),
-                        storeDto.getRating(),
-                        storeDto.getFile()
+                        storeDto.getRating()
                 );
         }
 
