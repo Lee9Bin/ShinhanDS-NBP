@@ -4,6 +4,7 @@ import com.delivery.domain.menu.entity.MenuEntity;
 import com.delivery.domain.store.entity.StoreEntity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,11 +13,6 @@ import lombok.*;
 @ToString
 public class MenuDto {
     private Long id;
-
-    //식당 아이디
-//    @ManyToOne
-//    @JoinColumn(name = "dummy_store_id")
-//    private DummyStoreEntity dummyStoreEntity;
 
     private String name;
 
@@ -28,6 +24,7 @@ public class MenuDto {
     private String content;
 
     private String category;
+
 
     public static MenuDto toMenuDto(MenuEntity dummyMenuEntity, StoreEntity storeEntity){
         Long storeId = (storeEntity != null) ? storeEntity.getId() : null;
@@ -50,8 +47,7 @@ public class MenuDto {
                 this.name,
                 this.price,
                 this.content,
-                this.category,
-                this.picturePath
+                this.category
         );
     }
 }
