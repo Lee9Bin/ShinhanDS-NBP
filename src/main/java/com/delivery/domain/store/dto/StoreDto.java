@@ -2,6 +2,7 @@ package com.delivery.domain.store.dto;
 
 import com.delivery.domain.owner.entity.OwnerEntity;
 import com.delivery.domain.store.entity.StoreEntity;
+import com.delivery.domain.storefile.entity.StoreFileEntity;
 import lombok.*;
 
 @Getter
@@ -16,10 +17,10 @@ public class StoreDto {
     private String description;
     private String category;
     private int rating;
-    private String file;
+    private StoreFileEntity storeFileEntity;
 
 
-    public static StoreDto toStoreDto(StoreEntity storeEntity, OwnerEntity ownerEntity){
+    public static StoreDto toStoreDto(StoreEntity storeEntity, OwnerEntity ownerEntity, StoreFileEntity storeFileEntity){
         return new StoreDto(
                 storeEntity.getId(),
                 ownerEntity.getId(),
@@ -27,7 +28,7 @@ public class StoreDto {
                 storeEntity.getDescription(),
                 storeEntity.getCategory(),
                 storeEntity.getRating(),
-                storeEntity.getFile()
+                storeFileEntity
         );
     }
 }
