@@ -13,9 +13,8 @@
 </head>
 
 <body>
-{{>layouts/header}}
 <div th:insert="~{layouts/html/header :: header}"></div>
-
+    <main class="container" overflow: scroll>
         <section class="mainpage">
                         <div class="main-banner">
                             <div class="icon1">
@@ -46,8 +45,8 @@
             <div class="mypage-container">
                 <div class="nav1">
                     <a href="#" onclick="showContent('notice')">공지사항</a>
-                    <a href="../board/" onclick="showContent('reviews')">리뷰</a>
-                    <a href="../mypage/bookmark" onclick="showContent('bookmarks')">북마크</a>
+                    <a href="#" onclick="showContent('reviews')">리뷰</a>
+                    <a href="#" onclick="showContent('bookmarks')">북마크</a>
                 </div>
                 <div class="content notice active">
                     <div class="notice-item">
@@ -72,7 +71,26 @@
                     </div>
                 </div>
                 <div class="content reviews">
-
+                    <div class="review-item">
+                        <h3>리뷰 1</h3>
+                        <p>리뷰 내용입니다.</p>
+                    </div>
+                    <div class="review-item">
+                        <h3>리뷰 2</h3>
+                        <p>리뷰 내용입니다.</p>
+                    </div>
+                    <div class="review-item">
+                        <h3>리뷰 3</h3>
+                        <p>리뷰 내용입니다.</p>
+                    </div>
+                    <div class="review-item">
+                        <h3>리뷰 4</h3>
+                        <p>리뷰 내용입니다.</p>
+                    </div>
+                    <div class="review-item">
+                        <h3>리뷰 5</h3>
+                        <p>리뷰 내용입니다.</p>
+                    </div>
                 </div>
 
                 <div class="content bookmarks">
@@ -100,9 +118,8 @@
             </div><br><br>
         </section>
         <h1 th:text="${ssg}"></h1>
-
+    </main>
 <div th:insert="~{layouts/html/footer :: footer}"></div>
-{{>layouts/footer}}
     <script type="text/javascript" src="/js/mypage/mypage.js"></script>
 </body>
 

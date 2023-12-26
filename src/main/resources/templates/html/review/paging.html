@@ -10,26 +10,19 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-<button onclick="saveReq()" class="deleteComment">글작성</button>
 
-
-
-<div id="contents" >
-
-    <div id="comment-count2">댓글 <span id="count2">0</span></div>
+<paging id="contents" th:fragment="paging">
 
     <div class="eachComment" th:each="board: ${boardList}" >
-
         <div>
             <div class="time" style="float: right">조회수 :<span th:text="${board.boardHits}">0</span></div>
             <div class="name" th:text="${board.boardWriter}" ></div>
-            <a th:href="@{|/board/${board.id}|(page=${boardList.number + 1})}"><button class="deleteComment" style="float: right">수정</button></a>
+            <a th:href="@{|/board/${board.id}|(page=${boardList.number + 1})}"><button class="deleteComment" style="float: right">상세</button></a>
         </div>
         <div class="inputValue"  th:text="${board.boardTitle}"></div>
-        <img th:src="@{|/upload/${board.storedFileName}|}" alt="" style="width: 120px">
+        <div><img th:src="@{|/upload/${board.storedFileName}|}" alt="" style="width: 120px"></div>
         <div class="inputValue" th:text="${board.boardContents}" ></div>
 <!--        th:text="${board.boardContents}"-->
-
         <div class="time" th:text="*{#temporals.format(board.boardCreatedTime, 'yyyy-MM-dd HH:mm:ss')}"></div>
     </div>
 
@@ -45,38 +38,29 @@
         <a th:href="${boardList.last} ? '#' : @{/board/paging(page=${boardList.number + 2})}"><button class="pageComment">></button></a>
         <a th:href="@{/board/paging(page=${boardList.totalPages})}"><button class="pageComment">>></button></a>
     </div>
-</div>
+    <button onclick="saveReq()" class="deleteComment" style="width: 50%; height: 20px">글작성</button>
+</paging>
 
-
-
-
-
-
-
-
-
-
-
-<table>
-    <tr>
-        <th>id</th>
-        <br>
-        <th>title</th>
-        <br>
-        <th>writer</th>
-        <br>
-        <th>date</th>
-        <br>
-        <th>hits</th>
-    </tr>
-    <tr th:each="board: ${boardList}">
-        <td th:text="${board.id}"></td>
-        <td><a th:href="@{|/board/${board.id}|(page=${boardList.number + 1})}" th:text="${board.boardTitle}"></a></td>
-        <td th:text="${board.boardWriter}"></td>
-        <td th:text="*{#temporals.format(board.boardCreatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
-        <td th:text="${board.boardHits}" style="font-size: 30px"></td>
-    </tr>
-</table>
+<!--<table>-->
+<!--    <tr>-->
+<!--        <th>id</th>-->
+<!--        <br>-->
+<!--        <th>title</th>-->
+<!--        <br>-->
+<!--        <th>writer</th>-->
+<!--        <br>-->
+<!--        <th>date</th>-->
+<!--        <br>-->
+<!--        <th>hits</th>-->
+<!--    </tr>-->
+<!--    <tr th:each="board: ${boardList}">-->
+<!--        <td th:text="${board.id}"></td>-->
+<!--        <td><a th:href="@{|/board/${board.id}|(page=${boardList.number + 1})}" th:text="${board.boardTitle}"></a></td>-->
+<!--        <td th:text="${board.boardWriter}"></td>-->
+<!--        <td th:text="*{#temporals.format(board.boardCreatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>-->
+<!--        <td th:text="${board.boardHits}" style="font-size: 30px"></td>-->
+<!--    </tr>-->
+<!--</table>-->
 <!-- 첫번째 페이지로 이동 -->
 <!-- /board/paging?page=1 -->
 <a th:href="@{/board/paging(page=1)}">First</a>
@@ -106,6 +90,5 @@
     const saveReq = () => {
         location.href = "/board/save";
     }
-
 </script>
 </html>

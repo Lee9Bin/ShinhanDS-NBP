@@ -8,66 +8,87 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="/css/review/list.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/layout/header.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/layout/footer.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/mypage/mypage.css">
 </head>
 <body>
-<div id="form-commentInfo">
-    <div id="comment-count">댓글 <span id="count">0</span></div>
-    <input id="comment-input" placeholder="댓글을 입력해 주세요.">
-    <button id="submit" class="deleteComment">등록</button>
-</div>
+<!--<div id="form-commentInfo">-->
+<!--    <div id="comment-count">댓글 <span id="count">0</span></div>-->
+<!--    <input id="comment-input" placeholder="댓글을 입력해 주세요.">-->
+<!--    <button id="submit" class="deleteComment">등록</button>-->
+<!--</div>-->
 
-<div id=comments>
+<!--<div id=comments>-->
 
-</div>
+<!--</div>-->
 
-<script src="/js/review/list.js"></script>
+<!--<script src="/js/review/list.js"></script>-->
+<div th:insert="~{layouts/html/header :: header}"></div>
+<div th:insert="~{layouts/html/mypagelink :: mypagelink}"></div>
 
-<div id="contents" >
-    <div id="comment-count2">댓글 <span id="count2">0</span></div>
-    <div class="eachComment" th:each="board: ${boardList}">
-        <div>
-            <div class="time" style="float: right">조회수 :<span th:text="${board.boardHits}">0</span></div>
-            <div class="name" th:text="${board.boardWriter}" ></div>
-            <a th:href="@{|/board/${board.id}|}"><button class="deleteComment" style="float: right">수정</button></a>
+<div class="mypage-container">
+    <div class="nav1">
+        <a href="../mypage/" onclick="showContent('notice')">공지사항</a>
+        <a href="#" onclick="showContent('reviews')">리뷰</a>
+        <a href="../mypage/bookmark" onclick="showContent('bookmarks')">북마크</a>
+    </div>
+    <div class="content notice active">
+        <div class="notice-item">
+            <pagelist th:fragment="pagelist">
+                <div id="contents" >
+                    <div class="eachComment" th:each="board: ${boardList}" th:if="${board.boardWriter == 'TS'}" style="width: 100%">
+                        <div>
+                            <div class="time" style="float: right; font-size: 15px;">조회수 :<span th:text="${board.boardHits}">0</span></div>
+                            <div class="name" th:text="${board.boardWriter}" ></div>
+                            <a th:href="@{|/board/${board.id}|}"><button class="deleteComment" style="float: right">상세보기</button></a>
+                        </div>
+                        <div class="inputValue" th:text="${board.boardTitle}"></div>
+                        <div><img th:src="@{|/upload/${board.storedFileName}|}" alt="" style="width: 120px"></div>
+                        <div class="inputValue" th:text="${board.boardContents}"></div>
+                        <div class="time" th:text="*{#temporals.format(board.boardCreatedTime, 'yyyy-MM-dd HH:mm:ss')}"></div>
+                    </div>
+                    <button onclick="indexReq()" class="deleteComment" style="width: 200px; align-content: center; background-color: cornflowerblue;
+                            border: none;
+                            border-radius: 5px;
+                            color: aliceblue;">글쓰기// 나중에 없애버리기</button>
+                </div>
+            </pagelist>
+            <br>
         </div>
-        <div class="inputValue" th:text="${board.boardTitle}"></div>
-        <div><img th:src="@{|/upload/${board.storedFileName}|}" alt="" style="width: 120px"></div>
-        <div class="inputValue" th:text="${board.boardContents}"></div>
-        <div class="time" th:text="*{#temporals.format(board.boardCreatedTime, 'yyyy-MM-dd HH:mm:ss')}"></div>
     </div>
 </div>
 
-<br>
+<div th:insert="~{layouts/html/footer :: footer}"></div>
+<!--<div name="AllreviewList">-->
+<!--<table>-->
+<!--    <tr>-->
+<!--        <th>사진</th>-->
+<!--        <br>-->
+<!--        <th>제목</th>-->
+<!--        <br>-->
+<!--        <th>글쓴이</th>-->
+<!--        <br>-->
+<!--        <th>내용</th>-->
+<!--        <br>-->
+<!--        <th>작성날짜</th>-->
+<!--        <br>-->
+<!--        <th>조회수</th>-->
+<!--    </tr>-->
 
-<div name="AllreviewList">
-<table>
-    <tr>
-        <th>사진</th>
-        <br>
-        <th>제목</th>
-        <br>
-        <th>글쓴이</th>
-        <br>
-        <th>내용</th>
-        <br>
-        <th>작성날짜</th>
-        <br>
-        <th>조회수</th>
-    </tr>
+<!--    <tr th:each="board: ${boardList}">-->
+<!--        <td><img th:src="@{|/upload/${board.storedFileName}|}" alt="" style="width: 120px"></td>-->
+<!--        <td><a th:href="@{|/board/${board.id}|}" th:text="${board.boardTitle}"></a></td>-->
+<!--        <td th:text="${board.boardWriter}"></td>-->
+<!--        <td th:text="${board.boardContents}"></td>-->
+<!--        <td th:text="*{#temporals.format(board.boardCreatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>-->
+<!--        <td th:text="${board.boardHits}" style="font-size: 30px"></td>-->
 
-    <tr th:each="board: ${boardList}">
-        <td><img th:src="@{|/upload/${board.storedFileName}|}" alt="" style="width: 120px"></td>
-        <td><a th:href="@{|/board/${board.id}|}" th:text="${board.boardTitle}"></a></td>
-        <td th:text="${board.boardWriter}"></td>
-        <td th:text="${board.boardContents}"></td>
-        <td th:text="*{#temporals.format(board.boardCreatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
-        <td th:text="${board.boardHits}" style="font-size: 30px"></td>
+<!--    </tr>-->
+<!--</table>-->
+<!--</div>-->
 
-    </tr>
-</table>
-</div>
 
-<button onclick="indexReq()" style="width: 200px; align-content: center">글쓰기</button>
 </body>
 <script>
 

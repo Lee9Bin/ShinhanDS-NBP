@@ -1,13 +1,9 @@
 package com.delivery.controller;
 
-import com.delivery.domain.dummyStore.entity.DummyStoreEntity;
-import com.delivery.domain.dummyStore.repository.DummyStoreRepository;
+
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,29 +18,13 @@ import java.util.List;
 public class CustomerController {
 
 
-    private final DummyStoreRepository dummyStoreRepository;
+
     @GetMapping("/")
     public String test(HttpSession session, Model model){
 
-        // 페이지 번호와 페이지 크기를 기반으로 페이징된 데이터를 가져옴, 내가 설정한 페이징 크기 8
-        Pageable pageable = PageRequest.of(0, DummyStoreEntity.PAGE_SIZE);
-        // 페이징된 데이터를 가져오고, dummyStorePage에 페이징된 결과가 저장
-        Page<DummyStoreEntity> dummyStorePage = dummyStoreRepository.findAll(pageable);
-        // 페이징된 결과에서 현재 페이지의 데이터를 추출하여 dummyStoreEntityList에 저장,
-        // 이 리스트에는 현재 페이지의 더미 스토어 엔터티가 포함
-        List<DummyStoreEntity> dummyStoreEntityList = dummyStorePage.getContent();
+
 
         // 로그 찍어보기
-        log.info("로그를 찍어보자: " + dummyStoreEntityList.toString());
-
-        // 세션에 현재 페이지 번호를 저장
-        session.setAttribute("currentPage", 1);
-        model.addAttribute("stores", dummyStoreEntityList);
-
-        // 전체 페이지 수와 현재 페이지 번호를 모델에 추가
-        model.addAttribute("totalPages", dummyStorePage.getTotalPages());
-        // 클라이언트에서 페이지네이션하기 좋음
-        model.addAttribute("currentPage", 1);
 
 //        List<DummyStoreEntity> dummyStoreEntity = dummyStoreRepository.findAll();
 //        log.info(dummyStoreEntity.toString());

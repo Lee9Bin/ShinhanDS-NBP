@@ -28,11 +28,12 @@ public class BoardController {
         return "html/review/save";
     }
 
+
     @PostMapping("/save")
     public String save(@ModelAttribute BoardDTO boardDTO) throws IOException {
         System.out.println("boardDTO = " + boardDTO);
         boardService.save(boardDTO);
-        return "html/review/index";
+        return "redirect:/board/";
     }
 
     @GetMapping("/")
@@ -42,8 +43,6 @@ public class BoardController {
         model.addAttribute("boardList", boardDTOList);
         return "html/review/list";
     }
-
-
 
     @GetMapping("/{id}")
     public String findById(@PathVariable Long id, Model model,
@@ -63,7 +62,6 @@ public class BoardController {
     }
 
     @GetMapping("/update/{id}")
-
     public String updateForm(@PathVariable Long id, Model model) {
         BoardDTO boardDTO = boardService.findById(id);
         model.addAttribute("boardUpdate", boardDTO);
@@ -87,12 +85,15 @@ public class BoardController {
     // /board/paging?page=1
     @GetMapping("/paging")
     public String paging(@PageableDefault(page = 1) Pageable pageable, Model model) {
+
+        List<BoardDTO> boardDTOList = boardService.findAll();
+        model.addAttribute("boardAllList", boardDTOList);
+
 //        pageable.getPageNumber();
         Page<BoardDTO> boardList = boardService.paging(pageable);
         int blockLimit = 3;
         int startPage = (((int)(Math.ceil((double)pageable.getPageNumber() / blockLimit))) - 1) * blockLimit + 1; // 1 4 7 10 ~~
         int endPage = ((startPage + blockLimit - 1) < boardList.getTotalPages()) ? startPage + blockLimit - 1 : boardList.getTotalPages();
-
         // page 갯수 20개
         // 현재 사용자가 3페이지
         // 1 2 3
@@ -100,7 +101,6 @@ public class BoardController {
         // 7 8 9
         // 보여지는 페이지 갯수 3개
         // 총 페이지 갯수 8개
-
         model.addAttribute("boardList", boardList);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);

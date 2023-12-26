@@ -125,14 +125,10 @@
     const listReq = () => {
         console.log("목록 요청");
         const page = [[${page}]];
-        var pagetest = 1;
-        console.log("page =" + page);
-        console.log("testpage =" + pagetest);
-
-        if(page == ""){
-               location.href = "/board/paging?page=" + pagetest;
+        if(page !== "" ){
+            location.href = "/board/" ;
         }else {
-               location.href = "/board/paging?page=" + page;
+            location.href = "/board/";
         }
     }
 

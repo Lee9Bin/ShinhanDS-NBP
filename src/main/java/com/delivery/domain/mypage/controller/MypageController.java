@@ -22,13 +22,14 @@ public class MypageController {
 
         return "html/mypage/orderlist";
     }
+
     @GetMapping("/info")
     public String info(Model model){
 
         return "html/mypage/info";
     }
     @GetMapping("/")
-    public String mypade(Model model){
+    public String mypage(Model model) {
 
         return "html/mypage/mypage";
     }
@@ -42,16 +43,10 @@ public class MypageController {
 
         return "html/mypage/recharge";
     }
-
-//    @GetMapping("/review")
-//    public String review(Model model){
-//
-//        return "html/mypage/review";
-//    }
-
     @GetMapping("/setting")
     public String setting(Model model){
 
         return "html/mypage/setting";
     }
+
 }
