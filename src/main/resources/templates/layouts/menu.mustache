@@ -9,7 +9,7 @@
     <div class="about">
         {{#stores}}
         <div class="about__card category-1 box">
-            <a href="/store/{{id}}" class="store-click" onclick="redirectToStore('{{id}}')">
+            <a href="/owner/store/{{id}}" class="store-click" onclick="redirectToStore('{{id}}')">
             <div class="about-store">
                 <a href="javascript:void(0);" class="bookmark">
                     <i class="fa-regular fa-bookmark"></i>
@@ -53,7 +53,7 @@
                 newPost.className = 'about__card category-1 box';
 
                 newPost.innerHTML = `
-                <a href="/store/${item.id}" class="store-click" onclick="redirectToStore('${item.id}')">
+                <a href="/owner/store/${item.id}" class="store-click" onclick="redirectToStore('${item.id}')">
                 <div class="about-store">
                     <a href="javascript:void(0);" class="bookmark">
                         <i class="fa-regular fa-bookmark"></i>
@@ -104,6 +104,6 @@
         // 예를 들어, 특별한 동작이 필요한 경우에만 이 함수를 사용하고,
         // 일반적인 링크 이동은 a 태그 자체에 위임합니다.
 
-        window.location.href = "/store/" + id;
+        window.location.href = "/owner/store/" + id;
     }
 </script>
