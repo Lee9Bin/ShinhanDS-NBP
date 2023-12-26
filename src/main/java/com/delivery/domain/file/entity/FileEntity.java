@@ -1,5 +1,7 @@
 package com.delivery.domain.file.entity;
 
+import com.delivery.domain.owner.entity.OwnerEntity;
+import com.delivery.domain.store.entity.StoreEntity;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,12 +13,19 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Builder
 public class FileEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="file_id")
     private Long id;
+
+    @OneToOne
+    @JoinColumn(name = "owner_id")
+    private OwnerEntity ownerEntity;
+
+    @ManyToOne
+    @JoinColumn(name = "store_id")
+    private StoreEntity storeEntity;
 
     private String orgNm;
 
