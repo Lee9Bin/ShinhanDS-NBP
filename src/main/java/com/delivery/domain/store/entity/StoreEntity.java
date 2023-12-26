@@ -45,6 +45,7 @@ public class StoreEntity {
                         storeDto.getFile()
                 );
         }
+
 }
 
 
