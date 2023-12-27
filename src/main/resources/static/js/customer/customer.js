@@ -1,11 +1,4 @@
 // JavaScript 수정
-document.querySelectorAll('.fa-regular.fa-bookmark').forEach(function(item) {
-    item.addEventListener('click', function() {
-        this.classList.toggle('fa-regular')
-        this.classList.toggle('fa-solid');
-    });
-});
-
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 mapOption = { 

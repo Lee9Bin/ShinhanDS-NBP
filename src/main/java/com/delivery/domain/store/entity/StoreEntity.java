@@ -2,12 +2,11 @@ package com.delivery.domain.store.entity;
 
 import com.delivery.domain.owner.entity.OwnerEntity;
 import com.delivery.domain.store.dto.StoreDto;
-import com.delivery.domain.storefile.entity.StoreFileEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 
 @Entity
@@ -43,6 +42,8 @@ public class StoreEntity {
                         storeDto.getCategory()
                 );
         }
+
+
 
 }
 
