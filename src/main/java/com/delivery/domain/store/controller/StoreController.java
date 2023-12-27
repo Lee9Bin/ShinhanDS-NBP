@@ -5,17 +5,16 @@ import com.delivery.domain.menu.service.MenuService;
 import com.delivery.domain.store.dto.StoreDto;
 import com.delivery.domain.store.entity.StoreEntity;
 import com.delivery.domain.store.service.StoreService;
-import com.delivery.domain.storefile.entity.StoreFileEntity;
 import groovy.util.logging.Slf4j;
 import jakarta.servlet.http.HttpSession;
-import java.io.IOException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.util.List;
 
 import static org.hibernate.query.sqm.tree.SqmNode.log;
 
@@ -42,7 +41,7 @@ public class StoreController {
         Long ownerId = (Long) session.getAttribute("ownerId");
         model.addAttribute("ownerId",ownerId);
         model.addAttribute("storeDto", new StoreDto());
-        return "/layouts/html/regist";
+        return "layouts/html/regist";
 
     }
 
