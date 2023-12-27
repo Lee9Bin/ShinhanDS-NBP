@@ -61,7 +61,7 @@ public class StoreFileController {
 
         StoreFileEntity file = storeFileRepository.findById(id).orElse(null);
         log.info("file 경로 - " + file.getSavedPath());
-        return new UrlResource("file:" + file.getSavedPath());
+        return new UrlResource("file:" + "C:/project/sinhan_img/"+file.getSavedNm());
     }
 
     // 첨부 파일 다운로드
