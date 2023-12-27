@@ -2,14 +2,10 @@ package com.delivery.domain.orderDelivery.controller;
 
 import com.delivery.domain.orderDelivery.dto.OrderDeliveryDto;
 import com.delivery.domain.orderDelivery.service.OrderDeliveryService;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -24,6 +20,11 @@ public class OrderDeliveryController {
         orderDeliveryDto.setAddress("123123");
         model.addAttribute("entity", orderDeliveryDto);
         return "html/order/order";
+    }
+
+    @GetMapping("/orderPay")
+    public String orderPay(){
+        return "html/order/orderPay";
     }
 
 //    @PostMapping("/new")

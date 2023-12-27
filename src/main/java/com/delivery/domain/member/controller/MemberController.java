@@ -67,11 +67,12 @@ public class MemberController {
         }
         session.setAttribute("loginEmail", loginResult.getMemberEmail());
         session.setAttribute("loginName", loginResult.getMemberName());
+        session.setAttribute("loginPhone", loginResult.getMemberPhone());
+        session.setAttribute("loginAddress" , loginResult.getMemberAddress());
+        session.setAttribute("LoggedIn", isLoggedIn);
 
         model.addAttribute("loginName", loginResult.getMemberName());
-
         model.addAttribute("loggedIn", isLoggedIn);
-        session.setAttribute("LoggedIn", isLoggedIn);
 
         log.info("login session loginEmail: " + session.getAttribute("loginEmail"));
 
