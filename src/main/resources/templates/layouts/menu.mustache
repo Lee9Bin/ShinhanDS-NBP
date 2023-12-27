@@ -2,15 +2,24 @@
     <div class="list-button">
         <button id="button-all">기본 순</button>
         <button id="button-1">북마크</button>
-        <button id="button-2">주문 많은 순</button>
-        <button id="button-3">리뷰 많은 순</button>
     </div>
 
     <div class="about">
-        {{#stores}}
+        {{#store}}
         <div class="about__card category-1 box">
-            <a href="/store/{{id}}" class="store-click" onclick="redirectToStore('{{id}}')">
+            <a href="/owner/store/{{id}}" class="store-click" onclick="redirectToStore('{{id}}')">
             <div class="about-store">
+                    <div>
+                        <img src="/images/{{storeFileEntity.id}}" width="100%" height="150">
+                    </div>
+
+<!--                    <div th:each="imageFile : ${all} ">-->
+<!--                        <img  th:src="|/images/${imageFile.id}|" width="150" height="150">-->
+<!--                        <p th:text="${imageFile.orgNm}"></p>-->
+<!--                    </div>-->
+
+
+
                 <a href="javascript:void(0);" class="bookmark">
                     <i class="fa-regular fa-bookmark"></i>
                 </a>
@@ -19,14 +28,12 @@
                 <h2 class="about__title _1">
                     {{name}}
                 </h2>
-                <p class="about__text">
-                    {{description}}
-                </p>
+
             </div>
             </a>
         </div>
 
-        {{/stores}}
+        {{/store}}
     </div>
 
     <button class="more-btn">더보기</button>
@@ -53,7 +60,7 @@
                 newPost.className = 'about__card category-1 box';
 
                 newPost.innerHTML = `
-                <a href="/store/${item.id}" class="store-click" onclick="redirectToStore('${item.id}')">
+                <a href="/owner/store/${item.id}" class="store-click" onclick="redirectToStore('${item.id}')">
                 <div class="about-store">
                     <a href="javascript:void(0);" class="bookmark">
                         <i class="fa-regular fa-bookmark"></i>
@@ -61,7 +68,6 @@
                 </div>
                 <div class="about-store-comment">
                     <h2 class="about__title _1">${item.name}</h2>
-                    <p class="about__text">${item.description}</p>
                 </div>
                 </a>
             `;
@@ -104,6 +110,6 @@
         // 예를 들어, 특별한 동작이 필요한 경우에만 이 함수를 사용하고,
         // 일반적인 링크 이동은 a 태그 자체에 위임합니다.
 
-        window.location.href = "/store/" + id;
+        window.location.href = "/owner/store/" + id;
     }
 </script>
