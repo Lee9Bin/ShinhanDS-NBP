@@ -194,6 +194,10 @@
 
 }
 
+.about-store > img{
+    width: 100%;
+}
+
 .bookmark i , .bookmark-fill i{
     font-size: 1.5rem;
     color: #ffa5a5;

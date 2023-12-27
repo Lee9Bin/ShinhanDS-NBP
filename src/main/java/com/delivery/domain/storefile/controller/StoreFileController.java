@@ -4,14 +4,16 @@ import com.delivery.domain.storefile.entity.StoreFileEntity;
 import com.delivery.domain.storefile.repository.StoreFileRepository;
 import com.delivery.domain.storefile.service.StoreFileService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.UriUtils;
 
 import java.io.IOException;
@@ -21,6 +23,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class StoreFileController {
 
     private final StoreFileService storeFileService;
@@ -57,6 +60,7 @@ public class StoreFileController {
     public Resource downloadImage(@PathVariable("fileId") Long id, Model model) throws IOException{
 
         StoreFileEntity file = storeFileRepository.findById(id).orElse(null);
+        log.info("file 경로 - " + file.getSavedPath());
         return new UrlResource("file:" + file.getSavedPath());
     }
 
