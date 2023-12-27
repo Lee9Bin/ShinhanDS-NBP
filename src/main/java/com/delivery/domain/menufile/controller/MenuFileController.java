@@ -57,7 +57,7 @@ public class MenuFileController {
 
     //   이미지 출력
     //   이미지 출력
-    @GetMapping("/images/{fileId}")
+    @GetMapping("/menu/images/{fileId}")
     @ResponseBody
     public Resource downloadImage(@PathVariable("fileId") Long id, Model model) throws IOException{
 

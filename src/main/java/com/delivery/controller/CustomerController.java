@@ -1,7 +1,10 @@
 package com.delivery.controller;
 
+import com.delivery.domain.menu.service.MenuService;
+import com.delivery.domain.store.dto.StoreDto;
 import com.delivery.domain.store.entity.StoreEntity;
 import com.delivery.domain.store.repository.StoreRepository;
+import com.delivery.domain.store.service.StoreService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +26,8 @@ public class CustomerController {
 
 
     private final StoreRepository storeRepository;
+    private final StoreService storeService;
+    private final MenuService menuService;
     @GetMapping("/")
     public String test(HttpSession session, Model model){
 
@@ -36,9 +41,10 @@ public class CustomerController {
 
         // 로그 찍어보기
         log.info("로그를 찍어보자: " + storeEntityList.toString());
-
+        StoreDto storeDto = storeService.findById((Long) session.getAttribute("ownerId"));
         // 세션에 현재 페이지 번호를 저장
         session.setAttribute("currentPage", 1);
+        model.addAttribute("store",storeDto);
         model.addAttribute("stores", storeEntityList);
 
         // 전체 페이지 수와 현재 페이지 번호를 모델에 추가
@@ -65,8 +71,6 @@ public class CustomerController {
         model.addAttribute("loginName", loginName);
         model.addAttribute("loggedIn", isLoggedIn);
 
-
-//        session.setAttribute("loginName", loginName);
 
         log.info("이동하기 loginEmail: " + session.getAttribute("loginEmail"));
         return "html/customer/test";
