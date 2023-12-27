@@ -1,6 +1,7 @@
 package com.delivery.domain.menu.controller;
 
 import com.delivery.domain.menu.dto.MenuDto;
+import com.delivery.domain.menu.dto.MenuRequestDto;
 import com.delivery.domain.menu.entity.MenuEntity;
 import com.delivery.domain.menu.repository.MenuRepository;
 import com.delivery.domain.menu.service.MenuService;
@@ -43,11 +44,13 @@ public class MenuController {
 
 
     @PostMapping("/menu/new")
-    public String menuSave(HttpSession session, @RequestBody List<MenuDto> menuDtoList, Model model) {
+    public String menuSave(HttpSession session, @RequestParam(name = "menuList") List<MenuRequestDto> menuDtoList, Model model) {
         Long ownerId = (Long) session.getAttribute("ownerId");
         Optional<StoreEntity> storeEntity = storeRepository.findByOwnerEntity_Id(ownerId);
-
-        menuService.save(menuDtoList, storeEntity.get().getId());
+        for(MenuRequestDto menuRequestDto : menuDtoList){
+            System.out.println("담은 메뉴 입니다.: " + menuRequestDto.toString());
+        }
+//        menuService.save(menuDtoList, storeEntity.get().getId());
 
         return "redirect:/owner/";
     }

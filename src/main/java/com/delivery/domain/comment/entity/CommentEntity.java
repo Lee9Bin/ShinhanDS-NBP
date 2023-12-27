@@ -20,7 +20,7 @@ public class CommentEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne // 해당 댓글 엔티티 여러개가, 하나의 ArticleEntity에 연관
+    @ManyToOne(fetch = FetchType.LAZY) // 해당 댓글 엔티티 여러개가, 하나의 ArticleEntity에 연관
     @JoinColumn(name = "article_id") // articleid 컬럼에 Article 대표값을 저장
     private ArticleEntity articleEntity;
 

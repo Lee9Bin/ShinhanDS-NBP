@@ -3,7 +3,11 @@ package com.delivery.domain.storefile.controller;
 import com.delivery.domain.storefile.entity.StoreFileEntity;
 import com.delivery.domain.storefile.repository.StoreFileRepository;
 import com.delivery.domain.storefile.service.StoreFileService;
+import jakarta.servlet.http.HttpServletRequest;
+import java.io.File;
 import lombok.RequiredArgsConstructor;
+import lombok.Value;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
@@ -21,16 +25,17 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class StoreFileController {
 
     private final StoreFileService storeFileService;
     private final StoreFileRepository storeFileRepository;
 
 
-//    @GetMapping("/upload")
-//    public String testUploadForm(){
-//        return "layouts/testImage";
-//    }
+    @GetMapping("/upload")
+    public String testUploadForm(){
+        return "layouts/testImage";
+    }
 //    @PostMapping("/upload")
 //    public String uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("files") List<MultipartFile> files) throws IOException {
 //        storeFileService.saveFile(file);
@@ -40,6 +45,22 @@ public class StoreFileController {
 //        }
 //
 //        return "redirect:/";
+//    }
+
+//    @PostMapping("/upload")
+//    public String uploadFile(
+//            HttpServletRequest request,
+//             @RequestParam("files") List<MultipartFile> files) throws IOException {
+//            log.info("request {}",request);
+//            log.info("files 입니다 {} ",files);
+//
+//            for(MultipartFile m : files){
+//                System.out.println("여까지 온겨?ㄴㄴㄴㄴ");
+//                m.transferTo(new File("D:/test/"+m.getOriginalFilename()));
+//                System.out.println(m.getOriginalFilename());
+//            }
+//        System.out.println("여까지 온겨?");
+//        return "layouts/testImage";
 //    }
 
     @GetMapping("/view")
