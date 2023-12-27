@@ -47,7 +47,7 @@ public class MenuService {
         List<MenuDto> menuDtoList = new ArrayList<>();
 
         for (MenuEntity menuEntity : menuEntityList){
-            menuDtoList.add(MenuDto.toMenuDto(menuEntity, storeRepository.findById(storeId).get(), menuFileRepository.findByMenuEntity_Id(menuEntity.getId()).get()));
+            menuDtoList.add(MenuDto.toMenuDto(menuEntity, storeRepository.findById(storeId), menuFileRepository.findByMenuEntity_Id(menuEntity.getId())));
         }
 
         return menuDtoList;
