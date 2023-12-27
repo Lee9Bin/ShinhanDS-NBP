@@ -51,6 +51,8 @@ public class StoreController {
     //점주 가게 등록 저장
     @PostMapping("/new")
     public String storeSave(@ModelAttribute StoreDto storeDto, HttpSession session, @RequestParam("file") MultipartFile file) throws IOException {
+        System.out.println("가게 등록입니다:" + file.toString());
+        System.out.println(file);
         storeService.save(storeDto, (Long) session.getAttribute("ownerId"),file);
         return "redirect:/owner/" + session.getAttribute("ownerId");
     }

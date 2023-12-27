@@ -29,35 +29,37 @@ public class MenuFileController {
     private final MenuFileRepository fileRepository;
 
 
-    @GetMapping("/menu-upload")
-    public String menuTestUploadForm(){
-        return "layouts/menuImage";
-    }
-    @PostMapping("/menu-upload")
-    public String menuUploadFile(@RequestParam("file") MultipartFile file, @RequestParam("files") List<MultipartFile> files) throws IOException {
-        fileService.saveFile(file);
-
-        for (MultipartFile multipartFile : files) {
-            fileService.saveFile(multipartFile);
-        }
-
-        return "redirect:/";
-    }
-
-    @GetMapping("/menu-view")
-    public String menuView(Model model) {
-
-        List<MenuFileEntity> files = fileRepository.findAll();
-        files.forEach( a-> log.info("test --> " + a.toString()));
-
-        model.addAttribute("menu",files);
-        return "layouts/menuView";
-    }
+//    @GetMapping("/menu-upload")
+//    public String menuTestUploadForm(){
+//        return "layouts/menuImage";
+//    }
+//    @PostMapping("/menu-upload")
+//    public String menuUploadFile(@RequestParam("file") MultipartFile file, @RequestParam("files") List<MultipartFile> files) throws IOException {
+//        fileService.saveFile(file);
+//
+//        for (MultipartFile multipartFile : files) {
+//            fileService.saveFile(multipartFile);
+//        }
+//
+//        return "redirect:/";
+//    }
+//
+//    @GetMapping("/menu-view")
+//    public String menuView(Model model) {
+//
+//        List<MenuFileEntity> files = fileRepository.findAll();
+//        files.forEach( a-> log.info("test --> " + a.toString()));
+//
+//        model.addAttribute("menu",files);
+//        return "layouts/menuView";
+//    }
 
 
     //   이미지 출력
     //   이미지 출력
-    @GetMapping("/menu/images/{fileId}")
+
+    @GetMapping("/images/menu/{fileId}")
+
     @ResponseBody
     public Resource downloadImage(@PathVariable("fileId") Long id, Model model) throws IOException{
 
