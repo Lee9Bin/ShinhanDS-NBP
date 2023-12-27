@@ -1,5 +1,6 @@
 package com.delivery.domain.menufile.service;
 
+import com.delivery.domain.menu.entity.MenuEntity;
 import com.delivery.domain.menufile.entity.MenuFileEntity;
 import com.delivery.domain.menufile.repository.MenuFileRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,9 +19,9 @@ public class MenuFileService {
     @Value("${file.dir}")
     private String fileDir;
 
-    private final MenuFileRepository fileRepository;
+    private final MenuFileRepository menuFileRepository;
 
-    public Long saveFile(MultipartFile files) throws IOException {
+    public Long saveFile(MultipartFile files, MenuEntity menuEntity) throws IOException {
         if (files.isEmpty()) {
             return null;
         }
@@ -42,6 +43,7 @@ public class MenuFileService {
 
         // 파일 엔티티 생성
         MenuFileEntity file = MenuFileEntity.builder()
+                .menuEntity(menuEntity)
                 .orgNm(origName)
                 .savedNm(savedName)
                 .savedPath(savedPath)
@@ -51,7 +53,7 @@ public class MenuFileService {
         files.transferTo(new File(savedPath));
 
         // 데이터베이스에 파일 정보 저장
-        MenuFileEntity savedFile = fileRepository.save(file);
+        MenuFileEntity savedFile = menuFileRepository.save(file);
 
         return savedFile.getId();
     }

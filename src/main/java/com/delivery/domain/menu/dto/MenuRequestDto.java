@@ -29,7 +29,7 @@ public class MenuRequestDto {
 
     private String category;
 
-    private MultipartFile multipartFile;
+    private String multipartFile;
 
 //
 //    public static MenuRequestDto toMenuDto(MenuEntity dummyMenuEntity, StoreEntity storeEntity){
