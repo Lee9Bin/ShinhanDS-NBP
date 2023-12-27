@@ -50,8 +50,7 @@ public class MenuDto {
                 this.name,
                 this.price,
                 this.content,
-                this.category,
-                this.picturePath
+                this.category
         );
     }
 }
