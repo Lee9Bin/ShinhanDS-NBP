@@ -1,6 +1,7 @@
 package com.delivery.domain.menu.controller;
 
 import com.delivery.domain.menu.dto.MenuDto;
+import com.delivery.domain.menu.dto.MenuRequestDto;
 import com.delivery.domain.menu.entity.MenuEntity;
 import com.delivery.domain.menu.repository.MenuRepository;
 import com.delivery.domain.menu.service.MenuService;
@@ -12,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -43,11 +45,24 @@ public class MenuController {
 
 
     @PostMapping("/menu/new")
-    public String menuSave(HttpSession session, @RequestBody List<MenuDto> menuDtoList, Model model) {
+    public String menuSave(HttpSession session,
+                           @RequestParam("name") List<String> names,
+                           @RequestParam("price") List<Integer> prices,
+                           @RequestParam("content") List<String> contents,
+                           @RequestParam("category") List<String> categories,
+                           @RequestPart("multipartFile") List<MultipartFile> files) throws IOException {
         Long ownerId = (Long) session.getAttribute("ownerId");
         Optional<StoreEntity> storeEntity = storeRepository.findByOwnerEntity_Id(ownerId);
-
-        menuService.save(menuDtoList, storeEntity.get().getId());
+        for (int i = 0; i < names.size(); i++) {
+            MenuDto menuDto = new MenuDto();
+            menuDto.setName(names.get(i));
+            menuDto.setPrice(prices.get(i));
+            menuDto.setContent(contents.get(i));
+            menuDto.setCategory(categories.get(i));
+            menuService.save(menuDto,storeEntity.get().getId(), files.get(i));
+            // 처리 로직 작성
+        }
+//        menuService.save(menuDtoList, storeEntity.get().getId());
 
         return "redirect:/owner/";
     }

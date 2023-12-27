@@ -1,9 +1,14 @@
 package com.delivery.domain.menu.dto;
 
 import com.delivery.domain.menu.entity.MenuEntity;
+import com.delivery.domain.menufile.entity.MenuFileEntity;
+import com.delivery.domain.owner.entity.OwnerEntity;
+import com.delivery.domain.store.dto.StoreDto;
 import com.delivery.domain.store.entity.StoreEntity;
+import com.delivery.domain.storefile.entity.StoreFileEntity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,11 +17,6 @@ import lombok.*;
 @ToString
 public class MenuDto {
     private Long id;
-
-    //식당 아이디
-//    @ManyToOne
-//    @JoinColumn(name = "dummy_store_id")
-//    private DummyStoreEntity dummyStoreEntity;
 
     private String name;
 
@@ -29,32 +29,18 @@ public class MenuDto {
 
     private String category;
 
-    private String picturePath;
+    private MenuFileEntity menuFileEntity;
 
-    public static MenuDto toMenuDto(MenuEntity dummyMenuEntity, StoreEntity storeEntity){
-        Long storeId = (storeEntity != null) ? storeEntity.getId() : null;
 
+    public static MenuDto toMenuDto(MenuEntity menuEntity, StoreEntity storeEntity, MenuFileEntity menuFileEntity){
         return new MenuDto(
-                dummyMenuEntity.getId(),
-                dummyMenuEntity.getName(),
-                storeId,
-                dummyMenuEntity.getPrice(),
-                dummyMenuEntity.getContent(),
-                dummyMenuEntity.getCategory(),
-                dummyMenuEntity.getPicturePath()
-        );
-    }
-
-    // dto -> entity로 바꾸기
-    public MenuEntity toEntity(StoreEntity storeEntity) {
-        return new MenuEntity(
-                this.id,
-                storeEntity,
-                this.name,
-                this.price,
-                this.content,
-                this.category,
-                this.picturePath
+                menuEntity.getId(),
+                menuEntity.getName(),
+                storeEntity.getId(),
+                menuEntity.getPrice(),
+                menuEntity.getContent(),
+                menuEntity.getCategory(),
+                menuFileEntity
         );
     }
 }
