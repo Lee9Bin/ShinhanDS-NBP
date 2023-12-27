@@ -12,6 +12,7 @@
                             type="text"
                             placeholder="검색어를 입력해주세요"
                             id="searchInput"
+                            onkeypress="handleKeyPress(event)"
                     />
                 </div>
                 <div class="search-section" onclick="performSearch()">
@@ -48,6 +49,22 @@
 <!--        window.location.href = "/moreStores";-->
 <!--    })-->
 <!--</script>-->
+<script>
+    function handleKeyPress(event) {
+        // 엔터 키가 눌렸을 때
+        if (event.key === 'Enter') {
+            performSearch();
+        }
+    }
+
+    function performSearch() {
+        const searchTerm = document.getElementById('searchInput').value;
+
+        // 검색어를 URL에 추가하여 새로운 페이지로 이동
+        window.location.href = `/owner/store/searchResults?searchTerm=${searchTerm}`;
+    }
+</script>
+
 
 <script>
     function performSearch() {

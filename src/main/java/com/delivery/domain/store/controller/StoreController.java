@@ -55,7 +55,7 @@ public class StoreController {
         return "redirect:/owner/" + session.getAttribute("ownerId");
     }
 
-//    //점주 가게 수정 폼
+    //    //점주 가게 수정 폼
 //    @GetMapping("/update")
 //    public String storeUpdateForm(Model model, HttpSession session) {
 //        StoreDto storeDto = storeService.findById((Long) session.getAttribute("ownerId"));
@@ -85,7 +85,7 @@ public class StoreController {
         model.addAttribute("stores", storeEntity.get());
         model.addAttribute("editStore", storeService.EditStores(id).get());
         model.addAttribute("menuList", menuListEntity);
-            // model.addAttribute("base64Image", storePicturePath);
+        // model.addAttribute("base64Image", storePicturePath);
         return "html/store/detail";
         // 예시로 null을 반환
     }

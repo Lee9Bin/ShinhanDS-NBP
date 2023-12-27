@@ -70,7 +70,6 @@ public class StoreService {
 
     }
 
-
     // 가게 상세 조회
     public Optional<StoreFileEntity> EditStores(Long id) {
         Optional<StoreEntity> targetStore = storeRepository.findById(id);
@@ -81,7 +80,6 @@ public class StoreService {
         }
         return null;
     }
-
 
 //
 //    //가게 수정
