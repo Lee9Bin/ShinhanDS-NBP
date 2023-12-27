@@ -75,17 +75,15 @@ public class StoreController {
     @GetMapping("/{id}")
     public String detail(@PathVariable Long id, Model model, HttpSession session) {
         StoreDto storeDto1 = storeService.findById(id);
-
         StoreDto storeDto = storeService.findById((Long) session.getAttribute("ownerId"));
         log.info("스토어 디티오 참조값: "+storeDto);
         List<MenuDto> menuListEntity = menuService.findAllByStoreEntity_Id(id);
+
         Optional<StoreEntity> storeEntity = storeRepository.findById(id);
         log.info("메뉴 디테일 페이지"+menuListEntity.toString());
-
-
         model.addAttribute("store",storeDto1);
-        model.addAttribute("editStore",storeService.EditStores(id).get());
         model.addAttribute("stores", storeEntity.get());
+        model.addAttribute("editStore", storeService.EditStores(id).get());
         model.addAttribute("menuList", menuListEntity);
         // model.addAttribute("base64Image", storePicturePath);
         return "html/store/detail";

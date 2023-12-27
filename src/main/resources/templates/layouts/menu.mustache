@@ -1,3 +1,5 @@
+
+
 <section id="about">
     <div class="list-button">
         <button id="button-all">기본 순</button>
@@ -6,33 +8,20 @@
 
     <div class="about">
         {{#stores}}
-            <div class="about__card category-1 box">
-                <a href="/owner/store/{{id}}" class="store-click" onclick="redirectToStore('{{id}}')">
-                    <div class="about-store">
-                        <div>
-
-                                <img src="/images/{{id}}" width="100%" height="150">
-
-                        </div>
-
-                        <!--                    <div th:each="imageFile : ${all} ">-->
-                        <!--                        <img  th:src="|/images/${imageFile.id}|" width="150" height="150">-->
-                        <!--                        <p th:text="${imageFile.orgNm}"></p>-->
-                        <!--                    </div>-->
-
-
-                        <a href="javascript:void(0);" class="bookmark">
-                            <i class="fa-regular fa-bookmark"></i>
-                        </a>
-                    </div>
-                    <div class="about-store-comment">
-                        <h2 class="about__title _1">
-                            {{name}}
-                        </h2>
-
-                    </div>
+        <div class="about__card category-1 box">
+            <a href="/owner/store/{{id}}" class="store-click" onclick="redirectToStore('{{id}}')">
+            <div class="about-store">
+                <a href="javascript:void(0);" class="bookmark">
+                    <i class="fa-regular fa-bookmark"></i>
                 </a>
             </div>
+            <div class="about-store-comment">
+                <h2 class="about__title _1">
+                    {{name}}
+                </h2>
+            </div>
+            </a>
+        </div>
 
         {{/stores}}
     </div>
@@ -90,6 +79,49 @@
 
 
     const aboutGrid = document.querySelector('.about');
+    // 페이지 로드 시 자동으로 실행되는 함수
+    window.addEventListener('load', function () {
+        // 페이지 로드 후 초기 데이터를 가져오는 함수 호출
+        loadInitialImages();
+    });
+
+    async function loadInitialImages() {
+        try {
+            const response = await fetch('/api/get-initial-images');
+            const storeFileEntityList = await response.json();
+
+            // 이미지를 담을 컨테이너
+            const imageContainers = document.querySelectorAll('.about-store');
+
+            // 각 박스에 이미지 추가
+            storeFileEntityList.forEach((image, index) => {
+                const existingCard = aboutGrid.children[index];
+                if (existingCard) {
+                    const imgElement = document.createElement('img');
+                    imgElement.src = `/images/${image.id}`;
+                    imgElement.width = 300;
+                    imgElement.height = 150;
+
+                    // 각 이미지에 대한 div 엘리먼트 생성
+                    const divElement = document.createElement('div');
+                    divElement.className = 'about-store-image-item';
+                    divElement.appendChild(imgElement);
+
+                    // 이미지를 담을 컨테이너에 추가
+                    const targetContainer = imageContainers[index % imageContainers.length];
+                    targetContainer.appendChild(divElement);
+
+                }
+            });
+
+            // 새로운 요소를 추가한 후에 about의 높이를 조절
+            adjustAboutHeight();
+        } catch (error) {
+            console.error('Error loading initial images:', error);
+        }
+    }
+
+
     const btn = document.querySelector('.more-btn');
     let currentPage = 0; // 초기 페이지 번호
     btn.addEventListener('click', async () => {
@@ -104,7 +136,10 @@
             console.log("url err:" + newData)
 
             // 새로운 게시물을 동적으로 생성
-            newData.forEach(item => {
+            newData.forEach((item,index) => {
+                const existingCard = aboutGrid.children[index];
+                if (existingCard) {
+
                 const newPost = document.createElement('div');
                 newPost.className = 'about__card category-1 box';
 
@@ -122,6 +157,22 @@
             `;
 
                 aboutGrid.appendChild(newPost);
+
+                    // const imgElement = document.createElement('img');
+                    // imgElement.src = `/images/${image.id}`;
+                    // imgElement.width = 300;
+                    // imgElement.height = 150;
+                    //
+                    // // 각 이미지에 대한 div 엘리먼트 생성
+                    // const divElement = document.createElement('div');
+                    // divElement.className = 'about-store-image-item';
+                    // divElement.appendChild(imgElement);
+                    //
+                    // // 이미지를 담을 컨테이너에 추가
+                    // const targetContainer = imageContainers[index % imageContainers.length];
+                    // targetContainer.appendChild(divElement);
+
+                }
 
             });
             // 새로운 요소를 추가한 후에 about의 높이를 조절
@@ -163,4 +214,9 @@
 
         window.location.href = "/owner/store/" + id;
     }
+
+
+
+
+
 </script>

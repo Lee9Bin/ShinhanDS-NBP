@@ -66,6 +66,8 @@ public class StoreService {
         else{
             return null;
         }
+
+
     }
 
     // 가게 상세 조회
