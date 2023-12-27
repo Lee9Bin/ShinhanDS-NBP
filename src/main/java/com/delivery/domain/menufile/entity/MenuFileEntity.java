@@ -1,5 +1,6 @@
 package com.delivery.domain.menufile.entity;
 
+import com.delivery.domain.menu.entity.MenuEntity;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,9 +18,9 @@ public class MenuFileEntity {
     @Column(name="menu_file_id")
     private Long id;
 
-//    @ManyToOne
-//    @JoinColumn(name = "store_id")
-//    private StoreEntity storeEntity;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "menu_id")
+    private MenuEntity menuEntity;
 
     private String orgNm;
 
@@ -28,8 +29,9 @@ public class MenuFileEntity {
     private String savedPath;
 
     @Builder
-    public MenuFileEntity(Long id, String orgNm, String savedNm, String savedPath) {
+    public MenuFileEntity(Long id, String orgNm, String savedNm, String savedPath, MenuEntity menuEntity) {
         this.id = id;
+        this.menuEntity = menuEntity;
         this.orgNm = orgNm;
         this.savedNm = savedNm;
         this.savedPath = savedPath;
