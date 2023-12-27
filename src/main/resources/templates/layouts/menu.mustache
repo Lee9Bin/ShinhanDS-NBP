@@ -1,6 +1,6 @@
 
 
-<section id="about">
+
     <div class="list-button">
         <button id="button-all">기본 순</button>
         <button id="button-1">북마크</button>
@@ -15,21 +15,29 @@
                     <i class="fa-regular fa-bookmark"></i>
                 </a>
             </div>
-            <div class="about-store-comment">
-                <h2 class="about__title _1">
+
+                <h2 class="about__title">
                     {{name}}
                 </h2>
-            </div>
             </a>
+
         </div>
 
         {{/stores}}
     </div>
 
-    <button class="more-btn">더보기</button>
-</section>
+
+
 
 <script>
+    // 페이지 로드 시 자동으로 실행되는 함수
+    window.addEventListener('load', function () {
+        // 페이지 로드 후 초기 데이터를 가져오는 함수 호출
+        loadInitialImages();
+
+    });
+
+
 
     document.getElementById('button-all').addEventListener('click', function () {
         showAllCards(); // 기본 순 버튼 클릭 시 모든 카드 보이기
@@ -79,11 +87,6 @@
 
 
     const aboutGrid = document.querySelector('.about');
-    // 페이지 로드 시 자동으로 실행되는 함수
-    window.addEventListener('load', function () {
-        // 페이지 로드 후 초기 데이터를 가져오는 함수 호출
-        loadInitialImages();
-    });
 
     async function loadInitialImages() {
         try {
@@ -99,8 +102,7 @@
                 if (existingCard) {
                     const imgElement = document.createElement('img');
                     imgElement.src = `/images/${image.id}`;
-                    imgElement.width = 300;
-                    imgElement.height = 150;
+
 
                     // 각 이미지에 대한 div 엘리먼트 생성
                     const divElement = document.createElement('div');
@@ -124,63 +126,7 @@
 
     const btn = document.querySelector('.more-btn');
     let currentPage = 0; // 초기 페이지 번호
-    btn.addEventListener('click', async () => {
-        try {
-            console.log(currentPage);
-            currentPage++; // 클릭할 때마다 페이지 번호 증가
-            // 서버에 데이터 요청
 
-            const response = await fetch(`/api/get-more-data?page=${currentPage}&pageSize=8`);
-            console.log(response);
-            const newData = await response.json();
-            console.log("url err:" + newData)
-
-            // 새로운 게시물을 동적으로 생성
-            newData.forEach((item,index) => {
-                const existingCard = aboutGrid.children[index];
-                if (existingCard) {
-
-                const newPost = document.createElement('div');
-                newPost.className = 'about__card category-1 box';
-
-                newPost.innerHTML = `
-                <a href="/owner/store/${item.id}" class="store-click" onclick="redirectToStore('${item.id}')">
-                <div class="about-store">
-                    <a href="javascript:void(0);" class="bookmark">
-                        <i class="fa-regular fa-bookmark"></i>
-                    </a>
-                </div>
-                <div class="about-store-comment">
-                    <h2 class="about__title _1">${item.name}</h2>
-                </div>
-                </a>
-            `;
-
-                aboutGrid.appendChild(newPost);
-
-                    // const imgElement = document.createElement('img');
-                    // imgElement.src = `/images/${image.id}`;
-                    // imgElement.width = 300;
-                    // imgElement.height = 150;
-                    //
-                    // // 각 이미지에 대한 div 엘리먼트 생성
-                    // const divElement = document.createElement('div');
-                    // divElement.className = 'about-store-image-item';
-                    // divElement.appendChild(imgElement);
-                    //
-                    // // 이미지를 담을 컨테이너에 추가
-                    // const targetContainer = imageContainers[index % imageContainers.length];
-                    // targetContainer.appendChild(divElement);
-
-                }
-
-            });
-            // 새로운 요소를 추가한 후에 about의 높이를 조절
-            adjustAboutHeight();
-        } catch (error) {
-            console.error('Error loading more data:', error);
-        }
-    });
 
     async function fetchRenderedHTMLFromServer() {
         try {
@@ -192,21 +138,6 @@
         }
     }
 
-    function adjustAboutHeight() {
-        // 모든 .about__card의 높이를 가져와서 최대 높이를 찾음
-        const maxCardHeight = Math.max(
-                ...Array.from(document.querySelectorAll('.about__card')).map(card => card.clientHeight)
-        );
-
-        // .about의 높이 설정
-        aboutGrid.style.height = `${aboutGrid.clientHeight}px`;
-        // 공백을 줄이기 위해 스크롤 여부 확인
-        const hasOverflow = aboutGrid.scrollHeight > aboutGrid.clientHeight;
-
-        // 스크롤이 필요한 경우에만 스크롤을 활성화
-        aboutGrid.style.overflowY = hasOverflow ? 'auto' : 'hidden';
-    }
-
     function redirectToStore(id) {
         // 클릭한 경우의 추가 동작이 필요하다면 여기에 추가 로직을 작성할 수 있습니다.
         // 예를 들어, 특별한 동작이 필요한 경우에만 이 함수를 사용하고,
@@ -215,8 +146,63 @@
         window.location.href = "/owner/store/" + id;
     }
 
+    // 스크롤 이벤트를 감지하여 페이징 처리하는 함수
+    async function handleScroll() {
+        const scrollThreshold = 100; // 스크롤 도달 시 추가 데이터를 로드할 임계값
+        const isScrollAtBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - scrollThreshold;
+
+        if (isScrollAtBottom) {
+            try {
+                console.log(currentPage);
+                currentPage++; // 스크롤이 발생할 때마다 페이지 번호 증가
+
+                // 서버에 데이터 요청
+                const response = await fetch(`/api/get-more-data?page=${currentPage}&pageSize=8`);
+                const newData = await response.json();
+
+                // 새로운 게시물을 동적으로 생성
+                newData.forEach(item => {
+                    const newPost = document.createElement('div');
+                    newPost.className = 'about__card category-1 box';
+
+                    newPost.innerHTML = `
+                    <a href="/owner/store/${item.id}" class="store-click" onclick="redirectToStore('${item.id}')">
+                        <div class="about-store">
+                            <a href="javascript:void(0);" class="bookmark">
+                                <i class="fa-regular fa-bookmark"></i>
+                            </a>
+                        </div>
+                            <h2 class="about__title">${item.name}</h2>
+                    </a>
+                `;
+                    aboutGrid.appendChild(newPost);
+                });
+
+                // 새로운 요소를 추가한 후에 about의 높이를 조절
+                adjustAboutHeight();
+            } catch (error) {
+                console.error('Error loading more data:', error);
+            }
+        }
+    }
+    // .about의 높이를 동적으로 조절하는 함수
+    function adjustAboutHeight() {
+        // .about의 높이를 가져와서 최대 높이를 찾음
+        const aboutHeight = aboutGrid.scrollHeight;
+
+        // 최대 높이를 찾은 후, 현재 창의 높이와 비교하여 큰 값을 적용
+        const maxHeight = Math.max(aboutHeight, window.innerHeight);
+
+        // .about의 높이 설정
+        aboutGrid.style.height = `${maxHeight}px`;
+
+        // 스크롤이 필요한 경우에만 스크롤을 활성화
+        aboutGrid.style.overflowY = aboutHeight > window.innerHeight ? 'auto' : 'hidden';
+    }
 
 
+    // 스크롤 이벤트 핸들링 함수 등록
+    window.addEventListener('scroll', handleScroll);
 
 
 </script>
