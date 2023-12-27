@@ -1,7 +1,6 @@
 package com.delivery.controller;
 
 import com.delivery.domain.menu.service.MenuService;
-import com.delivery.domain.store.dto.StoreDto;
 import com.delivery.domain.store.entity.StoreEntity;
 import com.delivery.domain.store.repository.StoreRepository;
 import com.delivery.domain.store.service.StoreService;
@@ -41,10 +40,44 @@ public class CustomerController {
 
         // 로그 찍어보기
         log.info("로그를 찍어보자: " + storeEntityList.toString());
-        StoreDto storeDto = storeService.findById((Long) session.getAttribute("ownerId"));
+
+//        StoreDto storeDto = storeService.findById((Long) session.getAttribute("ownerId"));
+//        List<StoreEntity> storeDto1 = storeRepository.findAll();
+//
+//        storeDto1.forEach( a -> log.info(String.valueOf(a.getId())));
+//
+//        List<StoreFileEntity> storeFileEntityList = new ArrayList<>();
+//        storeDto1.forEach(data -> {
+//            storeFileEntityList.add(storeService.EditStores(data.getId()).get());
+//            model.addAttribute("storeImage", storeFileEntityList);
+//                }
+//        );
+////        storeFileEntityList.forEach(a -> log.info(String.valueOf(a.getId())));
+
+//        storeDto1.forEach(data -> {
+//            Optional<StoreFileEntity> storeData = storeService.EditStores(data.getId());
+//
+//            storeData.ifPresent(store -> {
+//                // 값이 있는 경우에만 model에 추가
+//                model.addAttribute("storeImage", store);
+//            });
+//            // 값이 없을 때 별도의 처리를 추가하지 않음
+//        });
+
+
+//        List<StoreFileEntity> storeImages = new ArrayList<>();
+//        storeDto1.forEach(data -> {
+//            Optional<StoreFileEntity> storeData = storeService.EditStores(data.getId());
+//            storeData.ifPresent(storeImages::add);
+//        });
+//
+//        model.addAttribute("storeImages", storeImages);
+
+
+
         // 세션에 현재 페이지 번호를 저장
         session.setAttribute("currentPage", 1);
-        model.addAttribute("store",storeDto);
+//        model.addAttribute("store",storeDto);
         model.addAttribute("stores", storeEntityList);
 
         // 전체 페이지 수와 현재 페이지 번호를 모델에 추가
@@ -71,6 +104,8 @@ public class CustomerController {
         model.addAttribute("loginName", loginName);
         model.addAttribute("loggedIn", isLoggedIn);
 
+
+//        session.setAttribute("loginName", loginName);
 
         log.info("이동하기 loginEmail: " + session.getAttribute("loginEmail"));
         return "html/customer/test";
