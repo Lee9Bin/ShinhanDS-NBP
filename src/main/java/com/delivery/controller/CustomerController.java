@@ -39,6 +39,8 @@ public class CustomerController {
         // 이 리스트에는 현재 페이지의 더미 스토어 엔터티가 포함
         List<StoreEntity> storeEntityList = dummyStorePage.getContent();
 
+
+
         // 로그 찍어보기
         log.info("로그를 찍어보자: " + storeEntityList.toString());
         StoreDto storeDto = storeService.findById((Long) session.getAttribute("ownerId"));
@@ -57,9 +59,6 @@ public class CustomerController {
 //        session.setAttribute("stores", dummyStoreEntity);
 //        List<String> store = (List<String>) session.getAttribute("stores");
 //        model.addAttribute("stores", store);
-
-
-
 
         String loginName = (String) session.getAttribute("loginName");
         boolean isLoggedIn = true;

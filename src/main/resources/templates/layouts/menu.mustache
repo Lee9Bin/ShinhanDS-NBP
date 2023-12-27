@@ -5,41 +5,90 @@
     </div>
 
     <div class="about">
-        {{#store}}
-        <div class="about__card category-1 box">
-            <a href="/owner/store/{{id}}" class="store-click" onclick="redirectToStore('{{id}}')">
-            <div class="about-store">
-                    <div>
-                        <img src="/images/{{storeFileEntity.id}}" width="100%" height="150">
+        {{#stores}}
+            <div class="about__card category-1 box">
+                <a href="/owner/store/{{id}}" class="store-click" onclick="redirectToStore('{{id}}')">
+                    <div class="about-store">
+                        <div>
+
+                                <img src="/images/{{id}}" width="100%" height="150">
+
+                        </div>
+
+                        <!--                    <div th:each="imageFile : ${all} ">-->
+                        <!--                        <img  th:src="|/images/${imageFile.id}|" width="150" height="150">-->
+                        <!--                        <p th:text="${imageFile.orgNm}"></p>-->
+                        <!--                    </div>-->
+
+
+                        <a href="javascript:void(0);" class="bookmark">
+                            <i class="fa-regular fa-bookmark"></i>
+                        </a>
                     </div>
+                    <div class="about-store-comment">
+                        <h2 class="about__title _1">
+                            {{name}}
+                        </h2>
 
-<!--                    <div th:each="imageFile : ${all} ">-->
-<!--                        <img  th:src="|/images/${imageFile.id}|" width="150" height="150">-->
-<!--                        <p th:text="${imageFile.orgNm}"></p>-->
-<!--                    </div>-->
-
-
-
-                <a href="javascript:void(0);" class="bookmark">
-                    <i class="fa-regular fa-bookmark"></i>
+                    </div>
                 </a>
             </div>
-            <div class="about-store-comment">
-                <h2 class="about__title _1">
-                    {{name}}
-                </h2>
 
-            </div>
-            </a>
-        </div>
-
-        {{/store}}
+        {{/stores}}
     </div>
 
     <button class="more-btn">더보기</button>
 </section>
 
 <script>
+
+    document.getElementById('button-all').addEventListener('click', function () {
+        showAllCards(); // 기본 순 버튼 클릭 시 모든 카드 보이기
+    });
+    // 수정된 함수: 모든 카드 보이기
+    function showAllCards() {
+        const allCards = document.querySelectorAll('.about__card');
+        allCards.forEach(card => card.style.display = 'block');
+
+        // 새로운 요소를 추가한 후에 about의 높이를 조절
+        adjustAboutHeight();
+    }
+
+    // 북마크 이벤트 위임을 위해 .about 클래스에 이벤트를 걸어주기
+    document.querySelector('.about').addEventListener('click', function (event) {
+        if (event.target.classList.contains('fa-regular') || event.target.classList.contains('fa-solid')) {
+            // 클릭된 요소가 북마크 아이콘인 경우
+            event.target.classList.toggle('fa-regular');
+            event.target.classList.toggle('fa-solid');
+        }
+    });
+
+    document.getElementById('button-1').addEventListener('click', function () {
+        filterCards(); // 북마크 버튼 클릭 시 카드 필터링
+    });
+
+    // 새로운 함수 추가: 북마크 상태에 따라 카드 필터링
+    function filterCards() {
+        const bookmarkedCards = document.querySelectorAll('.about__card .fa-solid'); // 수정된 부분
+        const allCards = document.querySelectorAll('.about__card');
+
+        if (bookmarkedCards.length > 0) {
+            allCards.forEach(card => {
+                if (card.querySelector('.fa-regular')) { // 수정된 부분
+                    card.style.display = 'none';
+                } else {
+                    card.style.display = 'block';
+                }
+            });
+        } else {
+            allCards.forEach(card => card.style.display = 'block');
+        }
+
+        // 새로운 요소를 추가한 후에 about의 높이를 조절
+        adjustAboutHeight();
+    }
+
+
     const aboutGrid = document.querySelector('.about');
     const btn = document.querySelector('.more-btn');
     let currentPage = 0; // 초기 페이지 번호
@@ -52,7 +101,7 @@
             const response = await fetch(`/api/get-more-data?page=${currentPage}&pageSize=8`);
             console.log(response);
             const newData = await response.json();
-            console.log("url err:"+newData)
+            console.log("url err:" + newData)
 
             // 새로운 게시물을 동적으로 생성
             newData.forEach(item => {
@@ -81,6 +130,7 @@
             console.error('Error loading more data:', error);
         }
     });
+
     async function fetchRenderedHTMLFromServer() {
         try {
             const response = await fetch('/customer/{id}'); // 실제 엔드포인트에 맞게 수정
@@ -90,11 +140,12 @@
             console.error('Error fetching rendered HTML:', error);
         }
     }
+
     function adjustAboutHeight() {
         // 모든 .about__card의 높이를 가져와서 최대 높이를 찾음
         const maxCardHeight = Math.max(
                 ...Array.from(document.querySelectorAll('.about__card')).map(card => card.clientHeight)
-    );
+        );
 
         // .about의 높이 설정
         aboutGrid.style.height = `${aboutGrid.clientHeight}px`;

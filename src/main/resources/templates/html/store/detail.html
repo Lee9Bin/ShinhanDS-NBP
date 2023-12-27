@@ -324,16 +324,16 @@
     <div id="left">
         <div class="leftBox" id="storeImgDiv">
 
-        <img th:src="|/images/${store.storeFileEntity.getId()}|" width="300px" height="150">
+        <img th:src="|/images/${editStore.id}|" width="300px" height="150">
         </div>
         <div class="leftBox" id="storeContent">
 <!--            <p th:text="${store.storeFileEntity.getOrgNm()}"></p>-->
             <div class="store-new" >
-                <h2 th:text="${store.name}">가게 이름</h2>
+                <h2 th:text="${stores.name}">가게 이름</h2>
             </div>
             <hr>
             <div class="store-description">
-                <span th:text="${store.description}"></span>
+                <span th:text="${stores.description}"></span>
 
             </div>
 
