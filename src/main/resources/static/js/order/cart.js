@@ -32,10 +32,11 @@ document.addEventListener('DOMContentLoaded', function () {
             rightMenuDiv.classList.add('rightmenu');
             rightMenuDiv.setAttribute('data-menu-name', name);
             rightMenuDiv.innerHTML = `
-        <div>${name}</div>
+        <div id="menuName">${name}</div>
         <div>수량: <input type="number" min="1" value="1" data-menu-name="${name}" class="quantity-input" /></div>
-        <div>가격: 0원</div>
+        <div>가격: <span id="menuPrice"></span>원</div>
     `;
+
             rightMenuContainer.appendChild(rightMenuDiv);
 
             // 수량 입력 요소에 input 이벤트 추가
@@ -53,6 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    // 오른쪽 메뉴들 가격 및 등등
     function updateRightMenu() {
         var sum = 0;
 
@@ -63,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (menuContainer) {
                 var price = parseInt(menuContainer.querySelector('#price').textContent);
-                rightMenuDiv.lastElementChild.textContent = `가격: ${price * quantity}원`;
+                rightMenuDiv.lastElementChild.textContent = `${price * quantity}원`;
                 sum += price * quantity;
             }
         });

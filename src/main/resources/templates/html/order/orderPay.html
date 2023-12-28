@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
@@ -23,16 +23,14 @@
     <div class="order_title"><h2>1. 상품정보</h2></div>
     <br>
     <input type="hidden" name="cmd" value="order">
-    <div class="basketdiv" id="basket">
+    <div class="basketdiv" id="basket" >
         <div class="row head">
             <div class="subdiv">
-                <div class="img">이미지</div>
                 <div class="pname">상품명</div>
             </div>
             <div class="subdiv">
                 <div class="basketprice">가격</div>
                 <div class="num">수량</div>
-                <div class="sum">합계</div>
             </div>
             <div class="subdiv">
 
@@ -41,92 +39,20 @@
             <div class="split"></div>
         </div>
 
-        <div class="row data">
+<!--        <div class="row data" th:each="menuItem : ${orderMenu}">-->
+<!--                    <span th:text="${menuItem.menuPrice}"></span>-->
+<!--                <span th:text="${menuItem.menuName}"></span>-->
+<!--                        <span th:text="${menuItem.quantity}"></span>-->
+
+<!--                <div class="sum">40,000원</div>-->
+<!--        </div>-->
             <div class="subdiv">
-                <div class="img"><img src="/img/chic.jpg" width="60"></div>
-                <div class="pname">
-                    <span>치킨(menu_id)</span>
-                </div>
-            </div>
-            <div class="subdiv">
-                <div class="basketprice"><input type="hidden" name="p_price" id="p_price1" class="p_price"
-                                                value="20000">20,000원
-                </div>
-                <div class="num">
-                    <div class="updown">
-                        <input type="text" name="p_num1" id="p_num1" size="2" maxlength="4" class="p_num" value="2"
-                               onkeyup="javascript:basket.changePNum(1);">
-                        <span onclick="javascript:basket.changePNum(1);"><i
-                                class="fas fa-arrow-alt-circle-up up"></i></span>
-                        <span onclick="javascript:basket.changePNum(1);"><i
-                                class="fas fa-arrow-alt-circle-down down"></i></span>
-                    </div>
-                </div>
-                <div class="sum">40,000원</div>
-            </div>
-            <div class="subdiv">
-                <div class="basketcmd"><a href="javascript:void(0)" class="abutton"
-                                          onclick="javascript:basket.delItem();">삭제</a></div>
-            </div>
-        </div>
-        <div class="row data">
-            <div class="subdiv">
-                <div class="img"><img src="img/chic.jpg" width="60"></div>
-                <div class="pname">
-                    <span>치킨(menu_id)</span>
-                </div>
-            </div>
-            <div class="subdiv">
-                <div class="basketprice"><input type="hidden" name="p_price" id="p_price2" class="p_price"
-                                                value="19000">19,000원
-                </div>
-                <div class="num">
-                    <div class="updown">
-                        <input type="text" name="p_num2" id="p_num2" size="2" maxlength="4" class="p_num" value="1"
-                               onkeyup="javascript:basket.changePNum(2);">
-                        <span onclick="javascript:basket.changePNum(2);"><i
-                                class="fas fa-arrow-alt-circle-up up"></i></span>
-                        <span onclick="javascript:basket.changePNum(2);"><i
-                                class="fas fa-arrow-alt-circle-down down"></i></span>
-                    </div>
-                </div>
-                <div class="sum">19,000원</div>
-            </div>
-            <div class="subdiv">
-                <div class="basketcmd"><a href="javascript:void(0)" class="abutton"
-                                          onclick="javascript:basket.delItem();">삭제</a></div>
-            </div>
-        </div>
-        <div class="row data">
-            <div class="subdiv">
-                <div class="img"><img src="img/chic.jpg" width="60"></div>
-                <div class="pname">
-                    <span>치킨(menu_id)</span>
-                </div>
-            </div>
-            <div class="subdiv">
-                <div class="basketprice"><input type="hidden" name="p_price" id="p_price3" class="p_price"
-                                                value="15200">15,200원
-                </div>
-                <div class="num">
-                    <div class="updown">
-                        <input type="text" name="p_num3" id="p_num3" size="2" maxlength="4" class="p_num" value="1"
-                               onkeyup="javascript:basket.changePNum(3);">
-                        <span onclick="javascript:basket.changePNum(3);"><i
-                                class="fas fa-arrow-alt-circle-up up"></i></span>
-                        <span onclick="javascript:basket.changePNum(3);"><i
-                                class="fas fa-arrow-alt-circle-down down"></i></span>
-                    </div>
-                </div>
-                <div class="sum">15,200원</div>
-            </div>
-            <div class="subdiv">
-                <div class="basketcmd"><a href="javascript:void(0)" class="abutton"
-                                          onclick="javascript:basket.delItem();">삭제</a></div>
+                <div class="basketcmd"><a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delItem();">삭제</a></div>
             </div>
         </div>
 
-    </div>
+
+
     <br>
     <div class="right-align basketrowcmd">
     </div>
