@@ -401,7 +401,7 @@
                     <div>선택</div>
                 </div>
                 <div th:each="menuItem : ${menuList}" class="menu-item">
-                    <img th:src="|/images/menu/${editMenu.id}|" alt="Store Image" width="200px" height="100px"/>
+                    <img th:src="|/images/menu/${menuItem.id}|" alt="Store Image" width="200px" height="100px"/>
                     <span th:text="${menuItem.name}"></span>
                     <span th:text="${menuItem.content}"></span>
                     <span th:text="${menuItem.price}" id="price"></span>
