@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="/css/mypage/mypage.css">
     <title>Document</title>
 </head>
-
+{{>layouts/link}}
 <body>
 {{>layouts/header}}
 <div th:insert="~{layouts/html/header :: header}"></div>
@@ -50,6 +50,26 @@
             <a href="#" onclick="showContent('bookmarks')">북마크</a>
         </div>
         <div class="content notice active">
+
+            <div class="abouttt">
+                {{#stores}}
+                    <div class="bookmark-item">
+                        <a href="/owner/store/{{id}}" class="store-click" onclick="redirectToStore('{{id}}')">
+                            <div class="about-storeee">
+                                <a href="javascript:void(0);" class="bookmark">
+                                    <i class="fa-regular fa-bookmark"></i>
+                                </a>
+                            </div>
+                            <h2 class="about__title">
+                                <h3>{{name}}</h3>
+                            </h2>
+                        </a>
+
+                    </div>
+
+                {{/stores}}
+            </div>
+
             <div class="bookmark-item">
                 <h3>북마크 1</h3>
                 <p>북마크 내용입니다.</p>
