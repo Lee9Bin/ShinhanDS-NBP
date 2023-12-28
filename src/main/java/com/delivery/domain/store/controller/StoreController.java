@@ -73,7 +73,7 @@ public class StoreController {
 //        storeService.update(storeDto,(Long) session.getAttribute("ownerId"));
 //        return "redirect:/owner/store/update";
 //    }
-//
+
     @GetMapping("/{id}")
     public String detail(@PathVariable Long id, Model model, HttpSession session) {
         StoreDto storeDto1 = storeService.findById(id);
