@@ -3,7 +3,7 @@
   <section class="mainpage" th:fragment="mypagelink" >
     <div class="main-banner">
       <div class="icon1">
-        <a class="notice-item" href="#" onclick="showContent('member-change')">
+        <a class="notice-item" th:href="@{/member/update}" onclick="showContent('member-change')">
           <img src="/img/setting.png" alt="회원수정 이미지">
           <div class="overlay-text">회원정보 수정</div>
         </a>
@@ -21,7 +21,7 @@
         </a>
       </div>
       <div class="icon1">
-        <a class="notice-item" href="#" onclick="showContent('back-home')">
+        <a class="notice-item" href="../customer/" onclick="showContent('back-home')">
           <img src="/img/main2.png" alt="메인 이미지">
           <div class="overlay-text">메인으로</div>
         </a>

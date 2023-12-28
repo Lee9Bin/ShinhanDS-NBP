@@ -4,3 +4,7 @@ function showContent(contentType) {
 
     document.querySelector(`.${contentType}`).classList.add('active');
 }
+
+const saveReq = () => {
+    location.href = "../board/save";
+}

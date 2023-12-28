@@ -5,15 +5,19 @@ import com.delivery.domain.board.dto.BoardDTO;
 import com.delivery.domain.board.dto.ReCommentDTO;
 import com.delivery.domain.board.service.BoardService;
 import com.delivery.domain.board.service.ReCommentService;
+import com.delivery.domain.store.entity.StoreEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -28,24 +32,29 @@ public class BoardController {
         return "html/review/save";
     }
 
-
     @PostMapping("/save")
     public String save(@ModelAttribute BoardDTO boardDTO) throws IOException {
         System.out.println("boardDTO = " + boardDTO);
         boardService.save(boardDTO);
         return "redirect:/board/";
     }
-
     @GetMapping("/")
     public String findAll(Model model) {
-        // DB에서 전체 게시글 데이터를 가져와서 list.html에 보여준다.
         List<BoardDTO> boardDTOList = boardService.findAll();
         model.addAttribute("boardList", boardDTOList);
         return "html/review/list";
     }
 
+    @GetMapping("/list2")
+    public String findAll2(Model model) {
+        // DB에서 전체 게시글 데이터를 가져와서 list.html에 보여준다.
+        List<BoardDTO> boardDTOList = boardService.findAll();
+        model.addAttribute("boardList", boardDTOList);
+        return "html/review/list2";
+    }
+
     @GetMapping("/{id}")
-    public String findById(@PathVariable Long id, Model model,
+    public String findById(@PathVariable Long id, Long storeId, Model model,
                            @PageableDefault(page=1) Pageable pageable) {
         /*
             해당 게시글의 조회수를 하나 올리고
@@ -62,7 +71,7 @@ public class BoardController {
     }
 
     @GetMapping("/update/{id}")
-    public String updateForm(@PathVariable Long id, Model model) {
+    public String updateForm(@PathVariable Long id,  Model model) {
         BoardDTO boardDTO = boardService.findById(id);
         model.addAttribute("boardUpdate", boardDTO);
         return "html/review/update";
