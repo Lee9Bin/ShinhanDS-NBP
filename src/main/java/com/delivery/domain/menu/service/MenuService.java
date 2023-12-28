@@ -3,6 +3,7 @@ package com.delivery.domain.menu.service;
 import com.delivery.domain.menu.dto.MenuDto;
 import com.delivery.domain.menu.entity.MenuEntity;
 import com.delivery.domain.menu.repository.MenuRepository;
+import com.delivery.domain.menufile.entity.MenuFileEntity;
 import com.delivery.domain.menufile.repository.MenuFileRepository;
 import com.delivery.domain.menufile.service.MenuFileService;
 import com.delivery.domain.store.entity.StoreEntity;
@@ -43,6 +44,7 @@ public class MenuService {
 
     //해당 가게 메뉴 조회
     public List<MenuDto> findAllByStoreEntity_Id(Long storeId){
+
         List<MenuEntity> menuEntityList = menuRepository.findAllByStoreEntity_Id(storeId);
         List<MenuDto> menuDtoList = new ArrayList<>();
 
@@ -52,5 +54,18 @@ public class MenuService {
 
         return menuDtoList;
     }
+
+    // 메뉴 상세 조회
+    // 메뉴 상세 조회
+    public MenuFileEntity EditMenus(Long id) {
+        Optional<MenuEntity> targetMenu = menuRepository.findById(id);
+        if (targetMenu.isPresent()) {
+            // targetMenu이 존재할 때만 MenuFileEntity를 찾도록 수정
+            return menuFileRepository.findByMenuEntity_Id(id);
+        }
+        // targetMenu이 존재하지 않으면 null 반환
+        return null;
+    }
+
 
 }

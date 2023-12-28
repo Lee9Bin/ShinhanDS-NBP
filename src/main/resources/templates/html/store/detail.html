@@ -2,9 +2,9 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layouts/html/link :: link"/> <!--메타 정보 등-->
 <link rel="stylesheet" href="/css/order/order.css"/>
+<script src = "/static/js/order/cart.js"></script>
 
 <style>
-
 
     #container1 {
         width: 100%;
@@ -261,11 +261,11 @@
     }
 
     #deliver {
-        background-color: #21EF42;
+        background-color: #9cacbd;
     }
 
     #pickup {
-        background-color: #EF2121;
+        background-color: #9cacbd;
     }
 
     #pay {
@@ -277,7 +277,7 @@
     }
 
     #payButton {
-        background-color: #21EF42;
+        background-color: #9cacbd;
         width: 70%;
         height: 40%;
         border: 1px solid black;
@@ -311,8 +311,52 @@
     }
 
 
+    .store-menu {
+        text-align: center;
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .m-t1 {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+        margin-bottom: 15px;
+        font-weight: bold;
+        background-color: #787d86;
+        height: 30px;
+        text-align: center;
+        margin-top: 4px;
+    }
+
+    .menu-item {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+        align-items: center;
+        margin-bottom: 0;
+        text-align: center;
+    }
+
+    /*img {*/
+    /*    width: 100%;*/
+    /*    height: auto;*/
+
+    /*}*/
+
+    input[type="checkbox"] {
+        margin-left: 5px;
+    }
+
+    .quantity-input {
+        width: 50px;
+    }
+
 
 </style>
+
 </head>
 <body>
 
@@ -336,33 +380,30 @@
                 <span th:text="${stores.description}"></span>
 
             </div>
-
         </div>
-
-
-
-
 
         <div class="leftBox" id="storeFoot">
             <!--총 메뉴 영역-->
             <div class="store-menu">
                 <h2>메뉴</h2>
+                <div class="m-t1">
+                    <div>메뉴</div>
+                    <div>이름</div>
+                    <div>설명</div>
+                    <div>가격</div>
+                    <div>선택</div>
+                </div>
                 <div th:each="menuItem : ${menuList}" class="menu-item">
-                    <img th:src="@{'/img/menu/' + ${menuItem}}" alt="Store Image"/>
+                    <img th:src="|/images/menu/${editMenu.id}|" alt="Store Image" width="200px" height="100px"/>
                     <span th:text="${menuItem.name}"></span>
                     <span th:text="${menuItem.content}"></span>
-                    <span th:text="${menuItem.price}"></span>
+                    <span th:text="${menuItem.price}" id="price"></span>
                     <input type="checkbox" th:name="'selectedMenus'" th:value="${menuItem.storeId}"/>
                 </div>
             </div>
 
-
-
             <!-- 총메뉴 영역 끝-->
         </div>
-
-
-
 
         <!-- 더 많은 메뉴 아이템 추가 가능 -->
 
@@ -376,22 +417,17 @@
 
                 <!-- 사용자가 메뉴 추가시 동적으로 추가될 메뉴 div-->
                 <div class="rightmenu">
-                    <div id="rightMenuName">
-                        망곰이
-                    </div>
-                    <div id="rightMenuQuen">
-                        수량:1개
-                    </div>
-                    <div id="rightMenuPrice">
-                        가격:5000원
-                    </div>
+                    <div id="rightMenuName">선택된 메뉴 이름</div>
+                    <div id="rightMenuQuen"> 수량: <input type="number" min="1" value="1"
+                                                        data-menu-name="${menuItem.name}" class="quantity-input" /></div>
+                    <div id="rightMenuPrice">가격: 0원</div>
                 </div>
                 <!-- 사용자가 메뉴 추가시 동적으로 추가될 메뉴 div-->
 
             </div>
             <div id="totalPriceBox">
-                <div>결제금액:</div>
-                <div>13800</div>
+                <div>결제금액: </div>
+                <div class="sumAmount">0</div>
             </div>
         </div>
         <div id="bottom">
