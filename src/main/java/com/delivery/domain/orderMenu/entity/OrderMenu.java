@@ -1,21 +1,15 @@
 package com.delivery.domain.orderMenu.entity;
 
-import com.delivery.domain.orderDelivery.entiy.OrderDelivery;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "order_menu")
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderMenu {
@@ -25,36 +19,18 @@ public class OrderMenu {
     @Column(name = "order_menu_id")
     private Long id;
 
-    //주문 아이디
-    // @ManyToOne
-    // @JoinColumn(name = "order_delivery_id")
-    // private OrderDelivery orderDelivery;
-    //메뉴 아이디///
-    // @ManyToOne
-    // @JoinColumn(name = "menu_id")
-    // private MenuEntity menuEntity;
 
     @Column(nullable = false)
-    private int payment;
+    private String menuName; // 메뉴 이름
 
     @Column(nullable = false)
-    private int totalQuantity;
+    private int payment; // 메뉴 가격
 
-    //== 가격 계산==//
-    public int calculationPrice(){
-        return getPayment() * getTotalQuantity();
-    }
+    @Column(nullable = false)
+    private int quantity; //수량
 
-
-    // public static OrderMenu create(OrderDelivery orderDelivery, MenuEntity menuEntity, int count){
-    //     return new OrderMenu(
-    //             null,
-    //             orderDelivery,
-    //             menuEntity,
-    //             menuEntity.getPrice(),
-    //             count
-    //     );
-    // }
+    @Column(nullable = false)
+    private int totalAmount; // 최종 가격
 
 
 }

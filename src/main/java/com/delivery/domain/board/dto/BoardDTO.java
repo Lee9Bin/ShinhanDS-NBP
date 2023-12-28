@@ -1,6 +1,7 @@
 package com.delivery.domain.board.dto;
 
 import com.delivery.domain.board.entity.BoardEntity;
+import com.delivery.domain.store.entity.StoreEntity;
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 

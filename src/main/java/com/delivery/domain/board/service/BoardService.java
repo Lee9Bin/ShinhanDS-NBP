@@ -6,6 +6,8 @@ import com.delivery.domain.board.entity.BoardEntity;
 import com.delivery.domain.board.entity.BoardFileEntity;
 import com.delivery.domain.board.repository.BoardFileRepository;
 import com.delivery.domain.board.repository.BoardRepository;
+import com.delivery.domain.store.entity.StoreEntity;
+import com.delivery.domain.store.repository.StoreRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -29,6 +31,7 @@ import java.util.Optional;
 public class BoardService {
     private final BoardRepository boardRepository;
     private final BoardFileRepository boardFileRepository;
+
     public void save(BoardDTO boardDTO) throws IOException {
         // 파일 첨부 여부에 따라 로직 분리
         if (boardDTO.getBoardFile().isEmpty()) {
@@ -77,6 +80,7 @@ public class BoardService {
     public void updateHits(Long id) {
         boardRepository.updateHits(id);
     }
+
 
     @Transactional
     public BoardDTO findById(Long id) {

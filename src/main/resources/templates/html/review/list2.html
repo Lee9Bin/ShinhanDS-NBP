@@ -37,13 +37,12 @@
         <div class="notice-item">
             <pagelist th:fragment="pagelist">
                 <div id="contents" >
-                    <div class="eachComment" th:each="board: ${boardList}" th:if="${board.boardWriter == session.loginName}" style="width: 100%">
+                    <div class="eachComment" th:each="board: ${boardList}" th:if="${board.boardWriter == '관리자'}" style="width: 100%">
                         <div>
                             <div class="time" style="float: right; font-size: 15px;">조회수 :<span th:text="${board.boardHits}">0</span></div>
                             <div class="name" th:text="${board.boardWriter}" ></div>
-                            <a th:href="@{|/board/${board.id}|}"><button class="deleteComment" style="float: right">상세보기</button></a>
                         </div>
-                        <div class="inputValue" th:text="${board.boardTitle}"></div>
+                        <a th:href="@{|/board/${board.id}|}"><div class="inputValue" th:text="${board.boardTitle}"></div></a>
                         <div><img th:src="@{|/upload/${board.storedFileName}|}" alt="" style="width: 120px"></div>
                         <div class="inputValue" th:text="${board.boardContents}"></div>
                         <div class="time" th:text="*{#temporals.format(board.boardCreatedTime, 'yyyy-MM-dd HH:mm:ss')}"></div>
@@ -59,7 +58,7 @@
     </div>
 </div>
 
-
+<div th:insert="~{layouts/html/footer :: footer}"></div>
 <!--<div name="AllreviewList">-->
 <!--<table>-->
 <!--    <tr>-->
@@ -90,7 +89,6 @@
 
 
 </body>
-
 <script>
 
     const indexReq = () => {
@@ -99,4 +97,3 @@
 </script>
 
 </html>
-<div th:insert="~{layouts/html/footer :: footer}"></div>
