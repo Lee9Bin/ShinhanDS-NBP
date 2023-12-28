@@ -67,7 +67,7 @@ public class MenuFileController {
         MenuFileEntity byMenuEntityId = fileRepository.findByMenuEntity_Id(id);
 
         MenuFileEntity menuFile = fileRepository.findById(byMenuEntityId.getId()).orElse(null);
-        return new UrlResource("file:" + "C:/project/sinhan_img/"+ menuFile.getSavedNm());
+        return new UrlResource("file:" + "/Users/kky/test/"+ menuFile.getSavedNm());
     }
 
     // 첨부 파일 다운로드
