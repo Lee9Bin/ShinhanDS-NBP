@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     console.log('Checkbox state changed');
 
-    var checkboxes = document.querySelectorAll('.menu-item input[type="checkbox"]');
+    var checkboxes = document.querySelectorAll('.menuList input[type="checkbox"]');
     var rightMenuContainer = document.getElementById('rightmenus');
     var totalPriceElement = document.querySelector('.sumAmount');
 
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     checkboxes.forEach(function (checkbox) {
         checkbox.addEventListener('change', function () {
-            var menuContainer = checkbox.closest('.menu-item');
+            var menuContainer = checkbox.closest('.menuList');
             var name = menuContainer.querySelector('span:nth-child(2)').textContent;
 
             // 체크 해제 시 해당 메뉴의 rightmenu 제거
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function getMenuContainerByName(name) {
-        var menuContainers = document.querySelectorAll('.menu-item');
+        var menuContainers = document.querySelectorAll('.menuList');
         for (var i = 0; i < menuContainers.length; i++) {
             if (menuContainers[i].querySelector('span:nth-child(2)').textContent === name) {
                 return menuContainers[i];
