@@ -85,7 +85,8 @@ public class StoreController {
         log.info("메뉴 디테일 페이지"+menuListEntity.toString());
         model.addAttribute("store",storeDto1);
         model.addAttribute("stores", storeEntity.get());
-        model.addAttribute("editStore", storeService.EditStores(id).get());
+        model.addAttribute("editStore", storeService.EditStores(id).get()); // 이렇게 하나 더 만들어서 해
+        model.addAttribute("editMenu", menuService.EditMenus(id)); // 이렇게 하나 더 만들어서 해
         model.addAttribute("menuList", menuListEntity);
         // model.addAttribute("base64Image", storePicturePath);
         return "html/store/detail";

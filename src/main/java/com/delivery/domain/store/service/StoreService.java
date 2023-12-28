@@ -1,6 +1,8 @@
 package com.delivery.domain.store.service;
 
 
+import com.delivery.domain.menu.repository.MenuRepository;
+import com.delivery.domain.menufile.repository.MenuFileRepository;
 import com.delivery.domain.owner.entity.OwnerEntity;
 import com.delivery.domain.owner.repository.OwnerRepository;
 import com.delivery.domain.store.dto.StoreDto;
@@ -30,6 +32,8 @@ public class StoreService {
     private final StoreRepository storeRepository;
     private final StoreFileService storeFileService;
     private final StoreFileRepository storeFileRepository;
+    private final MenuRepository menuRepository;
+    private final MenuFileRepository menuFileRepository;
     //가게 키워드 검색
     public List<StoreEntity> searchStoresByName(String searchTerm) {
         return storeRepository.findByNameContainingIgnoreCase(searchTerm);
@@ -80,6 +84,9 @@ public class StoreService {
         }
         return null;
     }
+
+
+
 
 //
 //    //가게 수정

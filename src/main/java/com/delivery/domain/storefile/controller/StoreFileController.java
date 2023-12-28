@@ -3,8 +3,6 @@ package com.delivery.domain.storefile.controller;
 import com.delivery.domain.storefile.entity.StoreFileEntity;
 import com.delivery.domain.storefile.repository.StoreFileRepository;
 import com.delivery.domain.storefile.service.StoreFileService;
-import jakarta.servlet.http.HttpServletRequest;
-import java.io.File;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;
@@ -72,7 +70,7 @@ public class StoreFileController {
     }
 
 
-    //   이미지 출력
+    //  가게 이미지 출력
     @GetMapping("/images/{fileId}")
     @ResponseBody
     public Resource downloadImage(@PathVariable("fileId") Long id, Model model) throws IOException{
@@ -81,7 +79,6 @@ public class StoreFileController {
         log.info("file 경로 - " + file.getSavedPath());
         return new UrlResource("file:" + "C:/project/sinhan_img/"+file.getSavedNm());
     }
-
     // 첨부 파일 다운로드
     @GetMapping("/attach/{id}")
     public ResponseEntity<Resource> downloadAttach(@PathVariable Long id) throws MalformedURLException {

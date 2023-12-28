@@ -11,14 +11,14 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.UriUtils;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -64,7 +64,7 @@ public class MenuFileController {
     public Resource downloadImage(@PathVariable("fileId") Long id, Model model) throws IOException{
 
         MenuFileEntity menuFile = fileRepository.findById(id).orElse(null);
-        return new UrlResource("file:" + menuFile.getSavedPath());
+        return new UrlResource("file:" + "C:/project/sinhan_img/"+ menuFile.getSavedNm());
     }
 
     // 첨부 파일 다운로드

@@ -1,9 +1,361 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layouts/html/link :: link"/> <!--메타 정보 등-->
+<link rel="stylesheet" href="/css/order/order.css"/>
+<script src = "/static/js/order/cart.js"></script>
 
-<link rel="stylesheet" href="/css/order/cart.css"/>
-<script src="/js/order/cart.js" defer></script>
+<style>
+
+    #container1 {
+        width: 100%;
+
+        height: 900px;
+        border: 1px solid black;
+        display: flex;
+        /*flex-direction: column;*/
+        align-items: center;
+        justify-content: center;
+    }
+
+
+    /*  왼쪽 영역 시작*/
+    #left {
+        width: 60%;
+        height: 100%;
+        border: 1px solid red;
+    }
+
+    #leftBox {
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    #left>div {
+        border: 1px solid black;
+
+    }
+
+    #storeImgDiv {
+        height: 25%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #storeImg {
+        width: 300px;
+        height: 200px;
+        border: 1px solid black;
+    }
+
+    #storeContent {
+        height: 25%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .storeInfo {
+        width: 100%;
+        height: 30%;
+        border: 1px solid black;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+
+
+    .label {
+        width: 20%;
+        padding-left: 10px;
+    }
+
+    .Info {
+        width: 65%;
+        text-align: center;
+    }
+
+    #storeFoot {
+        width: 100%;
+        height: 50%;
+        position: relative;
+        overflow: auto;
+    }
+
+    #menuBox {
+        width: 99%;
+        height: 100%;
+        border: 1px solid rebeccapurple;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+
+        position: absolute;
+    }
+
+    .menudiv {
+
+        height: 20%;
+        border: 1px solid black;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .menudiv > div {
+        height: 100%;
+        width: 25%;
+        border: 1px solid black;
+    }
+
+
+    #menuImg {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 20%;
+    }
+
+    #menuImg>img {
+        width: 100px;
+        height: 80px;
+    }
+
+
+    #menuContent {
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #menuContent>div {
+        width: 100%;
+        height: 33%;
+        border: 1px solid black;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+    #menuQuen {
+        width: 15%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #plusButton {
+        width: 10%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /*  왼쪽 영역 끝*/
+
+
+    #right {
+        width: 38%;
+        height: 100%;
+        border: 1px solid blue;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #top {
+        width: 100%;
+        height: 70%;
+        border: 1px solid black;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+    #top>div {
+        width: 100%;
+        border: 1px solid black;
+        height: 33.3%;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    #top>#label {
+        height: 10%;
+        line-height: 50px;
+    }
+
+    #top>#rightmenus {
+        height: 80%;
+
+    }
+
+    .rightmenu {
+        margin-top: 1rem;
+        width: 100%;
+        height: 10%;
+        display: flex;
+        flex-direction: row;
+        padding-left: 10px;
+        padding-right: 10px;
+        font-weight: bold;
+        text-align: center;
+        font-size: 10px;
+        line-height: 50px;
+    }
+
+    .rightmenu>div {
+        width: 33.3%;
+        border: 1px solid black;
+    }
+
+
+    #top>#totalPriceBox {
+        height: 10%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #bottom {
+        width: 100%;
+        height: 30%;
+        border: 1px solid black;
+
+    }
+
+    #bottom>div {
+        width: 100%;
+        height: 50%;
+        border: 1px solid black;
+    }
+
+    #button1 {
+        width: 90%;
+        height: 100%;
+        border: 1px solid black;
+        display: flex;
+
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+
+    }
+
+    #button1>div {
+        width: 30%;
+        border: 1px solid black;
+        height: 40%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-weight: bold;
+    }
+
+    #deliver {
+        background-color: #9cacbd;
+    }
+
+    #pickup {
+        background-color: #9cacbd;
+    }
+
+    #pay {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-weight: bold;
+    }
+
+    #payButton {
+        background-color: #9cacbd;
+        width: 70%;
+        height: 40%;
+        border: 1px solid black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .store-new{
+        height: 4rem;
+        margin-top: 2rem;
+        text-align: center;
+        font-size: 2em;
+        font-weight: bold;
+        line-height: 3rem;
+    }
+
+    .store-description{
+        height: 4rem;
+        margin-top: 2rem;
+        text-align: center;
+        font-size: 1em;
+        font-weight: bold;
+    }
+
+    .store-menu > h2{
+        text-align: center;
+        margin-top: 1rem;
+        font-size: 2em;
+        font-weight: bold;
+    }
+
+
+    .store-menu {
+        text-align: center;
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .m-t1 {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+        margin-bottom: 15px;
+        font-weight: bold;
+        background-color: #787d86;
+        height: 30px;
+        text-align: center;
+        margin-top: 4px;
+    }
+
+    .menu-item {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+        align-items: center;
+        margin-bottom: 0;
+        text-align: center;
+    }
+
+    /*img {*/
+    /*    width: 100%;*/
+    /*    height: auto;*/
+
+    /*}*/
+
+    input[type="checkbox"] {
+        margin-left: 5px;
+    }
+
+    .quantity-input {
+        width: 50px;
+    }
+
+
+</style>
 
 </head>
 <body>
@@ -26,6 +378,7 @@
             <hr>
             <div class="store-description">
                 <span th:text="${stores.description}"></span>
+
             </div>
         </div>
 
@@ -33,11 +386,18 @@
             <!--총 메뉴 영역-->
             <div class="store-menu">
                 <h2>메뉴</h2>
+                <div class="m-t1">
+                    <div>메뉴</div>
+                    <div>이름</div>
+                    <div>설명</div>
+                    <div>가격</div>
+                    <div>선택</div>
+                </div>
                 <div th:each="menuItem : ${menuList}" class="menu-item">
-                    <img th:src="@{'/img/menu/' + ${menuItem}}" alt="Store Image"/>
+                    <img th:src="|/images/menu/${editMenu.id}|" alt="Store Image" width="200px" height="100px"/>
                     <span th:text="${menuItem.name}"></span>
                     <span th:text="${menuItem.content}"></span>
-                    <span th:text="${menuItem.price}"></span>
+                    <span th:text="${menuItem.price}" id="price"></span>
                     <input type="checkbox" th:name="'selectedMenus'" th:value="${menuItem.storeId}"/>
                 </div>
             </div>
@@ -57,22 +417,17 @@
 
                 <!-- 사용자가 메뉴 추가시 동적으로 추가될 메뉴 div-->
                 <div class="rightmenu">
-                    <div id="rightMenuName">
-                        망곰이
-                    </div>
-                    <div id="rightMenuQuen">
-                        수량:1개
-                    </div>
-                    <div id="rightMenuPrice">
-                        가격:5000원
-                    </div>
+                    <div id="rightMenuName">선택된 메뉴 이름</div>
+                    <div id="rightMenuQuen"> 수량: <input type="number" min="1" value="1"
+                                                        data-menu-name="${menuItem.name}" class="quantity-input" /></div>
+                    <div id="rightMenuPrice">가격: 0원</div>
                 </div>
                 <!-- 사용자가 메뉴 추가시 동적으로 추가될 메뉴 div-->
 
             </div>
             <div id="totalPriceBox">
-                <div>결제금액:</div>
-                <div>13800</div>
+                <div>결제금액: </div>
+                <div class="sumAmount">0</div>
             </div>
         </div>
         <div id="bottom">
@@ -95,7 +450,10 @@
             </div>
 
         </div>
+
     </div>
+
+
 
     </div>
 </section>
