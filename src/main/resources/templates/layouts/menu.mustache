@@ -143,9 +143,6 @@
     }
 
     function redirectToStore(id) {
-        // 클릭한 경우의 추가 동작이 필요하다면 여기에 추가 로직을 작성할 수 있습니다.
-        // 예를 들어, 특별한 동작이 필요한 경우에만 이 함수를 사용하고,
-        // 일반적인 링크 이동은 a 태그 자체에 위임합니다.
 
         window.location.href = "/owner/store/" + id;
     }
@@ -153,8 +150,6 @@
     // 이미지 ID를 찾는 함수
     function findImageIdForStore(storeId) {
         console.log(storeId);
-        // storeFileEntityList에서 해당 가게 ID에 맞는 이미지 ID를 찾아서 반환하는 로직
-        // 예시: storeFileEntityList에서 적절한 이미지 정보를 찾아서 반환
         const obj = JSON.stringify(storeFileEntityList);
         // obj는 비어있다
         console.log("list : " + obj);
