@@ -23,9 +23,10 @@
         width: 60%;
         height: 100%;
         border: 1px solid red;
+        position: relative;
     }
 
-    #leftBox {
+    .leftBox {
         display: flex;
         flex-direction: column;
 
@@ -50,11 +51,11 @@
         border: 1px solid black;
     }
 
-    #storeContent {
-        height: 25%;
-        display: flex;
-        flex-direction: column;
-    }
+    /*#storeContent {*/
+    /*    height: 25%;*/
+    /*    display: flex;*/
+    /*    flex-direction: column;*/
+    /*}*/
 
     .storeInfo {
         width: 100%;
@@ -212,12 +213,11 @@
 
     .rightmenu>div {
         width: 33.3%;
-        border: 1px solid black;
     }
 
 
     #top>#totalPriceBox {
-        height: 10%;
+
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -287,17 +287,17 @@
     }
 
     .store-new{
-        height: 4rem;
-        margin-top: 2rem;
+        height: 2rem;
+        margin-top: 1rem;
         text-align: center;
         font-size: 2em;
         font-weight: bold;
-        line-height: 3rem;
+        line-height: 1rem;
     }
 
     .store-description{
-        height: 4rem;
-        margin-top: 2rem;
+        height: 2rem;
+        margin-top: 1rem;
         text-align: center;
         font-size: 1em;
         font-weight: bold;
@@ -348,10 +348,17 @@
 
     input[type="checkbox"] {
         margin-left: 5px;
+
     }
 
     .quantity-input {
         width: 50px;
+        border: none;
+    }
+    .quantity-input:focus {
+        width: 50px;
+        border: none;
+        outline: none;
     }
 
 
@@ -431,17 +438,6 @@
             </div>
         </div>
         <div id="bottom">
-            <div id="button1">
-
-                <div id="deliver">
-                    배달
-                </div>
-
-                <div id="pickup">
-                    픽업
-                </div>
-
-            </div>
 
             <div id="pay">
                 <div id="payButton">
