@@ -14,6 +14,9 @@ public interface StoreRepository extends JpaRepository<StoreEntity, Long> {
     Optional<StoreEntity> findById(Long id);
 
     Optional<StoreEntity> findByOwnerEntity_Id(Long aLong);
+
+//    Optional<StoreEntity> findByStoreEntity_Id(Long aLong);
+
     // 대소문자 구별하지 않고 검색
     List<StoreEntity> findByNameContainingIgnoreCase(String name);
 

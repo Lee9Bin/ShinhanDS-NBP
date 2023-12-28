@@ -4,6 +4,7 @@ import com.delivery.domain.menu.dto.MenuDto;
 import com.delivery.domain.menu.service.MenuService;
 import com.delivery.domain.store.dto.StoreDto;
 import com.delivery.domain.store.entity.StoreEntity;
+import com.delivery.domain.store.repository.StoreRepository;
 import com.delivery.domain.store.service.StoreService;
 import groovy.util.logging.Slf4j;
 import jakarta.servlet.http.HttpSession;
@@ -15,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import static org.hibernate.query.sqm.tree.SqmNode.log;
 
@@ -25,6 +27,7 @@ import static org.hibernate.query.sqm.tree.SqmNode.log;
 public class StoreController {
     private final StoreService storeService;
     private final MenuService menuService;
+    private final StoreRepository storeRepository;
 
     //키워드 검색
     @GetMapping("/searchResults")
@@ -48,11 +51,13 @@ public class StoreController {
     //점주 가게 등록 저장
     @PostMapping("/new")
     public String storeSave(@ModelAttribute StoreDto storeDto, HttpSession session, @RequestParam("file") MultipartFile file) throws IOException {
+        System.out.println("가게 등록입니다:" + file.toString());
+        System.out.println(file);
         storeService.save(storeDto, (Long) session.getAttribute("ownerId"),file);
         return "redirect:/owner/" + session.getAttribute("ownerId");
     }
 
-//    //점주 가게 수정 폼
+    //    //점주 가게 수정 폼
 //    @GetMapping("/update")
 //    public String storeUpdateForm(Model model, HttpSession session) {
 //        StoreDto storeDto = storeService.findById((Long) session.getAttribute("ownerId"));
@@ -71,13 +76,25 @@ public class StoreController {
 //
     @GetMapping("/{id}")
     public String detail(@PathVariable Long id, Model model, HttpSession session) {
+        StoreDto storeDto1 = storeService.findById(id);
         StoreDto storeDto = storeService.findById((Long) session.getAttribute("ownerId"));
         log.info("스토어 디티오 참조값: "+storeDto);
+
         List<MenuDto> menuListEntity = menuService.findAllByStoreEntity_Id(id);
+
+        Optional<StoreEntity> storeEntity = storeRepository.findById(id);
+
         log.info("메뉴 디테일 페이지"+menuListEntity.toString());
-        model.addAttribute("store",storeDto);
+
+        model.addAttribute("store",storeDto1);
+        model.addAttribute("stores", storeEntity.get());
+        model.addAttribute("editStore", storeService.EditStores(id).get()); // 가게 사진
+        model.addAttribute("editMenu", menuService.EditMenus(id)); // 메뉴 사진
         model.addAttribute("menuList", menuListEntity);
-            // model.addAttribute("base64Image", storePicturePath);
+
+        // model.addAttribute("base64Image", storePicturePath);
+
+
         return "html/store/detail";
         // 예시로 null을 반환
     }

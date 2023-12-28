@@ -30,4 +30,7 @@ public class StoreDto {
                 storeFileEntity
         );
     }
+
+
+
 }

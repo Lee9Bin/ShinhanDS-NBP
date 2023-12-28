@@ -11,14 +11,14 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.UriUtils;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -29,40 +29,45 @@ public class MenuFileController {
     private final MenuFileRepository fileRepository;
 
 
-    @GetMapping("/menu-upload")
-    public String menuTestUploadForm(){
-        return "layouts/menuImage";
-    }
-    @PostMapping("/menu-upload")
-    public String menuUploadFile(@RequestParam("file") MultipartFile file, @RequestParam("files") List<MultipartFile> files) throws IOException {
-        fileService.saveFile(file);
-
-        for (MultipartFile multipartFile : files) {
-            fileService.saveFile(multipartFile);
-        }
-
-        return "redirect:/";
-    }
-
-    @GetMapping("/menu-view")
-    public String menuView(Model model) {
-
-        List<MenuFileEntity> files = fileRepository.findAll();
-        files.forEach( a-> log.info("test --> " + a.toString()));
-
-        model.addAttribute("menu",files);
-        return "layouts/menuView";
-    }
+//    @GetMapping("/menu-upload")
+//    public String menuTestUploadForm(){
+//        return "layouts/menuImage";
+//    }
+//    @PostMapping("/menu-upload")
+//    public String menuUploadFile(@RequestParam("file") MultipartFile file, @RequestParam("files") List<MultipartFile> files) throws IOException {
+//        fileService.saveFile(file);
+//
+//        for (MultipartFile multipartFile : files) {
+//            fileService.saveFile(multipartFile);
+//        }
+//
+//        return "redirect:/";
+//    }
+//
+//    @GetMapping("/menu-view")
+//    public String menuView(Model model) {
+//
+//        List<MenuFileEntity> files = fileRepository.findAll();
+//        files.forEach( a-> log.info("test --> " + a.toString()));
+//
+//        model.addAttribute("menu",files);
+//        return "layouts/menuView";
+//    }
 
 
     //   이미지 출력
     //   이미지 출력
-    @GetMapping("/menu/images/{fileId}")
+
+    @GetMapping("/images/menu/{fileId}")
+
     @ResponseBody
     public Resource downloadImage(@PathVariable("fileId") Long id, Model model) throws IOException{
 
-        MenuFileEntity menuFile = fileRepository.findById(id).orElse(null);
-        return new UrlResource("file:" + menuFile.getSavedPath());
+        // 여기서 id = menu id 이고 그에 해당하는 menufile_id 찾기
+        MenuFileEntity byMenuEntityId = fileRepository.findByMenuEntity_Id(id);
+
+        MenuFileEntity menuFile = fileRepository.findById(byMenuEntityId.getId()).orElse(null);
+        return new UrlResource("file:" + "C:/project/sinhan_img/"+ menuFile.getSavedNm());
     }
 
     // 첨부 파일 다운로드
