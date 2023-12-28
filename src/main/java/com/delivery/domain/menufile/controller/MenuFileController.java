@@ -63,8 +63,11 @@ public class MenuFileController {
     @ResponseBody
     public Resource downloadImage(@PathVariable("fileId") Long id, Model model) throws IOException{
 
-        MenuFileEntity menuFile = fileRepository.findById(id).orElse(null);
-        return new UrlResource("file:" + "/User/kky/test/"+ menuFile.getSavedNm());
+        // 여기서 id = menu id 이고 그에 해당하는 menufile_id 찾기
+        MenuFileEntity byMenuEntityId = fileRepository.findByMenuEntity_Id(id);
+
+        MenuFileEntity menuFile = fileRepository.findById(byMenuEntityId.getId()).orElse(null);
+        return new UrlResource("file:" + "C:/project/sinhan_img/"+ menuFile.getSavedNm());
     }
 
     // 첨부 파일 다운로드

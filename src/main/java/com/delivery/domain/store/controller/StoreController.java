@@ -79,16 +79,22 @@ public class StoreController {
         StoreDto storeDto1 = storeService.findById(id);
         StoreDto storeDto = storeService.findById((Long) session.getAttribute("ownerId"));
         log.info("스토어 디티오 참조값: "+storeDto);
+
         List<MenuDto> menuListEntity = menuService.findAllByStoreEntity_Id(id);
 
         Optional<StoreEntity> storeEntity = storeRepository.findById(id);
+
         log.info("메뉴 디테일 페이지"+menuListEntity.toString());
+
         model.addAttribute("store",storeDto1);
         model.addAttribute("stores", storeEntity.get());
-        model.addAttribute("editStore", storeService.EditStores(id).get()); // 이렇게 하나 더 만들어서 해
-        model.addAttribute("editMenu", menuService.EditMenus(id)); // 이렇게 하나 더 만들어서 해
+        model.addAttribute("editStore", storeService.EditStores(id).get()); // 가게 사진
+        model.addAttribute("editMenu", menuService.EditMenus(id)); // 메뉴 사진
         model.addAttribute("menuList", menuListEntity);
+
         // model.addAttribute("base64Image", storePicturePath);
+
+
         return "html/store/detail";
         // 예시로 null을 반환
     }
