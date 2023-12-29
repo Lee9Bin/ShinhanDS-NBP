@@ -43,7 +43,6 @@ document.addEventListener('DOMContentLoaded', function () {
             rightMenuDiv.classList.add('rightmenu');
             rightMenuDiv.setAttribute('data-menu-name', name);
             rightMenuDiv.innerHTML = `
-
         <input type="hidden" value="${menuUrl}">
         <div id="menuName">${name}</div>
         <div>수량: <input type="number" min="1" value="1" data-menu-name="${name}" class="quantity-input" /></div>
