@@ -15,16 +15,22 @@ public class OrderDeliveryController {
     private final OrderDeliveryService orderDeliveryService;
 
     @GetMapping("/new/{id}")
-    public String createOrderDeliverForm(Model model){
+    public String createOrderDeliverForm(Model model) {
         OrderDeliveryDto orderDeliveryDto = new OrderDeliveryDto();
         orderDeliveryDto.setAddress("123123");
         model.addAttribute("entity", orderDeliveryDto);
         return "html/order/order";
     }
 
-    @GetMapping("/orderPay")
-    public String orderPay(){
-        return "html/order/orderPay";
+//    @GetMapping("/orderPay")
+//    public String orderPay(Model model) {
+////        model.addAttribute("orderMenu", orderRequests);
+//        return "html/order/orderPay";
+//    }
+
+    @GetMapping("/orderTest")
+    public String test111(){
+        return "html/order/orderP";
     }
 
 //    @PostMapping("/new")
