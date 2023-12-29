@@ -345,8 +345,7 @@
             <div id="rightmenus">
 
                 <!-- 사용자가 메뉴 추가시 동적으로 추가될 메뉴 div-->
-                <div class="rightmenu" th:each="menuItem : ${menuList}">
-                    <input type="hidden" th:value="${menuItem.id}" id="menuId">
+                <div class="rightmenu">
                     <div id="rightMenuName">선택된 메뉴 이름</div>
                     <div id="rightMenuQuen"> 수량: <input type="number" min="1" value="1"
                                                         data-menu-name="${menuItem.name}" class="quantity-input" name="count"/></div>
@@ -360,7 +359,9 @@
                 <div>결제금액  :  </div>
                 <div class="sumAmount">0</div><span>원</span>
             </div>
-        <div id="bottom"><a href="/customer/orderPay" class="pay payButton" onclick=submitOrder()>결제</a></div>
+        <div id="bottom"><a href="/customer/orderPay" onclick=submitOrder() class="pay payButton" >결제</a>
+<!--                <button onclick=submitOrder()>주문테스트</button>-->
+        </div>
             <!-- Button trigger modal -->
         </div>
 
@@ -373,47 +374,92 @@
 
 <script>
     const btn = document.querySelector(".payButton");
-    // btn.addEventListener('click', submitOrder);
     function submitOrder() {
-        // FormData 객체 생성
-        var formData = new FormData();
-
-        // 동적으로 추가된 각 메뉴 정보를 FormData에 추가
-
-
+        // 동적으로 추가된 각 메뉴 정보를 배열에 추가
         let menuElements = document.querySelectorAll('.rightmenu');
-        menuElements.forEach((data) => {
-            // let menuId = data.querySelector('#menuId').value;
+        let orderRequests = Array.from(menuElements).map(data => {
+            let menuId = data.querySelector('input[type=hidden]').value;
             let menuName = data.querySelector('#menuName').textContent;
             let quantity = data.querySelector('.quantity-input').value;
             let menuPrice = data.querySelector('#menuPrice').textContent;
-            // let totalPrice = menuElement.querySelector('#finalAmount').textContent;
 
 
-            // 메뉴 정보를 FormData에 추가
-            //     menuId: menuId,
-            formData.append('orderRequests', JSON.stringify({
+            return {
+                menuId: menuId,
                 menuName: menuName,
                 quantity: quantity,
                 menuPrice: menuPrice
-            }));
+            };
         });
 
-        // AJAX를 사용하여 서버로 POST 요청 보내기
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/order/orderContent', true);
-        xhr.onload = function () {
-            // 서버 응답에 대한 처리
-            if (xhr.status === 200) {
-                alert('주문이 완료되었습니다.');
-                console.log(formData)
+        // 서버로 전송할 데이터 객체 생성
+        let requestData = orderRequests;
 
-            } else {
-                alert('주문 실패');
-            }
-        };
-        xhr.send(formData);
+        // fetch API를 사용하여 서버로 POST 요청 보내기
+        fetch('/order/orderContent', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestData),
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert('주문이 완료되었습니다.');
+                } else {
+                    alert('주문 실패');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
     }
+
+
+
+
+    // btn.addEventListener('click', submitOrder);
+    // function submitOrder() {
+    //     // FormData 객체 생성
+    //     var formData = new FormData();
+    //
+    //     // 동적으로 추가된 각 메뉴 정보를 FormData에 추가
+    //
+    //
+    //     let menuElements = document.querySelectorAll('.rightmenu');
+    //     menuElements.forEach((data) => {
+    //         let menuId = data.querySelector('input[type=hidden]').value;
+    //         let menuName = data.querySelector('#menuName').textContent;
+    //         let quantity = data.querySelector('.quantity-input').value;
+    //         let menuPrice = data.querySelector('#menuPrice').textContent;
+    //         // let totalPrice = menuElement.querySelector('#finalAmount').textContent;
+    //
+    //
+    //         // 메뉴 정보를 FormData에 추가
+    //         //     menuId: menuId,
+    //         formData.append('orderRequests', JSON.stringify({
+    //             menuId: menuId,
+    //             menuName: menuName,
+    //             quantity: quantity,
+    //             menuPrice: menuPrice
+    //         }));
+    //     });
+    //
+    //     // AJAX를 사용하여 서버로 POST 요청 보내기
+    //     var xhr = new XMLHttpRequest();
+    //     xhr.open('POST', '/order/orderContent', true);
+    //     xhr.onload = function () {
+    //         // 서버 응답에 대한 처리
+    //         if (xhr.status === 200) {
+    //             alert('주문이 완료되었습니다.');
+    //             console.log(formData)
+    //
+    //         } else {
+    //             alert('주문 실패');
+    //         }
+    //     };
+    //     xhr.send(formData);
+    // }
 </script>
 
 <div th:replace="layouts/html/footer :: footer"/> <!--푸터 뼈대-->

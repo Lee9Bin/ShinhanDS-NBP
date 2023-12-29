@@ -1,31 +1,50 @@
 package com.delivery.domain.orderMenu.controller;
 
-import com.delivery.domain.orderMenu.repository.OrderMenuRepository;
+import com.delivery.domain.orderMenu.dto.OrderMenuDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
-import java.util.List;
+import java.util.ArrayList;
 
 @Controller
 @RequiredArgsConstructor
 @Slf4j
 public class OrderMenuController {
 
-    private final OrderMenuRepository orderMenuRepository;
-
-    @PostMapping("/order/orderContent")
-    public String processOrder(@RequestParam List<String> orderRequests, Model model)  {
-//        model.addAttribute()
-        orderRequests.forEach(a -> log.info("데이터가 들어와라 - " + a.toString()));
-        model.addAttribute("orderMenu", orderRequests);
+//    private final OrderMenuRepository orderMenuRepository;
 
 
 
-        // 성공적으로 처리되었다는 응답 반환
+
+//    @GetMapping("/customer/orderPay")
+//    public String orderPay(Model model) {
+//        // 모델에 데이터 추가
+//        // 리다이렉트로 전달된 데이터를 가져와 모델에 추가
+//        Object processedOrders = model.asMap().get("processedOrders");
+//        if (processedOrders != null) {
+//            model.addAttribute("processedOrders", processedOrders);
+//        }
+//
+//        return "html/order/orderPay";
+//    }
+
+
+    @GetMapping("/customer/orderPay")
+    public String getAllOrders(Model model ,@ModelAttribute("processedOrders") ArrayList<OrderMenuDto> order) {
+        // 실제 데이터는 데이터베이스에서 가져오거나, 임시로 저장된 데이터를 사용하면 됩니다.
+
+        // 모델에 데이터 추가
+        model.addAttribute("processedOrders", order);
+
+        // 해당 뷰 페이지로 이동
         return "html/order/orderPay";
     }
+
+
+
+
 }
