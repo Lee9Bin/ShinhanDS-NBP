@@ -68,8 +68,8 @@
     <div class="right-align basketrowcmd">
     </div>
 
-    <div class="bigtext right-align sumcount" id="sum_p_num">상품갯수: 4개</div>
-    <div class="bigtext right-align box blue summoney" id="sum_p_price">합계금액: 74,200원</div>
+    <div class="bigtext right-align sumcount" id="sum_p_num">상품갯수: 0개</div>
+    <div class="bigtext right-align box blue summoney" id="sum_p_price">합계금액: 0원</div>
 
     <div id="goorder" class="">
         <div class="clear"></div>
@@ -161,11 +161,17 @@
     function renderProcessedOrders(processedOrders) {
         // 받아온 데이터를 표시할 HTML 요소를 선택
         const container = document.getElementById("orderContentContainer");
+        let totalCount = 0;
+        let totalPrice = 0;
 
         // 데이터를 순회하면서 HTML에 추가
         processedOrders.forEach(item => {
             const itemElement = document.createElement("div");
             const newList = document.querySelector('#orderContentContainer');
+
+            // 상품 개수와 합계금액 계산
+            totalCount += parseInt(item.quantity);
+            totalPrice += parseFloat(item.menuPrice);
             newList.innerHTML = `
                 <div>
                 <img src="${item.menuId}" alt="#">
@@ -176,7 +182,23 @@
             `;
             // container.appendChild(itemElement);
         });
+        // 상품 개수와 합계금액을 업데이트
+        updateTotalUI(totalCount, totalPrice);
     }
+
+    function updateTotalUI(totalCount, totalPrice) {
+        document.getElementById('sum_p_num').textContent = `상품갯수: ${totalCount}개`;
+        document.getElementById('sum_p_price').textContent = `합계금액: ${totalPrice.formatNumber()}원`;
+    }
+
+    // 숫자 3자리 콤마찍기
+    Number.prototype.formatNumber = function () {
+        if (this == 0) return 0;
+        let regex = /(^[+-]?\d+)(\d{3})/;
+        let nstr = (this + '');
+        while (regex.test(nstr)) nstr = nstr.replace(regex, '$1' + ',' + '$2');
+        return nstr;
+    };
     // function renderOrderContent(orderContent) {
     //     // 받아온 데이터를 표시할 HTML 요소를 선택
     //     const container = document.getElementById("orderContentContainer");
@@ -241,7 +263,7 @@
 
 
 
-<script src="/js/order/orderPay.js"></script>
+<!--<script src="/js/order/orderPay.js"></script>-->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>
 </html>
