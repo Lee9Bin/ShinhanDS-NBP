@@ -1,6 +1,7 @@
 package com.delivery.domain.board.entity;
 
 import com.delivery.domain.board.dto.BoardDTO;
+import com.delivery.domain.store.entity.StoreEntity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,6 +21,10 @@ public class BoardEntity extends BaseEntity {
 
     @Column(length = 20, nullable = false) // 크기 20, not null
     private String boardWriter;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "store_id")
+    private StoreEntity storeEntity;
 
     @Column // 크기 255, null 가능
     private String boardPass;
@@ -74,6 +79,7 @@ public class BoardEntity extends BaseEntity {
         boardEntity.setFileAttached(1); // 파일 있음.
         return boardEntity;
     }
+
 }
 
 

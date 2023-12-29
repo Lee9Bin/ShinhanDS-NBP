@@ -11,6 +11,8 @@ import java.util.Optional;
 public interface StoreRepository extends JpaRepository<StoreEntity, Long> {
     List<StoreEntity> findAll();
 
+    Optional<StoreEntity> findById(Long id);
+
     Optional<StoreEntity> findByOwnerEntity_Id(Long aLong);
 
 //    Optional<StoreEntity> findByStoreEntity_Id(Long aLong);
