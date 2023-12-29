@@ -20,7 +20,7 @@
 }
 
 .basketdiv {
-    width: 50%;
+    width: 70%;
     border-top: 1px solid #e0e0e0;
     float: center;
     font-size: 0.9375em;
@@ -50,24 +50,26 @@
     display: block;
     float: left;
 }
-.basketdiv .row > .subdiv:nth-child(1) {
-    width: 50%;
-}
-.basketdiv .row > .subdiv:nth-child(2) {
+.basketdiv .row> .subdiv:nth-child(1) {
     width: 40%;
 }
-.basketdiv .row > .subdiv:nth-child(3) {
-    width: 10%;
+.basketdiv  .row> .subdiv:nth-child(2) {
+    width: 20%;
 }
-.basketdiv2 .row > .subdiv:nth-child(1) {
-    width: 60%;
+.basketdiv  .row> .subdiv:nth-child(3) {
+    width: 20%;
 }
-.basketdiv2 .row > .subdiv:nth-child(2) {
-    width: 40%;
+.basketdiv  .row> .subdiv:nth-child(4) {
+    width: 20%;
 }
+
+span{
+    margin-left: 3rem;
+    font-size: 2rem;
+}
+
 .basketdiv .row > div > div {
     display: block;
-    float: left;
     text-align: center;
     margin: 0;
     padding: 12px 0;

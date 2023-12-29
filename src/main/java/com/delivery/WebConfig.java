@@ -41,5 +41,7 @@ public class WebConfig implements WebMvcConfigurer {
                         , "/owner/email-check", "/ownerSignIn", "/customer/**", "/customer/", "/api/articles/**" , "/static/img/**" , "/images/**"
                         , "/articles/**", "/articles/new", "/layouts/**", "/api/get-more-data", "/searchResults","/store/**", "/api/**" , "/owner/**");
 
+
+
     }
 }
