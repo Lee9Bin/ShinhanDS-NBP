@@ -81,7 +81,8 @@ public class MemberController {
         session.removeAttribute("redirectURL");
         // 직전 페이지의 정보를 들고 와야됨
         //return "redirect:" + redirectURL;
-        return "redirect:" + (redirectURL != null ? redirectURL : "/");
+//        return "redirect:" + (redirectURL != null ? redirectURL : "/");
+        return "redirect:/customer/";
 
     }
 

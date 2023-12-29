@@ -48,6 +48,28 @@ input {
     overflow: hidden;
 }
 
+/* detail.css 파일에 다음 CSS 코드를 추가하세요 */
+
+.deleteComment {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 5.5em;
+    height: 3.3em;
+    background-color: #97a2b6;
+    border: none;
+    border-radius: 5px;
+    color: aliceblue;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* 부드러운 전환 효과를 추가합니다 */
+
+    /* 마우스 오버 효과를 위한 스타일 추가 */
+}
+
+.deleteComment:hover {
+    background-color: #5b5e67;
+}
+
+/* 다른 버튼에 대한 필요한 경우 유사한 스타일링을 추가하세요 */
 
 @media all and (max-width: 768px) {
 
@@ -99,6 +121,7 @@ input {
         border: 1px solid #ccc;
         border-radius: 4px;
     }
+
 
 
 

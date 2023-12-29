@@ -17,7 +17,7 @@
 }
 
 #submit{
-    background-color: rgb(0, 128,255);
+    background-color: rgb(120, 125, 134);
     width: 5.5em;
     height: 3.3em;;
     font-size: 15px;
@@ -36,7 +36,7 @@
 }
 
 #deleteComment{
-    background-color: cornflowerblue;
+    background-color: #5b5e67;
     width: 5.5em;
     height: 3.3em;;
     border: none;
@@ -46,14 +46,14 @@
 }
 
 #pageComment{
-    background-color: cornflowerblue;
+    background-color: #97a2b6;
     border: none;
     border-radius: 5px;
     color: aliceblue;
 }
 
 .pageComment{
-    background-color: cornflowerblue;
+    background-color: #97a2b6;
     border: none;
     border-radius: 5px;
     color: aliceblue;

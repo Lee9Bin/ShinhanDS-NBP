@@ -43,7 +43,7 @@ public class MenuFileService {
 
         // 파일 엔티티 생성
         MenuFileEntity file = MenuFileEntity.builder()
-                .menuEntity(menuEntity)
+                .menuEntity(menuEntity) // 조인
                 .orgNm(origName)
                 .savedNm(savedName)
                 .savedPath(savedPath)

@@ -54,7 +54,7 @@ public class StoreController {
         System.out.println("가게 등록입니다:" + file.toString());
         System.out.println(file);
         storeService.save(storeDto, (Long) session.getAttribute("ownerId"),file);
-        return "redirect:/owner/" + session.getAttribute("ownerId");
+        return "redirect:/owner/";
     }
 
     //    //점주 가게 수정 폼

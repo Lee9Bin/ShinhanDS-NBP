@@ -1,5 +1,6 @@
 package com.delivery.domain.orderMenu.controller;
 
+
 import com.delivery.domain.orderMenu.dto.OrderMenuDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,27 +11,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.util.ArrayList;
 
+
 @Controller
 @RequiredArgsConstructor
 @Slf4j
 public class OrderMenuController {
-
-//    private final OrderMenuRepository orderMenuRepository;
-
-
-
-
-//    @GetMapping("/customer/orderPay")
-//    public String orderPay(Model model) {
-//        // 모델에 데이터 추가
-//        // 리다이렉트로 전달된 데이터를 가져와 모델에 추가
-//        Object processedOrders = model.asMap().get("processedOrders");
-//        if (processedOrders != null) {
-//            model.addAttribute("processedOrders", processedOrders);
-//        }
-//
-//        return "html/order/orderPay";
-//    }
 
 
     @GetMapping("/customer/orderPay")

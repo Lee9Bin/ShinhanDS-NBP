@@ -29,7 +29,8 @@ public class OrderDeliveryService {
 
     @Transactional //주문하기
     public OrderDeliveryDto save(OrderDeliveryDto orderDeliveryDto, Long memberID, Long storeId){
-                                //메뉴아이디랑 받아와야할듯
+
+        //메뉴아이디랑 받아와야할듯
         // 처음 주믄을 하면 요청수락대기 단계
         Optional<MemberEntity> targetMember = memberRepository.findById(memberID);
         Optional<StoreEntity> targetStore = storeRepository.findById(storeId);

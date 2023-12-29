@@ -15,7 +15,7 @@
 <form action="/your/payment/endpoint" method="post" onsubmit="return checkAgreement()">
 
     <div class="store_info">
-        <p>${store.name}</p>
+        <p>결제 확인 페이지</p>
     </div>
 
     <!-- 상품정보 영역 -->
@@ -23,13 +23,13 @@
     <br>
 
     <!-- Thymeleaf를 사용하여 주문 정보를 반복적으로 표시합니다. -->
-<!--    <div class="subdiv" th:each="menuItem : ${processedOrders}">-->
-<!--        <span th:text="${menuItem.menuId}"></span>-->
-<!--        <span th:text="${menuItem.menuName}"></span>-->
-<!--        <span th:text="${menuItem.menuPrice}"></span>-->
-<!--        <span th:text="${menuItem.quantity}"></span>-->
-<!--        <div class="basketcmd"><a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delItem();">삭제</a></div>-->
-<!--    </div>-->
+    <!--    <div class="subdiv" th:each="menuItem : ${processedOrders}">-->
+    <!--        <span th:text="${menuItem.menuId}"></span>-->
+    <!--        <span th:text="${menuItem.menuName}"></span>-->
+    <!--        <span th:text="${menuItem.menuPrice}"></span>-->
+    <!--        <span th:text="${menuItem.quantity}"></span>-->
+    <!--        <div class="basketcmd"><a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delItem();">삭제</a></div>-->
+    <!--    </div>-->
 
 
     <input type="hidden" name="cmd" value="order">
@@ -147,6 +147,7 @@
             })
             .catch(error => console.error('Error fetching order content:', error));
     }
+
     function fetchProcessedOrders() {
         fetch("/api/processedOrders")
             .then(response => response.json())
@@ -172,14 +173,13 @@
             totalCount += parseInt(item.quantity);
             totalPrice += parseFloat(item.menuPrice);
             itemElement.innerHTML = `
-                <div>
-
+            <div>
                 <img src="${item.menuId}" alt="#" width="150px" height="100px">
                 <span>${item.menuName}</span>
                 <span>${item.menuPrice}</span>
                 <span>${item.quantity}</span>
-                    </div>
-            `;
+            </div>
+        `;
             container.appendChild(itemElement);
         });
         // 상품 개수와 합계금액을 업데이트
@@ -189,6 +189,11 @@
     function updateTotalUI(totalCount, totalPrice) {
         document.getElementById('sum_p_num').textContent = `상품갯수: ${totalCount}개`;
         document.getElementById('sum_p_price').textContent = `합계금액: ${totalPrice.formatNumber()}원`;
+
+        // 아임포트의 amount 값 업데이트
+        document.getElementById('iamportPayment').addEventListener('click', function () {
+            iamportPayment(totalPrice);
+        });
     }
 
     // 숫자 3자리 콤마찍기
@@ -199,25 +204,9 @@
         while (regex.test(nstr)) nstr = nstr.replace(regex, '$1' + ',' + '$2');
         return nstr;
     };
-    // function renderOrderContent(orderContent) {
-    //     // 받아온 데이터를 표시할 HTML 요소를 선택
-    //     const container = document.getElementById("orderContentContainer");
-    //
-    //     // 데이터를 순회하면서 HTML에 추가
-    //     orderContent.forEach(item => {
-    //         const itemElement = document.createElement("div");
-    //         itemElement.innerHTML = `
-    //             <span>${item.menuId}</span>
-    //             <span>${item.menuName}</span>
-    //             <span>${item.menuPrice}</span>
-    //             <span>${item.quantity}</span>
-    //             <div class="basketcmd"><a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delItem();">삭제</a></div>
-    //         `;
-    //         container.appendChild(itemElement);
-    //     });
-    // }
+
     //버튼 클릭하면 실행
-    function iamportPayment() {
+    function iamportPayment(totalPrice) {
         var loginName = "";
         $.ajax({
             url: '/getLoginName',
@@ -236,7 +225,6 @@
         // merchant_uid에 현재 시간을 추가하여 사용
         var merchantUid = "test_" + currentTime;
 
-
         IMP.init('imp53158047'); //아임포트 관리자 콘솔에서 확인한 '가맹점 식별코드' 입력
 
         IMP.request_pay({
@@ -244,7 +232,7 @@
             pay_method: "card",
             merchant_uid: merchantUid,
             name: "상품",
-            amount: 50,
+            amount: totalPrice, // 합계금액을 여기에 설정
             buyer_id: "1",
             buyer_email: "testiamport@naver.com",
             buyer_name: loginName,
@@ -252,18 +240,26 @@
         }, function (rsp) {
             // callback
             if (rsp.success) {
-                alert("[완료] imp_uid : " + rsp.imp_uid + " / merchant_uid : " + rsp.merchant_uid + "/ name : " + loginName);
-
+                alert("[결제 완료] imp_uid : " + rsp.imp_uid + " / merchant_uid : " + rsp.merchant_uid + "/ name : " + loginName);
+                mainGogo();
             } else {
                 alert("[실패] 코드(" + rsp.error_code + ") / 메세지(" + rsp.error_msg + ")");
             }
         });
     }
+
 </script>
 
 
 
 <!--<script src="/js/order/orderPay.js"></script>-->
+
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    function mainGogo(){
+        window.location.href = 'http://localhost:8080/customer/';
+
+    }
+</script>
 </body>
 </html>
