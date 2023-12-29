@@ -38,7 +38,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/", "/mail", "/mailOwner", "/member/email-check", "/member/login", "/member/save", "/member/logout"
                         , "/css/**", "/html/**", "/img/**", "/js/**", "/*.ico", "/error", "/session-info", "/owner/login", "/owner/save", "/owner/logout"
 
-                        , "/owner/email-check", "/ownerSignIn", "/customer/**", "/customer/", "/api/articles/**" , "/static/img/**" , "/images/**"
+                        , "/owner/email-check", "/ownerSignIn", "/customer/**", "/customer/", "/api/articles/**" , "/static/img/**" , "/images/**", "/static/js/order/cart.js"
                         , "/articles/**", "/articles/new", "/layouts/**", "/api/get-more-data", "/searchResults","/store/**", "/api/**" , "/owner/**");
 
 

@@ -1,7 +1,6 @@
 package com.delivery.domain.mypage.controller;
 
 
-import com.delivery.domain.article.entity.ArticleEntity;
 import com.delivery.domain.menu.service.MenuService;
 import com.delivery.domain.store.entity.StoreEntity;
 import com.delivery.domain.store.repository.StoreRepository;
@@ -55,7 +54,8 @@ public class MypageController {
 
         session.setAttribute("currentPage", 1);
 //        model.addAttribute("store",storeDto);
-        model.addAttribute("stores", storeEntityList);
+        model.addAttribute("stores1", storeEntityList.get(2));
+        model.addAttribute("stores2", storeEntityList.get(5));
 
         // 전체 페이지 수와 현재 페이지 번호를 모델에 추가
         model.addAttribute("totalPages", dummyStorePage.getTotalPages());
