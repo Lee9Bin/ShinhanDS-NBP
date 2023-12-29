@@ -9,7 +9,6 @@
 </head>
 <body>
 
-
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script> <!-- iamport.payment.js -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 
@@ -24,13 +23,13 @@
     <br>
 
     <!-- Thymeleaf를 사용하여 주문 정보를 반복적으로 표시합니다. -->
-<!--    <div class="subdiv" th:each="menuItem : ${processedOrders}">-->
-<!--        <span th:text="${menuItem.menuId}"></span>-->
-<!--        <span th:text="${menuItem.menuName}"></span>-->
-<!--        <span th:text="${menuItem.menuPrice}"></span>-->
-<!--        <span th:text="${menuItem.quantity}"></span>-->
-<!--        <div class="basketcmd"><a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delItem();">삭제</a></div>-->
-<!--    </div>-->
+    <!--    <div class="subdiv" th:each="menuItem : ${processedOrders}">-->
+    <!--        <span th:text="${menuItem.menuId}"></span>-->
+    <!--        <span th:text="${menuItem.menuName}"></span>-->
+    <!--        <span th:text="${menuItem.menuPrice}"></span>-->
+    <!--        <span th:text="${menuItem.quantity}"></span>-->
+    <!--        <div class="basketcmd"><a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delItem();">삭제</a></div>-->
+    <!--    </div>-->
 
 
     <input type="hidden" name="cmd" value="order">
@@ -166,21 +165,22 @@
 
         // 데이터를 순회하면서 HTML에 추가
         processedOrders.forEach(item => {
+            // const newList = document.querySelector('#orderContentContainer');
             const itemElement = document.createElement("div");
-            const newList = document.querySelector('#orderContentContainer');
-
+            itemElement.classList.add("grid-container");
             // 상품 개수와 합계금액 계산
             totalCount += parseInt(item.quantity);
             totalPrice += parseFloat(item.menuPrice);
-            newList.innerHTML = `
+            itemElement.innerHTML = `
                 <div>
-                <img src="${item.menuId}" alt="#">
+
+                <img src="${item.menuId}" alt="#" width="150px" height="100px">
                 <span>${item.menuName}</span>
                 <span>${item.menuPrice}</span>
                 <span>${item.quantity}</span>
                     </div>
             `;
-            // container.appendChild(itemElement);
+            container.appendChild(itemElement);
         });
         // 상품 개수와 합계금액을 업데이트
         updateTotalUI(totalCount, totalPrice);
@@ -263,7 +263,7 @@
 
 
 
-<!--<script src="/js/order/orderPay.js"></script>-->
+<!—<script src="/js/order/orderPay.js"></script>—>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>
 </html>

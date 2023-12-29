@@ -20,7 +20,7 @@
 }
 
 .basketdiv {
-    width: 70%;
+    width: 50%;
     border-top: 1px solid #e0e0e0;
     float: center;
     font-size: 0.9375em;
@@ -62,10 +62,20 @@
 .basketdiv  .row> .subdiv:nth-child(4) {
     width: 20%;
 }
+.grid-container{
+    position: relative;
 
+}
+img{
+    padding-left: 5rem;
+}
 span{
-    margin-left: 3rem;
+    padding-left: 5rem;
     font-size: 2rem;
+}
+
+.flex-container{
+    display: flex;
 }
 
 .basketdiv .row > div > div {
