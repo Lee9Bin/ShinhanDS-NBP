@@ -22,8 +22,8 @@
 <img width="625" alt="스크린샷 2024-05-15 오후 6 50 10" src="https://github.com/KyoungYoung/ShinhanDS-NBP/assets/92295755/025de998-1780-4963-a781-98088bbe6117">
 
 ### API
-<img width="425" height="350" alt="스크린샷 2024-05-15 오후 6 50 10" src="https://github.com/KyoungYoung/ShinhanDS-NBP/assets/92295755/ee343623-265f-4754-a94d-957d715bea84">
-<img width="425" height="350" alt="스크린샷 2024-05-15 오후 6 50 10" src="https://github.com/KyoungYoung/ShinhanDS-NBP/assets/92295755/e0a0d6f1-7773-4db6-9995-de312fcbae03">
+<img width="425" height="340" alt="스크린샷 2024-05-15 오후 6 50 10" src="https://github.com/KyoungYoung/ShinhanDS-NBP/assets/92295755/ee343623-265f-4754-a94d-957d715bea84">
+<img width="425" height="340" alt="스크린샷 2024-05-15 오후 6 50 10" src="https://github.com/KyoungYoung/ShinhanDS-NBP/assets/92295755/e0a0d6f1-7773-4db6-9995-de312fcbae03">
 
 
 ### ERD
