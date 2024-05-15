@@ -5,10 +5,10 @@
 [NBP 프로젝트 시연 정리 사이트](https://gamma.app/docs/-x74i281jczcd0y1?mode=doc)
 
 ## 목차
-1. [프로젝트 소개](#-프로젝트-소개)
-2. [개발 환경](#-개발-환경)
-3. [역할 분담](#-역할-분담)
-4. [주요 기능](#-주요-기능)
+1. [프로젝트 소개]
+2. [개발 환경]
+3. [역할 분담]
+4. [주요 기능]
 
 ## 프로젝트 소개
 <img width="731" alt="image" src="https://github.com/KyoungYoung/ShinhanDS-NBP/assets/92295755/bbe86211-d327-4cbe-93c4-4d4232a87222">
@@ -22,8 +22,9 @@
 <img width="625" alt="스크린샷 2024-05-15 오후 6 50 10" src="https://github.com/KyoungYoung/ShinhanDS-NBP/assets/92295755/025de998-1780-4963-a781-98088bbe6117">
 
 ### API
-![api1](https://github.com/KyoungYoung/ShinhanDS-NBP/assets/92295755/ee343623-265f-4754-a94d-957d715bea84)
-![api2](https://github.com/KyoungYoung/ShinhanDS-NBP/assets/92295755/e0a0d6f1-7773-4db6-9995-de312fcbae03)
+<img width="425" height="350" alt="스크린샷 2024-05-15 오후 6 50 10" src="https://github.com/KyoungYoung/ShinhanDS-NBP/assets/92295755/ee343623-265f-4754-a94d-957d715bea84">
+<img width="425" height="350" alt="스크린샷 2024-05-15 오후 6 50 10" src="https://github.com/KyoungYoung/ShinhanDS-NBP/assets/92295755/e0a0d6f1-7773-4db6-9995-de312fcbae03">
+
 
 ### ERD
 ![erd](https://github.com/KyoungYoung/ShinhanDS-NBP/assets/92295755/994d0ca9-6de0-438d-bc92-d62f1eb4305e)
