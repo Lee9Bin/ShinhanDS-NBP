@@ -7,8 +7,7 @@
 ## 목차
 1. [프로젝트 개요]
 2. [개발 환경]
-3. [역할 분담]
-4. [주요 기능]
+3. [주요 기능]
 
 ## 프로젝트 소개
 <img width="731" alt="image" src="https://github.com/KyoungYoung/ShinhanDS-NBP/assets/92295755/bbe86211-d327-4cbe-93c4-4d4232a87222">
@@ -29,13 +28,6 @@
 
 ### ERD
 ![erd](https://github.com/KyoungYoung/ShinhanDS-NBP/assets/92295755/994d0ca9-6de0-438d-bc92-d62f1eb4305e)
-
-
-
-
-## 👬 역할 분담
-- 작성중
- 
 
 
 ## 🤗 주요 기능
